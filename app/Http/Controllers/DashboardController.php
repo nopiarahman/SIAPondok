@@ -10,7 +10,6 @@ use App\mapel;
 use App\kelas;
 use App\asatidzah;
 use Illuminate\Http\Request;
-use Midnite81\GeoLocation\Contracts\Services\GeoLocation;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -22,18 +21,29 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        // dd($request);
+        
         $cekuser = auth()->user();
-
-        $ip = geoip()->getLocation(trim(shell_exec("dig +short myip.opendns.com @resolver1.opendns.com")));
-        // dd($ip);
         $santriwustha=santriwustha::all();
         $asatidzah=asatidzah::all();
         $mapel=mapel::all();
         $periode=periode::where('status','Aktif')->first();
         $waktu=carbon::now();
         $hari=$waktu->isoFormat('dddd');
-        // dd($asatidzah);
+        
+        /* Menyimpan nama marhalah */
+        if(auth()->user()->jenjang=="sd"){
+            $jenjang="Salafiyyah Uulaa";
+        }
+        elseif(auth()->user()->jenjang=="smpPutra"){
+            $jenjang="Salafiyyah Wustha'";
+        }
+        elseif(auth()->user()->jenjang=="smpPutri"){
+            $jenjang="Tahfidzul Qur'an Lil Banaat";
+        }
+        else{
+            $jenjang="Salafiyyah Ulyaa";
+        }
+        
         if(auth()->user()->role=='waliSantri')
         {
             $santriwustha=santriwustha::where('emailWali','=',$cekuser->email)->first();
@@ -41,7 +51,6 @@ class DashboardController extends Controller
             $cekaktif=['santriwustha_id'=> $santriwustha->id,'periode_id'=>$periode->id];
             $nilaiaktif=nilai::where($cekaktif)->orderBy('mapel_id')->get();
             // dd($nilaiaktif);
-
             $jadwalbelajar = jadwalbelajar::where('kelas_id',$santriwustha->kelas_id)->get();
             return view ('dashboard/index',compact('cekuser','santriwustha','periode'));
         }
@@ -73,9 +82,9 @@ class DashboardController extends Controller
                 $namaKelas[]=$ks->namaKelas;
                 $data[]=santriwustha::where('kelas_id',$ks->id)->count();
             }
-            // dd($namaKelas);
 
-        return view ('dashboard/index',compact('cekuser','santriwustha','periode','asatidzah','mapel','namaKelas','data'));
+        /* return view untuk Admin */
+        return view ('dashboard/index',compact('cekuser','santriwustha','periode','asatidzah','mapel','namaKelas','data','jenjang'));
     }
 
     /**

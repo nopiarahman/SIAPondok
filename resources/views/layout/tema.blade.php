@@ -88,9 +88,14 @@
             <div class="navbar-header">
                 {{-- <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a> --}}
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand mb-n2" href="{{url('/dashboard')}}"> <img
-                        src="{{asset('tema/images/logopondok.png')}}" alt=""> Sistem Informasi Akademik Pondok Pesantren
-                    Alqosim Jambi</a>
+                <a class="navbar-brand mb-n2" href="{{url('/dashboard')}}"> <img src="{{asset('tema/images/logopondok.png')}}" alt=""> 
+                    Sistem Informasi Akademik Pondok Pesantren Alqosim Jambi 
+                    @if(auth()->user()->jenjang=="smpPutra")Marhalah Salafiyyah Wustha'
+                    @elseif(auth()->user()->jenjang=="sd")Marhalah Salafiyah Uulaa
+                    @elseif(auth()->user()->jenjang=="smpPutri")Marhalah Tahfidzul Qur'an Lil Banaat
+                    @elseif(auth()->user()->jenjang=="smaPutra")Marhalah Salafiyyah Ulyaa
+                    @endif
+                </a>
             </div>
 
     </nav>
@@ -110,11 +115,8 @@
                         {{auth()->user()->name}}</div>
                     <div class="email">{{auth()->user()->email}}</div>
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if(auth()->user()->jenjang=="smpPutra")
-                            {{Str::ucfirst(auth()->user()->role)}} Salafiyah Wustha
-                        @elseif(auth()->user()->jenjang=="sd")
-                            {{Str::ucfirst(auth()->user()->role)}} Salafiyah Uulaa
-                        @endif
+                        {{Str::ucfirst(auth()->user()->role)}} 
+                        
                     </div>
 
 
