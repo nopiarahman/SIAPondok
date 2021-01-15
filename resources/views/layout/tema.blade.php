@@ -44,7 +44,13 @@
     <link href="{{asset('tema/css/themes/all-themes.css')}}" rel="stylesheet" />
 </head>
 
-<body class="theme-green">
+<body class="
+@if(auth()->user()->jenjang=="smpPutra")
+                            {{Str::ucfirst(auth()->user()->role)}} theme-green
+                        @elseif(auth()->user()->jenjang=="sd")
+                            {{Str::ucfirst(auth()->user()->role)}} theme-deep-orange
+                        @endif
+">
     <!-- Page Loader -->
     {{-- <div class="page-loader-wrapper">
         <div class="loader">
@@ -273,10 +279,10 @@
             <!-- Footer -->
             <div class="legal">
                 <div class="copyright">
-                    &copy; 2020 - 2021 <a href="javascript:void(0);">Pondok Pesantren Al-Qosim Jambi</a>.
+                    &copy; 2021 <a href="javascript:void(0);">Pondok Pesantren Al-Qosim Jambi</a>.
                 </div>
                 <div class="version">
-                    <b>Version: </b> 1.0.5
+                    <b>Version: </b> 1.0.6
                 </div>
             </div>
             <!-- #Footer -->
