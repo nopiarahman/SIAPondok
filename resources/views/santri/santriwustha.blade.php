@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3 class="my-3 align-center">Data Santri Marhalah Salafiyah Wustha'</h3>
+          <h3 class="my-3 align-center">Data Santri Marhalah {{jenjangLengkap()}}</h3>
           @if (session('status'))
             <div class="alert alert-success">
               {{session ('status')}}
@@ -19,7 +19,9 @@
 
                 @if(auth()->user()->role=='admin')
                   <div class="col-md-4">
-                    <a href="/santriwusthatambah" class="btn btn-primary mt-3"  >Tambah data santri Salafiyah Wustha</a>
+                    <a href="/santriwusthatambah" class="btn btn-primary mt-3"  >Tambah data santri 
+                      
+                    </a>
                   </div>
                   @endif
                   <div class="col-md-8">
@@ -33,7 +35,7 @@
                               {{-- <i class="material-icons">search</i> --}}
                               <span class="input-group-btn ">
                                 <button type="submit" class="btn btn-primary mr-1 mt-3 mb-n2"> Cari </button>
-                               <a href="{{ url('/santriwustha') }}" class="btn btn-primary mt-3 mb-n2" title=""> Refresh Data </a>
+                              <a href="{{ url('/santriwustha') }}" class="btn btn-primary mt-3 mb-n2" title=""> Refresh Data </a>
                               </span>
                           </div>
                         </div>  

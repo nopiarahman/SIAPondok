@@ -45,7 +45,7 @@
             <div class="col-md-4 mt-1">
                 {{-- <div class="row"> --}}
                 <a href="{{url('/santriwustha')}}">
-                    <button type="button" class="btn btn-success btn-block py-3">
+                    <button type="button" class="btn btn-block py-3 {{jenjang()."button"}}">
                         <div class="col-md-2 ">
                             <i class="material-icons" style="font-size:40px;">people</i>
                         </div>
@@ -64,7 +64,7 @@
             <div class="col-md-4 mt-1">
                 {{-- <div class="row"> --}}
                 <a href="{{url('/asatidzah')}}">
-                    <button type="button" class="btn btn-success btn-block py-3">
+                    <button type="button" class="btn {{jenjang()."button"}} btn-block py-3">
                         <div class="col-md-2 ">
                             <i class="material-icons" style="font-size:40px;">person</i>
                         </div>
@@ -83,7 +83,7 @@
             <div class="col-md-4 mt-1">
                 {{-- <div class="row"> --}}
                 <a href="{{url('/mapel')}}">
-                    <button type="button" class="btn btn-success btn-block py-3">
+                    <button type="button" class="btn {{jenjang()."button"}} btn-block py-3">
                         <div class="col-md-2 ">
                             <i class="material-icons" style="font-size:40px;">book</i>
                         </div>

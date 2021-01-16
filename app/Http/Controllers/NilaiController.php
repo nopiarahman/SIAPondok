@@ -23,18 +23,14 @@ class NilaiController extends Controller
      */
     public function index(Request $request)
     {
-        $periode=periode::where('status','Aktif')->first();
-        $santriwustha = santriwustha::orderBy('namaLengkap')->get();
-        $nilai = nilai::orderBy('santriwustha_id')->paginate(10);
-        $jadwalbelajar = jadwalbelajar::orderBy('hari')->paginate(10);
-
-        $cekasatidzah=asatidzah::where('user_id','=',auth()->user()->id)->first();
-        $jadwalaktif=jadwalbelajar::where('periode_id','=',$periode->id)
+        $periode        =periode::where('status','Aktif')->first();
+        $santriwustha   =santriwustha::orderBy('namaLengkap')->get();
+        $nilai          =nilai::orderBy('santriwustha_id')->paginate(10);
+        $jadwalbelajar  =jadwalbelajar::orderBy('hari')->paginate(10);
+        $cekasatidzah   =asatidzah::where('user_id','=',auth()->user()->id)->first();
+        $jadwalaktif    =jadwalbelajar::where('periode_id','=',$periode->id)
                                     ->where('asatidzah_id','=',$cekasatidzah->id)
                                     ->paginate(10);
-        // $nilaikelas=$jadwalaktif->firstWhere('kelas_id');
-        // dd($nilaikelas);
-        // dd($jadwalaktif);
         return view ('nilai/nilai',compact('kelas','santriwustha','jadwalbelajar','nilai','jadwalaktif','periode'));
     }
     

@@ -6,7 +6,7 @@
   <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3 class="my-3 align-center">Tambah Data Santri Salafiyah Wustha</h3>
+          <h3 class="my-3 align-center">Tambah Data Santri {{jenjangLengkap()}}</h3>
           
             <form method="POST" action="/santriwustha" class="pb-5" enctype="multipart/form-data">
                 @csrf

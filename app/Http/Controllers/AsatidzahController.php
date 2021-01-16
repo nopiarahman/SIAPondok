@@ -16,10 +16,14 @@ class AsatidzahController extends Controller
     public function index(Request  $request)
     {
         if ($request ->get('cari')){
-            $asatidzah = asatidzah::where('namaLengkap','LIKE','%'. $request->cari.'%')->paginate(10); 
+            $asatidzah = asatidzah::where('namaLengkap','LIKE','%'. $request->cari.'%')
+                                    ->where('jenjang',jenjang())
+                                    ->paginate(10); 
         }else{
             
-            $asatidzah = asatidzah::orderBy('namaLengkap')->paginate(10);
+            $asatidzah = asatidzah::orderBy('namaLengkap')
+                                    ->where('jenjang',jenjang())
+                                    ->paginate(10);
         }
         return view ('asatidzah/asatidzah',['asatidzah'=>$asatidzah]);
     }
@@ -80,12 +84,13 @@ class AsatidzahController extends Controller
         $user->email=$request->email;
         $user->password= bcrypt('rahasia');
         $user->remember_token= str_random(60);
+        $user->jenjang = jenjang();
         $user->save();
 
         $request->request->add(['user_id'=>$user->id]);
-        
         $requestData           = $request->all();
         $requestData['pasPhoto'] = $file_photo;
+        $requestData['jenjang'] = jenjang();
         $this->validate($request,$rules,$costumMessages);
         asatidzah::create($requestData);
         return redirect('/asatidzah')->with('status', 'Data Berhasil ditambahkan');

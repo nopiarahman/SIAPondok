@@ -17,7 +17,9 @@ class KelasController extends Controller
      */
     public function index(Request  $request)
     {
-        $kelas = kelas::orderBy('namaKelas')->paginate(5);
+        $kelas = kelas::orderBy('namaKelas')
+                        ->where('jenjang',jenjang())
+                        ->paginate(5);
         return view('kelas/kelas',['kelas'=>$kelas]);
     }
 

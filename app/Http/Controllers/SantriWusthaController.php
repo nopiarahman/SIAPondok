@@ -20,8 +20,11 @@ class SantriWusthaController extends Controller
             $santriwustha = santriwustha::where('namaLengkap', 'LIKE', '%' . $request->cari . '%')->paginate(10);
         } else {
 
-            $santriwustha = santriwustha::orderBy('namaLengkap')->paginate(10);
-        }
+            $santriwustha = santriwustha::orderBy('namaLengkap')
+                                        ->where('jenjang',jenjang())
+                                        ->paginate(10);
+            // dd($santriwustha);
+        }   
         return view('santri/santriwustha', ['santriwustha' => $santriwustha]);
     }
 
@@ -89,10 +92,11 @@ class SantriWusthaController extends Controller
         } else {
             $file_suratWaliSantri = $request->file('suratWaliSantri')->store('public/file/wustha/suratWaliSantri');
         }
-
+        $jenjang=auth()->user()->jenjang;
         $requestData           = $request->all();
         $requestData['pasPhoto'] = $file_photo;
         $requestData['suratWaliSantri'] = $file_suratWaliSantri;
+        $requestData['jenjang'] = $jenjang;
         $this->validate($request, $rules, $costumMessages);
         santriwustha::create($requestData);
         // $user = new \App\User;
@@ -101,14 +105,9 @@ class SantriWusthaController extends Controller
             'name' => $request->namaWali,
             'email' => $request->emailWali,
             'password' => bcrypt('rahasia'),
+            'jenjang' => $jenjang,
             'remember_token' => str_random(60)
         ]);
-        // $user->role='waliSantri';
-        // $user->name=$request->namaWali;
-        // $user->email=$request->emailWali;
-        // $user->password= bcrypt('rahasia');
-        // $user->remember_token= str_random(60);
-        // $user->save();
         return redirect('/santriwustha')->with('status', 'Data Berhasil ditambahkan');
     }
 

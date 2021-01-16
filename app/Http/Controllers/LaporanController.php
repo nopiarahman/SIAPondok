@@ -60,9 +60,9 @@ class LaporanController extends Controller
         // $jadwalbelajar=jadwalbelajar::->where('namaKelas',$kelas->÷namaKelas);
         // dd($kelas);
         $nilai=nilai::where('kelas_id',$kelas->id)->get();
-        $santriwustha=santriwustha::where('kelas_id',$kelas->id)->get();
-        
-       
+        $santriwustha=santriwustha::where('kelas_id',$kelas->id)
+                                    // ->where('jenjang',jenjang())
+                                    ->get();
         return view ('laporan/laporanshow',compact('santriwustha','kelas'));
 
     }

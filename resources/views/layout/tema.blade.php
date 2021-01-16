@@ -89,12 +89,7 @@
                 {{-- <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a> --}}
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand mb-n2" href="{{url('/dashboard')}}"> <img src="{{asset('tema/images/logopondok.png')}}" alt=""> 
-                    Sistem Informasi Akademik Pondok Pesantren Alqosim Jambi 
-                    @if(auth()->user()->jenjang=="smpPutra")Marhalah Salafiyyah Wustha'
-                    @elseif(auth()->user()->jenjang=="sd")Marhalah Salafiyah Uulaa
-                    @elseif(auth()->user()->jenjang=="smpPutri")Marhalah Tahfidzul Qur'an Lil Banaat
-                    @elseif(auth()->user()->jenjang=="smaPutra")Marhalah Salafiyyah Ulyaa
-                    @endif
+                    Sistem Informasi Akademik Pondok Pesantren Alqosim Jambi {{jenjangLengkap()}}
                 </a>
             </div>
 
@@ -104,35 +99,36 @@
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar my-4">
             <!-- User Info -->
-            <div class="user-info pb-5 align-center">
-                <div class="image">
+                <div class="{{jenjang()}} user-info pb-5 align-center ">
+                    <div class="image">
 
-                    <img src="{{asset('tema/images/user.png')}}" width="75" height="75" alt="User" />
-                    {{-- <img src="{{auth()->user()->asatidzah()->pasPhoto}}" width="75" height="75" alt="User" /> --}}
-                </div>
-                <div class="info-container pb-3 align-center">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{auth()->user()->name}}</div>
-                    <div class="email">{{auth()->user()->email}}</div>
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{Str::ucfirst(auth()->user()->role)}} 
-                        
+                        <img src="{{asset('tema/images/user.png')}}" width="75" height="75" alt="User" />
+                        {{-- <img src="{{auth()->user()->asatidzah()->pasPhoto}}" width="75" height="75" alt="User" /> --}}
+                    </div>
+                    <div class="info-container pb-3 align-center">
+                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{auth()->user()->name}}</div>
+                        <div class="email">{{auth()->user()->email}}</div>
+                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{Str::ucfirst(auth()->user()->role)}} {{jenjangLengkap()}}
+                            
+                        </div>
+
+
+                        <div class="btn-group user-helper-dropdown">
+                            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">keyboard_arrow_down</i>
+                            <ul class="dropdown-menu">
+                                <li><a href="/profil"><i class="material-icons">person</i>Profile</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/logout"><i class="material-icons">input</i>Sign Out</a></li>
+                            </ul>
+                        </div>
+
                     </div>
 
-
-                    <div class="btn-group user-helper-dropdown">
-                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="true">keyboard_arrow_down</i>
-                        <ul class="dropdown-menu">
-                            <li><a href="/profil"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/logout"><i class="material-icons">input</i>Sign Out</a></li>
-                        </ul>
-                    </div>
-
                 </div>
-
-            </div>
+            
             <!-- #User Info -->
             <!-- Menu -->
             <div class="menu">

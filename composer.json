@@ -45,7 +45,9 @@
             
         ],
         "files": [
-            "app/Helpers/terbilang.php"
+            "app/Helpers/terbilang.php",
+            "app/Helpers/jenjang.php"
+            
         ]
     },
     "autoload-dev": {
