@@ -22,28 +22,33 @@ class JadwalBelajarController extends Controller
         $cekasatidzah=asatidzah::where('user_id','=',$cekuser->id)->first();
         $periode=periode::where('status','Aktif')->first();
         if ($request ->get('cari')){
-            $cariasatidzah = asatidzah::where('namaLengkap','LIKE','%'.$request->cari.'%')->first();
+            $cariasatidzah = asatidzah::where('namaLengkap','LIKE','%'.$request->cari.'%')->where('jenjang',jenjang())->first();
             if($cariasatidzah!=null)
             {
-                $jadwalaktif = jadwalbelajar::where('asatidzah_id',$cariasatidzah->id)->orderBy('hari')->paginate(10); 
+                $jadwalaktif = jadwalbelajar::where('asatidzah_id',$cariasatidzah->id)->orderBy('hari')
+                                                ->where('jenjang',jenjang())->paginate(10); 
                 return view ('/jadwalbelajar/jadwalbelajar',compact('jadwalbelajar','periode','jadwalaktif','jadwalaktifguru')); 
             }
             else
             {
-                $jadwalaktif=jadwalbelajar::where('periode_id','=',$periode->id)->orderBy('hari')->paginate(10);
+                $jadwalaktif=jadwalbelajar::where('periode_id','=',$periode->id)->orderBy('hari')
+                                            ->where('jenjang',jenjang())->paginate(10);
             }
         }else
         {
-            $jadwalaktif=jadwalbelajar::where('periode_id','=',$periode->id)->orderBy('hari')->paginate(10);
+            $jadwalaktif=jadwalbelajar::where('periode_id','=',$periode->id)->orderBy('hari')
+                                        ->where('jenjang',jenjang())->paginate(10);
         }
         // dd($jadwalaktif);
         if(auth()->user()->role=='asatidzah')
         {
         $jadwalaktifguru=jadwalbelajar::where('periode_id','=',$periode->id)
-                                        ->where('asatidzah_id','=',$cekasatidzah->id)->orderBy('hari')->get();
-        
+                                        ->where('asatidzah_id','=',$cekasatidzah->id)
+                                        ->where('jenjang',jenjang())
+                                        ->orderBy('hari')->get();
+        return view ('/jadwalbelajar/jadwalbelajar',compact('periode','jadwalaktif','jadwalaktifguru')); 
         }                             
-        return view ('/jadwalbelajar/jadwalbelajar',compact('jadwalbelajar','periode','jadwalaktif','jadwalaktifguru')); 
+        return view ('/jadwalbelajar/jadwalbelajar',compact('periode','jadwalaktif')); 
 
     }
     
@@ -55,9 +60,9 @@ class JadwalBelajarController extends Controller
     public function create( Request $request)
     {
         $jadwalbelajar = new jadwalbelajar;
-        $asatidzah = asatidzah::orderBy('namaLengkap')->get();
-        $mapel = mapel::orderBy('namaMapel')->get();
-        $kelas = kelas::orderBy('namaKelas')->get();
+        $asatidzah = asatidzah::orderBy('namaLengkap')->where('jenjang',jenjang())->get();
+        $mapel = mapel::orderBy('namaMapel')->where('jenjang',jenjang())->get();
+        $kelas = kelas::orderBy('namaKelas')->where('jenjang',jenjang())->get();
         return view ('/jadwalbelajar/jadwalbelajartambah',compact('jadwalbelajar','asatidzah','mapel','kelas')); 
 
     }
@@ -74,6 +79,7 @@ class JadwalBelajarController extends Controller
         $periode=periode::where('status','Aktif')->first();
         $requestData           = $request->all();
         $requestData['periode_id'] = $periode->id;
+        $requestData['jenjang']=jenjang();
         jadwalbelajar::create($requestData);
         return redirect('/jadwalbelajar')->with('status', 'Data Berhasil ditambahkan');
     }
@@ -97,9 +103,9 @@ class JadwalBelajarController extends Controller
      */
     public function edit(jadwalbelajar $jadwalbelajar)
     {
-        $asatidzah = asatidzah::orderBy('namaLengkap')->paginate(10);
-        $mapel = mapel::orderBy('namaMapel')->paginate(10);
-        $kelas = kelas::orderBy('namaKelas')->paginate(10);
+        $asatidzah = asatidzah::orderBy('namaLengkap')->where('jenjang',jenjang())->paginate(10);
+        $mapel = mapel::orderBy('namaMapel')->where('jenjang',jenjang())->paginate(10);
+        $kelas = kelas::orderBy('namaKelas')->where('jenjang',jenjang())->paginate(10);
         return view ('jadwalbelajar/jadwalbelajaredit',compact('jadwalbelajar','mapel','kelas','asatidzah'));
     }
 

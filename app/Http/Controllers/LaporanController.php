@@ -23,7 +23,8 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $kelas = kelas::orderBy('namaKelas')->paginate(10);
+        $kelas = kelas::orderBy('namaKelas')
+                        ->where('jenjang',jenjang())->paginate(10);
         return view('laporan/laporan',['kelas'=>$kelas]);
     }
 
@@ -61,7 +62,7 @@ class LaporanController extends Controller
         // dd($kelas);
         $nilai=nilai::where('kelas_id',$kelas->id)->get();
         $santriwustha=santriwustha::where('kelas_id',$kelas->id)
-                                    // ->where('jenjang',jenjang())
+                                    ->where('jenjang',jenjang())
                                     ->get();
         return view ('laporan/laporanshow',compact('santriwustha','kelas'));
 
@@ -102,15 +103,17 @@ class LaporanController extends Controller
     }
     public function detail(Santriwustha $santriwustha)
     {
-        $nilai=nilai::where('kelas_id',$santriwustha->kelas_id)->first();
+        $nilai=nilai::where('kelas_id',$santriwustha->kelas_id)->where('jenjang',jenjang())->first();
         $semuanilai=mapel::all();
-        $periode=periode::where('status','Aktif')->first();
+        $periode=periode::where('status','Aktif')->where('jenjang',jenjang())->first();
         if($nilai!=null){
             $ceknilai = DB::table('nilai')
                     ->where('kelas_id', '=', $nilai->kelas_id)
+                    ->where('jenjang',jenjang())
                     ->get();
             $cekaktif=['santriwustha_id'=> $santriwustha->id,'periode_id'=>$periode->id];
-            $nilaiaktif=nilai::where($cekaktif)->get();
+            $nilaiaktif=nilai::where($cekaktif)
+                            ->where('jenjang',jenjang())->get();
             // $nilaiaktifurut=$nilaiaktif->orderBy($nilaiaktif->namaMapel)->get();
             // dd($nilaiaktifurut);
         }else{

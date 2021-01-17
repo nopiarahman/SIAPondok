@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\kelas;
 use App\santriwustha;
+use App\asatidzah;
+use App\waliKelas;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
@@ -19,8 +21,9 @@ class KelasController extends Controller
     {
         $kelas = kelas::orderBy('namaKelas')
                         ->where('jenjang',jenjang())
-                        ->paginate(5);
-        return view('kelas/kelas',['kelas'=>$kelas]);
+                        ->get();
+        $asatidzah = asatidzah::orderBy('namaLengkap')->where('jenjang',jenjang())->get();
+        return view('kelas/kelas',compact('kelas','asatidzah'));
     }
 
     /**
@@ -31,6 +34,7 @@ class KelasController extends Controller
     public function create()
     {
         $kelas = new kelas;
+
         return view ('kelas/kelastambah',compact('kelas'));
     }
 
@@ -49,6 +53,7 @@ class KelasController extends Controller
             'required' =>':attribute tidak boleh kosong',
         ];
         $requestData           = $request->all();
+        $requestData ['jenjang'] = jenjang();
         $this->validate($request,$rules,$costumMessages);
         kelas::create($requestData);
         return redirect('/kelas')->with('status', 'Data Berhasil ditambahkan');
@@ -62,18 +67,22 @@ class KelasController extends Controller
      */
     public function show(kelas $kelas , Request $request)
     {
-        $santriwustha = santriwustha::orderby('namaLengkap')->get();
+        $santriwustha = santriwustha::orderby('namaLengkap')
+                                        ->where('jenjang',jenjang())->get();
         return view ('/kelas/kelasshow',compact('santriwustha','kelas'));
     }
     public function isi(kelas $kelas , Request $request)
     {
         if ($request ->get('cari')){
-            $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')->paginate(10); 
+            $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')
+                                        ->where('jenjang',jenjang())->paginate(10); 
         }else{
             
-            $santriwustha = santriwustha::orderBy('namaLengkap')->paginate(10);
+            $santriwustha = santriwustha::orderBy('namaLengkap')
+                                        ->where('jenjang',jenjang())->paginate(10);
         }
-        $kelas = kelas::orderBy('namaKelas')->get();
+        $kelas = kelas::orderBy('namaKelas')
+                        ->where('jenjang',jenjang())->get();
         // $santriwustha = santriwustha::orderBy('namaLengkap')->paginate(5);
         return view ('kelas/kelasisi',compact('request','santriwustha','kelas'));
     }
@@ -83,9 +92,7 @@ class KelasController extends Controller
         if ($request->kelas_id != null)
         {
             $santri = santriwustha::find($request->id);
-
             $santri->kelas_id = $request->kelas_id;
-            
             $santri->save();
         }
         else
@@ -93,16 +100,20 @@ class KelasController extends Controller
             // Checkbox is not checked
         }
         if ($request ->get('cari')){
-            $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')->paginate(10); 
+            $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')
+                                        ->where('jenjang',jenjang())->paginate(10); 
         }else{
             
-            $santriwustha = santriwustha::orderBy('namaLengkap')->paginate(10);
+            $santriwustha = santriwustha::orderBy('namaLengkap')
+                                        ->where('jenjang',jenjang())->paginate(10);
         }
-        $kelas = kelas::orderBy('namaKelas')->paginate(10);
+        $kelas = kelas::orderBy('namaKelas')
+                        ->where('jenjang',jenjang())->paginate(10);
 
         $requestData           = $request->all();
 
-        $isi = santriwustha::where('kelas_id', '=', $request->input('kelas_id'))->first();
+        $isi = santriwustha::where('kelas_id', '=', $request->input('kelas_id'))
+                            ->where('jenjang',jenjang())->first();
         return view ('kelas/kelasisi',compact('request','santriwustha','kelas'));
     }
     
@@ -134,7 +145,8 @@ class KelasController extends Controller
         ];
         $requestData           = $request->all();
 
-        $namaKelas = kelas::where('namaKelas', '=', $request->input('namaKelas'))->first();
+        $namaKelas = kelas::where('namaKelas', '=', $request->input('namaKelas'))
+                            ->where('jenjang',jenjang())->first();
         if ($namaKelas === null) {
             $this->validate($request,$rules,$costumMessages);
             $kelas->update($requestData);
@@ -161,4 +173,25 @@ class KelasController extends Controller
         kelas::destroy($kelas->id);
         return redirect('/kelas')->with('status', 'Data Berhasil dihapus');
     }
+    public function isiWaliKelas(Request $request)
+    {
+        $requestData = $request->all();
+        $requestData ['jenjang'] = jenjang();
+        $requestData ['kelas_id'] = $request->id;
+        waliKelas::create($requestData);
+        return redirect('/kelas')->with('status', 'Wali Kelas Berhasil Ditambahkan');
+    }
+    public function gantiWaliKelas (Request $request)
+    { 
+        // $update = waliKelas::find($request->id);
+        // $update = $request->all();
+        $update ['namaLengkap'] = $request->namaLengkap;
+        $update ['email'] = $request->email;
+        $update ['jenjang'] = jenjang();
+        $update ['kelas_id'] = $request->id;
+        // dd($update);
+        waliKelas::where('kelas_id',$request->id)
+                    ->update($update);
+        return redirect('/kelas')->with('status2', 'Wali Kelas Berhasil Dirubah');
+    }   
 }

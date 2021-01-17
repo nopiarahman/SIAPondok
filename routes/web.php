@@ -41,6 +41,8 @@ Route::group(['middleware'=>['auth','checkRole:admin']],function(){
     Route::get('/asatidzah/{asatidzah}/edit', 'AsatidzahController@edit');
     Route::patch('/asatidzah/{asatidzah}','AsatidzahController@update');
     
+    Route::post('/kelas/isiWaliKelas/{kelas}','KelasController@isiWaliKelas');
+    Route::post('/kelas/gantiWaliKelas/{kelas}','KelasController@gantiWaliKelas');
     Route::get('/kelas', 'KelasController@index');
     Route::post('/kelas', 'KelasController@store');
     Route::get('/kelas/kelasisi/', 'KelasController@isi');

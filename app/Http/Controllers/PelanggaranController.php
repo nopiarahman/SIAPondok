@@ -16,7 +16,9 @@ class PelanggaranController extends Controller
      */
     public function index(Request $request)
     {
-        $pelanggaran = pelanggaran::latest()->paginate(10);
+        $pelanggaran = pelanggaran::latest()
+                        ->where('jenjang',jenjang())
+                        ->paginate(10);
         return view('pelanggaran/pelanggaran',['pelanggaran'=>$pelanggaran]);
     }
 
@@ -29,10 +31,14 @@ class PelanggaranController extends Controller
     {
 
         if ($request ->get('cari')){
-            $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')->paginate(10); 
+            $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')
+                                        ->where('jenjang',jenjang())
+                                        ->paginate(10); 
         }else{
             
-            $santriwustha = santriwustha::orderBy('namaLengkap')->paginate(10);
+            $santriwustha = santriwustha::orderBy('namaLengkap')
+                                        ->where('jenjang',jenjang())
+                                        ->paginate(10);
         }
 
         $pelanggaran = new pelanggaran;
@@ -47,26 +53,20 @@ class PelanggaranController extends Controller
      */
     public function store(Request $request)
     {
-           $rules =[
-            'namaLengkap' => 'required',
-            'jenisPelanggaran' => 'required',
-            'tanggalPelanggaran' => 'required',
-            'keterangan' => 'required',
-        ];
-        $costumMessages = [
-            'required' =>':attribute tidak boleh kosong'
-        ];
-
-        // $requestData = $request->all();
-        $this->validate($request,$rules,$costumMessages);
-        pelanggaran::create([
-            'santriwustha_id' => $request->santriwustha_id,
-            'jenisPelanggaran' => $request->jenisPelanggaran,
-            'keterangan' => $request->keterangan,
-            'tanggalPelanggaran' => $request->tanggalPelanggaran
-
-        ]);
-        
+        // dd($request);
+        // $rules =[
+        //     'namaLengkap' => 'required',
+        //     'jenisPelanggaran' => 'required',
+        //     'tanggalPelanggaran' => 'required',
+        //     'keterangan' => 'required',
+        // ];
+        // $costumMessages = [
+        //     'required' =>':attribute tidak boleh kosong'
+        // ];
+        // $this->validate($request,$rules,$costumMessages);
+        $requestData           = $request->all();
+        $requestData['jenjang']=jenjang();
+        pelanggaran::create($requestData);
         return redirect('/pelanggaran')->with('status', 'Data Berhasil ditambahkan');
     }
 

@@ -14,7 +14,8 @@ class MapelController extends Controller
      */
     public function index(Request  $request)
     {
-        $mapel = mapel::orderBy('namaMapel')->paginate(10);
+        $mapel = mapel::orderBy('namaMapel')
+                        ->where('jenjang',jenjang())->paginate(10);
         return view('mapel/mapel',['mapel'=>$mapel]);
     }
 
@@ -45,6 +46,7 @@ class MapelController extends Controller
             'required' =>':attribute tidak boleh kosong',
         ];
         $requestData           = $request->all();
+        $requestData['jenjang'] = jenjang();
         $this->validate($request,$rules,$costumMessages);
         mapel::create($requestData);
         return redirect('/mapel')->with('status', 'Data Berhasil ditambahkan');
@@ -89,7 +91,8 @@ class MapelController extends Controller
         ];
         $requestData = $request->all();
 
-        $namamapel = mapel::where('namaMapel', '=', $request->input('namaMapel'))->first();
+        $namamapel = mapel::where('namaMapel', '=', $request->input('namaMapel'))
+                            ->where('jenjang',jenjang())->first();
         if ($namamapel === null) {
             $this->validate($request,$rules,$costumMessages);
             $mapel->update($requestData);
