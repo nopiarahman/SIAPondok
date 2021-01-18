@@ -6,6 +6,7 @@ use App\kelas;
 use App\santriwustha;
 use App\asatidzah;
 use App\waliKelas;
+use App\user;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
@@ -175,23 +176,43 @@ class KelasController extends Controller
     }
     public function isiWaliKelas(Request $request)
     {
+        /* Menyimpan Data User */
+        $user ['name'] = $request->namaLengkap;
+        $user ['email'] = $request->email;
+        $user ['password']= bcrypt('rahasia');
+        $user ['role']="waliKelas";
+        $user ['jenjang']=jenjang();
+        $userData = user::create($user);
+        // dd($userData);
+        /* Menyimpan Data Wali Kelas */
         $requestData = $request->all();
         $requestData ['jenjang'] = jenjang();
         $requestData ['kelas_id'] = $request->id;
+        $requestData ['user_id'] = $userData->id;
         waliKelas::create($requestData);
+
         return redirect('/kelas')->with('status', 'Wali Kelas Berhasil Ditambahkan');
     }
     public function gantiWaliKelas (Request $request)
     { 
-        // $update = waliKelas::find($request->id);
-        // $update = $request->all();
+        /* Update Wali Kelas */
         $update ['namaLengkap'] = $request->namaLengkap;
         $update ['email'] = $request->email;
         $update ['jenjang'] = jenjang();
         $update ['kelas_id'] = $request->id;
-        // dd($update);
-        waliKelas::where('kelas_id',$request->id)
+        $updateData=waliKelas::where('kelas_id',$request->id)->first();
+        walikelas::where('kelas_id',$request->id)
                     ->update($update);
+        /* Update Table User */
+        $updateUser ['name'] = $request->namaLengkap;
+        $updateUser ['email'] = $request->email;
+        $updateUser ['password']= bcrypt('rahasia');
+        $updateUser ['role']="waliKelas";
+        $updateUser ['jenjang']=jenjang();
+        // dd($updateUser);
+        user::find($updateData->user_id)
+            ->update($updateUser);
+        
         return redirect('/kelas')->with('status2', 'Wali Kelas Berhasil Dirubah');
     }   
 }

@@ -45,4 +45,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\User','user_id');
     }
+    public function waliKelas()
+    {
+        return $this->hasMany(waliKelas::class);
+    }
 }

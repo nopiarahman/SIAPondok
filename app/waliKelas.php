@@ -13,5 +13,9 @@ class waliKelas extends Model
     {
         return $this->belongsTo(kelas::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(user::class);
+    }
 
 }
