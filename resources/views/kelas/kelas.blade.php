@@ -15,6 +15,10 @@
             <div class="alert alert-warning">
                 {{session ('status2')}}
             </div>
+            @elseif (session ('status3'))
+            <div class="alert alert-danger">
+                {{session ('status3')}}
+            </div>
             @endif
         </div>
     </div>

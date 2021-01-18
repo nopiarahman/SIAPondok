@@ -184,12 +184,6 @@
                     </li> --}}
                 </ul>
                 </li>
-                <li class="@yield('menulaporan')">
-                    <a href="{{'/laporan'}}">
-                        <i class="material-icons">assignment</i>
-                        <span>Laporan Nilai</span>
-                    </a>
-                </li>
                 <li class="@yield('menuPelanggaran')">
                     <a href="{{'/pelanggaran'}}">
                         <i class="material-icons">gavel</i>
@@ -203,6 +197,14 @@
                     </a>
                 </li>
                 @elseif(auth()->user()->role=='asatidzah')
+                @if(auth()->user()->waliKelas != null)
+                <li class="@yield('menulaporan')">
+                    <a href="{{'/laporan'}}">
+                        <i class="material-icons">assignment</i>
+                        <span>Laporan Nilai Kelas</span>
+                    </a>
+                </li>
+                @endif
                 <li class="@yield('menusantri')">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">people</i>
@@ -220,6 +222,7 @@
                 </li> --}}
                 </ul>
                 </li>
+                
                 <li class="@yield('menujadwal')">
                     <a href="{{'/jadwalbelajar'}}">
                         <i class="material-icons">access_time</i>
@@ -232,12 +235,12 @@
                         <span>Nilai</span>
                     </a>
                 </li>
-                <li class="@yield('menukelas')">
+                {{-- <li class="@yield('menukelas')">
                     <a href="{{'/kelas'}}">
                         <i class="material-icons">business</i>
                         <span>Kelas</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="@yield('')">
                     <a href="{{'/logout'}}">
                         <i class="material-icons">exit_to_app</i>
@@ -269,7 +272,7 @@
                         <span>Keluar</span>
                     </a>
                 </li>
-                @endif
+                @endif  
 
                 </ul>
             </div>

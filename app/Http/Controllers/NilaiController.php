@@ -31,7 +31,7 @@ class NilaiController extends Controller
         $jadwalaktif    =jadwalbelajar::where('periode_id','=',$periode->id)
                                     ->where('asatidzah_id','=',$cekasatidzah->id)
                                     ->paginate(10);
-        return view ('nilai/nilai',compact('kelas','santriwustha','jadwalbelajar','nilai','jadwalaktif','periode'));
+        return view ('nilai/nilai',compact('santriwustha','jadwalbelajar','nilai','jadwalaktif','periode'));
     }
     
     /**

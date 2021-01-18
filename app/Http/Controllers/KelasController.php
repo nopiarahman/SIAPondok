@@ -176,43 +176,40 @@ class KelasController extends Controller
     }
     public function isiWaliKelas(Request $request)
     {
-        /* Menyimpan Data User */
-        $user ['name'] = $request->namaLengkap;
-        $user ['email'] = $request->email;
-        $user ['password']= bcrypt('rahasia');
-        $user ['role']="waliKelas";
-        $user ['jenjang']=jenjang();
-        $userData = user::create($user);
-        // dd($userData);
-        /* Menyimpan Data Wali Kelas */
-        $requestData = $request->all();
-        $requestData ['jenjang'] = jenjang();
-        $requestData ['kelas_id'] = $request->id;
-        $requestData ['user_id'] = $userData->id;
-        waliKelas::create($requestData);
-
-        return redirect('/kelas')->with('status', 'Wali Kelas Berhasil Ditambahkan');
+        /* Mengecek walikelas */
+        $cekWaliKelas = walikelas::where('email',$request->email)->first();
+        if ($cekWaliKelas != null){
+            /* menampilkan pesan gagal */
+            return redirect('/kelas')->with('status3', 'Asatidzah sudah menjadi Wali kelas di kelas yang lain, silahkan pilih asatidzah lain');
+        }else{
+            /* Menyimpan Data Wali Kelas */
+            $ambilUser = user::where('email',$request->email)->first();
+            $requestData = $request->all();
+            $requestData ['jenjang'] = jenjang();
+            $requestData ['kelas_id'] = $request->id;
+            $requestData ['user_id'] = $ambilUser->id;
+            waliKelas::create($requestData);
+            return redirect('/kelas')->with('status', 'Wali Kelas Berhasil Ditambahkan');
+        }
     }
     public function gantiWaliKelas (Request $request)
     { 
-        /* Update Wali Kelas */
-        $update ['namaLengkap'] = $request->namaLengkap;
-        $update ['email'] = $request->email;
-        $update ['jenjang'] = jenjang();
-        $update ['kelas_id'] = $request->id;
-        $updateData=waliKelas::where('kelas_id',$request->id)->first();
-        walikelas::where('kelas_id',$request->id)
-                    ->update($update);
-        /* Update Table User */
-        $updateUser ['name'] = $request->namaLengkap;
-        $updateUser ['email'] = $request->email;
-        $updateUser ['password']= bcrypt('rahasia');
-        $updateUser ['role']="waliKelas";
-        $updateUser ['jenjang']=jenjang();
-        // dd($updateUser);
-        user::find($updateData->user_id)
-            ->update($updateUser);
-        
-        return redirect('/kelas')->with('status2', 'Wali Kelas Berhasil Dirubah');
+        /* Mengecek walikelas */
+        $cekWaliKelas = walikelas::where('email',$request->email)->first();
+        if ($cekWaliKelas != null){
+            /* menampilkan pesan gagal */
+            return redirect('/kelas')->with('status3', 'Asatidzah sudah menjadi Wali kelas di kelas yang lain, silahkan pilih asatidzah lain');
+        }else{
+            /* Update Wali Kelas */
+            $ambilUser = user::where('email',$request->email)->first();
+            $update ['namaLengkap'] = $request->namaLengkap;
+            $update ['email'] = $request->email;
+            $update ['jenjang'] = jenjang();
+            $update ['kelas_id'] = $request->id;
+            $update ['user_id']=$ambilUser->id;
+            walikelas::where('kelas_id',$request->id)
+                        ->update($update);
+            return redirect('/kelas')->with('status2', 'Wali Kelas Berhasil Dirubah');
+        }
     }   
 }

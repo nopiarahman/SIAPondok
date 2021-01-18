@@ -81,10 +81,6 @@ Route::group(['middleware'=>['auth','checkRole:admin']],function(){
     Route::patch('/periode/{periode}', 'PeriodeController@update');
     Route::delete('/periode/{periode}', 'PeriodeController@destroy');
     Route::get('/periode/{id}/aktif', 'PeriodeController@setaktif');
-    
-    Route::get('/laporan', 'LaporanController@index');
-    Route::get('/laporan/{kelas}', 'LaporanController@show');
-    Route::get('/laporan/{santriwustha}/detail', 'LaporanController@detail');
 
     Route::get('/cetaknilai/{santriwustha}','CetakNilaiController@cetak');
     Route::get('/cetaknilaisw/{santriwustha}','CetakNilaiController@cetaksw');
@@ -99,6 +95,10 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri']],fun
     Route::get('/kelas', 'KelasController@index');
     Route::get('/kelas/kelasisi/', 'KelasController@isi');
     Route::get('/kelas/{kelas}', 'KelasController@show');
+
+    Route::get('/laporan', 'LaporanController@index');
+    Route::get('/laporan/{kelas}', 'LaporanController@show');
+    Route::get('/laporan/{santriwustha}/detail', 'LaporanController@detail');
     
     Route::get('/nilai', 'NilaiController@index');
     Route::post('/nilaiisi/{jadwalbelajar}', 'NilaiController@store');
