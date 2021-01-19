@@ -52,7 +52,7 @@
     @elseif(auth()->user()->jenjang=="smpPutri")
         {{Str::ucfirst(auth()->user()->role)}} theme-deep-purple
     @elseif(auth()->user()->jenjang=="smaPutra")
-        {{Str::ucfirst(auth()->user()->role)}} theme-deep-blue
+        {{Str::ucfirst(auth()->user()->role)}} theme-blue
     @elseif(auth()->user()->jenjang=="kepalaYayasan")
         {{Str::ucfirst(auth()->user()->role)}} theme-green
     @endif
