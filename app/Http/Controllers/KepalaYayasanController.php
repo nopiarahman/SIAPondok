@@ -20,7 +20,11 @@ class KepalaYayasanController extends Controller
         $adminBaru->jenjang = $request->jenjang;
         $adminBaru->role="admin";
         $adminBaru->save();
-
         return redirect('/editadmin')->with('status', 'Admin Berhasil Ditambahkan');
     }
+    public function adminhapus($admin){
+        user::destroy($admin);
+        return redirect('/editadmin')->with('status', 'Data Berhasil dihapus');
+    }
+
 }

@@ -109,8 +109,8 @@
             </div>
         </div>
         @elseif(auth()->user()->role=='asatidzah')
-        <div class="row">
-            <div class="col align-center mt-1">
+        <div class="row align-center">
+            <div class="col mt-1">
                 {{-- <div class="row"> --}}
                 <a href="{{url('/mapel')}}">
                     <button type="button" class="btn btn-success py-3 align-center">
@@ -128,6 +128,19 @@
                     </button>
                 </a>
             </div>
+            @if(auth()->user()->waliKelas != null)
+            <div class="col mt-1">
+                    <button type="button" class="btn btn-success py-3 align-center">
+                        <div class="col-md-2 ">
+                            <i class="material-icons" style="font-size:40px;">domain</i>
+                        </div>
+                        <div class="col-md-6 py-2 align-middle pl-4">
+                            <h6 class="text-center"> Anda Wali Kelas di Kelas {{$cekwaliKelas->kelas->namaKelas}} </h6>
+                        </div>
+                    </button>
+                {{-- </a> --}}
+            </div>
+            @endif
         </div>
     </div>
     <div class="card mt-1 p-4">

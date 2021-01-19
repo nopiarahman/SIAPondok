@@ -1,6 +1,6 @@
 @extends('layout/tema') {{-- menambah dari folder layout halaman main --}}
 @section('title','Data Santri Salafiyah Wustha') {{-- mengisi yield title dengan 1 baris code--}}
-@section ('menuwustha','active')
+@section ('menuwali','active')
 @section ('menusantri','active')
 @section('container')        {{-- mengisi yield container dengan lebih dari 1 baris code --}}
     <div class="container">

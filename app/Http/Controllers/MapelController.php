@@ -47,6 +47,7 @@ class MapelController extends Controller
         ];
         $requestData           = $request->all();
         $requestData['jenjang'] = jenjang();
+        // dd($requestData);
         $this->validate($request,$rules,$costumMessages);
         mapel::create($requestData);
         return redirect('/mapel')->with('status', 'Data Berhasil ditambahkan');

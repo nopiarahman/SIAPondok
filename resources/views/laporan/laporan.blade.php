@@ -2,6 +2,7 @@
 @section('title','Laporan Nilai Santri') {{-- mengisi yield title dengan 1 baris code--}}
 {{-- @section('menuasatidzah','active') --}}
 @section('menulaporan','active')
+@section('menuwali','active')
 @section('container')        {{-- mengisi yield container dengan lebih dari 1 baris code --}}
     <div class="container">
       <div class="row">

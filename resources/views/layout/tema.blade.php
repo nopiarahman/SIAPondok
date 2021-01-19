@@ -45,18 +45,17 @@
 </head>
 
 <body class="
-    @if(auth()->user()->jenjang=="smpPutra")
-        {{Str::ucfirst(auth()->user()->role)}} theme-green
-    @elseif(auth()->user()->jenjang=="sd")
-        {{Str::ucfirst(auth()->user()->role)}} theme-deep-orange
+    @if(auth()->user()->jenjang==" smpPutra") {{Str::ucfirst(auth()->user()->role)}} theme-green @elseif(auth()->
+    user()->jenjang=="sd")
+    {{Str::ucfirst(auth()->user()->role)}} theme-deep-orange
     @elseif(auth()->user()->jenjang=="smpPutri")
-        {{Str::ucfirst(auth()->user()->role)}} theme-deep-purple
+    {{Str::ucfirst(auth()->user()->role)}} theme-deep-purple
     @elseif(auth()->user()->jenjang=="smaPutra")
-        {{Str::ucfirst(auth()->user()->role)}} theme-blue
+    {{Str::ucfirst(auth()->user()->role)}} theme-blue
     @elseif(auth()->user()->jenjang=="kepalaYayasan")
-        {{Str::ucfirst(auth()->user()->role)}} theme-green
+    {{Str::ucfirst(auth()->user()->role)}} theme-green
     @endif
-">
+    ">
     <!-- Page Loader -->
     {{-- <div class="page-loader-wrapper">
         <div class="loader">
@@ -94,7 +93,8 @@
             <div class="navbar-header">
                 {{-- <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a> --}}
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand mb-n2" href="{{url('/dashboard')}}"> <img src="{{asset('tema/images/logopondok.png')}}" alt=""> 
+                <a class="navbar-brand mb-n2" href="{{url('/dashboard')}}"> <img
+                        src="{{asset('tema/images/logopondok.png')}}" alt="">
                     Sistem Informasi Akademik Pondok Pesantren Alqosim Jambi {{jenjangLengkap()}}
                 </a>
             </div>
@@ -105,36 +105,36 @@
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar my-4">
             <!-- User Info -->
-                <div class="{{jenjang()}} user-info pb-5 align-center ">
-                    <div class="image">
+            <div class="{{jenjang()}} user-info pb-5 align-center ">
+                <div class="image">
 
-                        <img src="{{asset('tema/images/user.png')}}" width="75" height="75" alt="User" />
-                        {{-- <img src="{{auth()->user()->asatidzah()->pasPhoto}}" width="75" height="75" alt="User" /> --}}
+                    <img src="{{asset('tema/images/user.png')}}" width="75" height="75" alt="User" />
+                    {{-- <img src="{{auth()->user()->asatidzah()->pasPhoto}}" width="75" height="75" alt="User" /> --}}
+                </div>
+                <div class="info-container pb-3 align-center">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{auth()->user()->name}}</div>
+                    <div class="email">{{auth()->user()->email}}</div>
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{Str::ucfirst(auth()->user()->role)}} {{jenjangLengkap()}}
+
                     </div>
-                    <div class="info-container pb-3 align-center">
-                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{auth()->user()->name}}</div>
-                        <div class="email">{{auth()->user()->email}}</div>
-                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{Str::ucfirst(auth()->user()->role)}} {{jenjangLengkap()}}
-                            
-                        </div>
 
 
-                        <div class="btn-group user-helper-dropdown">
-                            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="true">keyboard_arrow_down</i>
-                            <ul class="dropdown-menu">
-                                <li><a href="/profil"><i class="material-icons">person</i>Profile</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="/logout"><i class="material-icons">input</i>Sign Out</a></li>
-                            </ul>
-                        </div>
-
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu">
+                            <li><a href="/profil"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout"><i class="material-icons">input</i>Sign Out</a></li>
+                        </ul>
                     </div>
 
                 </div>
-            
+
+            </div>
+
             <!-- #User Info -->
             <!-- Menu -->
             <div class="menu">
@@ -204,31 +204,22 @@
                 </li>
                 @elseif(auth()->user()->role=='asatidzah')
                 @if(auth()->user()->waliKelas != null)
-                <li class="@yield('menulaporan')">
-                    <a href="{{'/laporan'}}">
-                        <i class="material-icons">assignment</i>
-                        <span>Laporan Nilai Kelas</span>
-                    </a>
-                </li>
-                @endif
-                <li class="@yield('menusantri')">
+                <li class="@yield('menuwali')">
                     <a href="javascript:void(0);" class="menu-toggle">
-                        <i class="material-icons">people</i>
-                        <span>Data Santri</span>
+                        <i class="material-icons">assignment</i>
+                        <span>Data Kelas</span>
                     </a>
                     <ul class="ml-menu">
-                        {{-- <li class="@yield('menuuula')">
-                                <a href="{{url('/santriuula')}}">Salafiyah Uula</a>
-                </li> --}}
-                <li class="@yield('menuwustha')">
-                    <a href="{{url('/santriwustha')}}">Salafiyah Wustha</a>
-                </li>
-                {{-- <li class="@yield('menubanaat')">
-                                <a href="{{url('/santribanaat')}}">Tahfidz Qur'an Lilbanaat</a>
-                </li> --}}
-                </ul>
+                        <li class="@yield('menusantri')">
+                            <a href="{{url('/dataSantri')}}">Data Santri</a>
+                        </li>
+                        <li class="@yield('menulaporan')">
+                            <a href="{{url('/laporannilai')}}">Laporan Nilai Kelas</a>
+                        </li>
+                    </ul>
                 </li>
                 
+                @endif
                 <li class="@yield('menujadwal')">
                     <a href="{{'/jadwalbelajar'}}">
                         <i class="material-icons">access_time</i>
@@ -243,9 +234,9 @@
                 </li>
                 {{-- <li class="@yield('menukelas')">
                     <a href="{{'/kelas'}}">
-                        <i class="material-icons">business</i>
-                        <span>Kelas</span>
-                    </a>
+                <i class="material-icons">business</i>
+                <span>Kelas</span>
+                </a>
                 </li> --}}
                 <li class="@yield('')">
                     <a href="{{'/logout'}}">
@@ -291,7 +282,7 @@
                         <span>Keluar</span>
                     </a>
                 </li>
-                @endif  
+                @endif
 
                 </ul>
             </div>

@@ -36,57 +36,56 @@
                                 <form method="POST" action="/admintambah" class="pb-5" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row mb-1">
-                                      <div class="col-sm-4"> 
-                                      <label for="name" class=" col-form-label">Nama Admin</label>
-                                      </div>
-                                      <div class="col-sm-8 ">
-                                        <input type="text"
-                                        class="form-control @error('name') is-invalid @enderror"
-                                        id="name" name="name" }}">
-                                        @error('name')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                      </div>
+                                        <div class="col-sm-4">
+                                            <label for="name" class=" col-form-label">Nama Admin</label>
+                                        </div>
+                                        <div class="col-sm-8 ">
+                                            <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                                id="name" name="name" }}">
+                                            @error('name')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="row mb-1">
-                                      <div class="col-sm-4"> 
-                                      <label for="email" class=" col-form-label">Email</label>
-                                      </div>
-                                      <div class="col-sm-8 ">
-                                          <input type="text"
-                                              class="form-control @error('email') is-invalid @enderror"
-                                              id="email" name="email" }}">
-                                          @error('email')
-                                          <div class="invalid-feedback">{{$message}}</div>
-                                          @enderror
-                                      </div>
+                                        <div class="col-sm-4">
+                                            <label for="email" class=" col-form-label">Email</label>
+                                        </div>
+                                        <div class="col-sm-8 ">
+                                            <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                                id="email" name="email" }}">
+                                            @error('email')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="row mb-1">
-                                      <div class="col-sm-4"> 
-                                      <label for="jenjang" class=" col-form-label">Jenjang</label>
-                                      </div>
-                                      <div class="col-sm-8 ">
-                                          <select name="jenjang" id="jenjang" class="custom-select">
-                                            <option selected>Pilih jenjang admin</option>
-                                            <option name="jenjang" value="sd">Salafiyyah Uulaa</option>
-                                            <option name="jenjang" value="smpPutra">Salafiyyah Wustha'</option>
-                                            <option name="jenjang" value="smaPutra">Salafiyyah Ulyaa</option>
-                                            <option name="jenjang" value="smpPutri">Tahfidzul Qur'an Lil Bana'at</option>
-                                          </select>
-                                      </div>
+                                        <div class="col-sm-4">
+                                            <label for="jenjang" class=" col-form-label">Jenjang</label>
+                                        </div>
+                                        <div class="col-sm-8 ">
+                                            <select name="jenjang" id="jenjang" class="custom-select">
+                                                <option selected>Pilih jenjang admin</option>
+                                                <option name="jenjang" value="sd">Salafiyyah Uulaa</option>
+                                                <option name="jenjang" value="smpPutra">Salafiyyah Wustha'</option>
+                                                <option name="jenjang" value="smaPutra">Salafiyyah Ulyaa</option>
+                                                <option name="jenjang" value="smpPutri">Tahfidzul Qur'an Lil Bana'at
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="row mb-1">
-                                      <div class="col-sm-4"> 
-                                      <label for="password" class=" col-form-label">Password</label>
-                                      </div>
-                                      <div class="col-sm-8 ">
-                                        <input type="text"
-                                        class="form-control @error('password') is-invalid @enderror"
-                                        id="password" name="password" }}">
-                                        @error('password')
-                                        <div class="invalid-feedback">{{$message}}</div>
-                                        @enderror
-                                      </div>
+                                        <div class="col-sm-4">
+                                            <label for="password" class=" col-form-label">Password</label>
+                                        </div>
+                                        <div class="col-sm-8 ">
+                                            <input type="text"
+                                                class="form-control @error('password') is-invalid @enderror"
+                                                id="password" name="password" }}">
+                                            @error('password')
+                                            <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-info px-4 ml-3 ">Tambah</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -144,7 +143,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Batal</button>
-                                            <form action="/admin/hapus/{{$ad->id}}" method="POST" class="d-inline">
+                                            <form action="/adminhapus/{{$ad->id}}" method="POST" class="d-inline">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger px-4 ml-2">Hapus</button>

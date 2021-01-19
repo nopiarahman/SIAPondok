@@ -82,8 +82,6 @@ Route::group(['middleware'=>['auth','checkRole:admin']],function(){
     Route::delete('/periode/{periode}', 'PeriodeController@destroy');
     Route::get('/periode/{id}/aktif', 'PeriodeController@setaktif');
 
-    Route::get('/cetaknilai/{santriwustha}','CetakNilaiController@cetak');
-    Route::get('/cetaknilaisw/{santriwustha}','CetakNilaiController@cetaksw');
 });
 
 Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepalaYayasan',]],function(){
@@ -96,8 +94,10 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::get('/kelas/{kelas}', 'KelasController@show');
 
     Route::get('/laporan', 'LaporanController@index');
-    Route::get('/laporan/{kelas}', 'LaporanController@show');
+    Route::get('/laporannilai', 'LaporanController@show');
     Route::get('/laporan/{santriwustha}/detail', 'LaporanController@detail');
+    Route::get('/cetaknilai/{santriwustha}','CetakNilaiController@cetak');
+    Route::get('/cetaknilaisw/{santriwustha}','CetakNilaiController@cetaksw');
     
     Route::get('/nilai', 'NilaiController@index');
     Route::post('/nilaiisi/{jadwalbelajar}', 'NilaiController@store');
@@ -105,6 +105,7 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::get('/nilai/{jadwalbelajar}','NilaiController@show');
     Route::delete('/nilai/{nilai}','NilaiController@destroy');
     
+    Route::get('/dataSantri','WaliKelasController@index');
     
 });
 Route::group(['middleware'=>['auth','checkRole:waliSantri']],function(){
@@ -116,6 +117,7 @@ Route::group(['middleware'=>['auth','checkRole:waliSantri']],function(){
 Route::group(['middleware' => ['auth','checkRole:kepalaYayasan']], function () {
     Route::get('/editadmin','KepalaYayasanController@editAdmin');
     Route::post('/admintambah','KepalaYayasanController@admintambah');
+    Route::delete('/adminhapus/{admin}','KepalaYayasanController@adminhapus');
 });
 
 Route::get('/profil','HomeController@showChangePasswordForm');

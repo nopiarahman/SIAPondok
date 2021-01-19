@@ -8,6 +8,7 @@ use App\jadwalbelajar;
 use App\pelanggaran;
 use App\mapel;
 use App\kelas;
+use App\waliKelas;
 use App\asatidzah;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -23,9 +24,9 @@ class DashboardController extends Controller
     {
         
         $cekuser = auth()->user();
-        $santriwustha=santriwustha::all();
-        $asatidzah=asatidzah::all();
-        $mapel=mapel::all();
+        $santriwustha=santriwustha::where('jenjang',jenjang())->get();
+        $asatidzah=asatidzah::where('jenjang',jenjang())->get();
+        $mapel=mapel::where('jenjang',jenjang())->get();
         $periode=periode::where('status','Aktif')->first();
         $waktu=carbon::now();
         $hari=$waktu->isoFormat('dddd');
@@ -59,8 +60,6 @@ class DashboardController extends Controller
             $cekasatidzah=asatidzah::where('user_id','=',$cekuser->id)->first();
             $cekjadwalaktif=['asatidzah_id'=> $cekasatidzah->id,'periode_id'=>$periode->id];
             $cekjadwal=jadwalbelajar::where($cekjadwalaktif)->get();
-            //  dd($cekasatidzah->id);
-
             if($hari=='Minggu'){
                 $jadwalHariIni=jadwalbelajar::where('hari','Ahad')
                                             ->where($cekjadwalaktif)
@@ -71,8 +70,9 @@ class DashboardController extends Controller
                                             ->where($cekjadwalaktif)
                                             ->get();
             }
-            // dd($jadwalHariIni);
-            return view ('dashboard/index',compact('cekuser','santriwustha','periode','cekjadwal','asatidzah','mapel','jadwalHariIni'));
+            $cekwaliKelas=waliKelas::where('user_id',$cekuser->id)->first();
+            // dd($cekwaliKelas->kelas->namaKelas);
+            return view ('dashboard/index',compact('cekuser','santriwustha','periode','cekjadwal','asatidzah','mapel','jadwalHariIni','cekwaliKelas'));
         }
         elseif(auth()->user()->role=='kepalaYayasan')
         {

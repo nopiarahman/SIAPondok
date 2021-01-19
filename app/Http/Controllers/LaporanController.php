@@ -8,6 +8,7 @@ use App\mapel;
 use App\periode;
 use App\jadwalbelajar;
 use App\santriwustha;
+use App\waliKelas;
 use App\nilai;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -57,13 +58,13 @@ class LaporanController extends Controller
      */
     public function show(laporan $laporan, kelas $kelas)
     {
-        // $santriwustha=santriwustha::orderBy('namaLengkap')->get();
-        // $jadwalbelajar=jadwalbelajar::->where('namaKelas',$kelas->÷namaKelas);
-        // dd($kelas);
-        $nilai=nilai::where('kelas_id',$kelas->id)->get();
-        $santriwustha=santriwustha::where('kelas_id',$kelas->id)
+        $cekuser = auth()->user();
+        $cekwaliKelas=waliKelas::where('user_id',$cekuser->id)->first();
+        $nilai=nilai::where('kelas_id',$cekwaliKelas->kelas->id)->get();
+        $santriwustha=santriwustha::where('kelas_id',$cekwaliKelas->kelas->id)
                                     ->where('jenjang',jenjang())
                                     ->get();
+        // dd($santriwustha);
         return view ('laporan/laporanshow',compact('santriwustha','kelas'));
 
     }
@@ -105,7 +106,7 @@ class LaporanController extends Controller
     {
         $nilai=nilai::where('kelas_id',$santriwustha->kelas_id)->where('jenjang',jenjang())->first();
         $semuanilai=mapel::all();
-        $periode=periode::where('status','Aktif')->where('jenjang',jenjang())->first();
+        $periode=periode::where('status','Aktif')->first();
         if($nilai!=null){
             $ceknilai = DB::table('nilai')
                     ->where('kelas_id', '=', $nilai->kelas_id)
