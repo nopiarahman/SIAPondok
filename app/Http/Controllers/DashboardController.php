@@ -29,20 +29,20 @@ class DashboardController extends Controller
         $periode=periode::where('status','Aktif')->first();
         $waktu=carbon::now();
         $hari=$waktu->isoFormat('dddd');
-        
+        $jenjang =jenjang();
         /* Menyimpan nama marhalah */
-        if(auth()->user()->jenjang=="sd"){
-            $jenjang="Salafiyyah Uulaa";
-        }
-        elseif(auth()->user()->jenjang=="smpPutra"){
-            $jenjang="Salafiyyah Wustha'";
-        }
-        elseif(auth()->user()->jenjang=="smpPutri"){
-            $jenjang="Tahfidzul Qur'an Lil Banaat";
-        }
-        else{
-            $jenjang="Salafiyyah Ulyaa";
-        }
+        // if(auth()->user()->jenjang=="sd"){
+        //     $jenjang="Salafiyyah Uulaa";
+        // }
+        // elseif(auth()->user()->jenjang=="smpPutra"){
+        //     $jenjang="Salafiyyah Wustha'";
+        // }
+        // elseif(auth()->user()->jenjang=="smpPutri"){
+        //     $jenjang="Tahfidzul Qur'an Lil Banaat";
+        // }
+        // else{
+        //     $jenjang="Salafiyyah Ulyaa";
+        // }
         
         if(auth()->user()->role=='waliSantri')
         {
@@ -73,6 +73,10 @@ class DashboardController extends Controller
             }
             // dd($jadwalHariIni);
             return view ('dashboard/index',compact('cekuser','santriwustha','periode','cekjadwal','asatidzah','mapel','jadwalHariIni'));
+        }
+        elseif(auth()->user()->role=='kepalaYayasan')
+        {
+            return view ('dashboard/index',compact('cekuser'));
         }
         $kelas=kelas::orderBy('namaKelas')->get();
             $namaKelas=[];

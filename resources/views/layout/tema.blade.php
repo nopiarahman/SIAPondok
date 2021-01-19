@@ -45,11 +45,17 @@
 </head>
 
 <body class="
-@if(auth()->user()->jenjang=="smpPutra")
-                            {{Str::ucfirst(auth()->user()->role)}} theme-green
-                        @elseif(auth()->user()->jenjang=="sd")
-                            {{Str::ucfirst(auth()->user()->role)}} theme-deep-orange
-                        @endif
+    @if(auth()->user()->jenjang=="smpPutra")
+        {{Str::ucfirst(auth()->user()->role)}} theme-green
+    @elseif(auth()->user()->jenjang=="sd")
+        {{Str::ucfirst(auth()->user()->role)}} theme-deep-orange
+    @elseif(auth()->user()->jenjang=="smpPutri")
+        {{Str::ucfirst(auth()->user()->role)}} theme-deep-purple
+    @elseif(auth()->user()->jenjang=="smaPutra")
+        {{Str::ucfirst(auth()->user()->role)}} theme-deep-blue
+    @elseif(auth()->user()->jenjang=="kepalaYayasan")
+        {{Str::ucfirst(auth()->user()->role)}} theme-green
+    @endif
 ">
     <!-- Page Loader -->
     {{-- <div class="page-loader-wrapper">
@@ -264,6 +270,19 @@
                     <a href="{{'/lihatpelanggaran'}}">
                         <i class="material-icons">gavel</i>
                         <span>Pelanggaran</span>
+                    </a>
+                </li>
+                <li class="@yield('')">
+                    <a href="{{'/logout'}}">
+                        <i class="material-icons">exit_to_app</i>
+                        <span>Keluar</span>
+                    </a>
+                </li>
+                @elseif(auth()->user()->role=='kepalaYayasan')
+                <li class="@yield('menuEditAdmin')">
+                    <a href="{{'/editadmin'}}">
+                        <i class="material-icons">people</i>
+                        <span>Kelola Admin</span>
                     </a>
                 </li>
                 <li class="@yield('')">

@@ -30,7 +30,7 @@
                               {{-- <i class="material-icons">search</i> --}}
                               <span class="input-group-btn ">
                                 <button type="submit" class="btn btn-primary mr-1 mt-3 mb-n2"> Cari </button>
-                               <a href="{{ url('/asatidzah') }}" class="btn btn-primary mt-3 mb-n2" title=""> Refresh Data </a>
+                                <a href="{{ url('/asatidzah') }}" class="btn btn-primary mt-3 mb-n2" title=""> Refresh Data </a>
                               </span>
                           </div>
                         </div>  

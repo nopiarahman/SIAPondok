@@ -86,9 +86,8 @@ Route::group(['middleware'=>['auth','checkRole:admin']],function(){
     Route::get('/cetaknilaisw/{santriwustha}','CetakNilaiController@cetaksw');
 });
 
-Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri']],function(){
+Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepalaYayasan',]],function(){
     Route::get('/dashboard', 'DashboardController@index');
-    
     Route::get('/santriwustha', 'SantriWusthaController@index');
     Route::get('/santriwustha/{santriwustha}', 'SantriWusthaController@show');
     Route::get('/jadwalbelajar', 'JadwalBelajarController@index');
@@ -112,6 +111,11 @@ Route::group(['middleware'=>['auth','checkRole:waliSantri']],function(){
     Route::get('/walisantriwustha', 'WaliSantriController@lihatsantri');
     Route::get('/lihatnilai', 'WaliSantriController@lihatnilai');
     Route::get('/lihatpelanggaran', 'WaliSantriController@lihatpelanggaran');
+});
+
+Route::group(['middleware' => ['auth','checkRole:kepalaYayasan']], function () {
+    Route::get('/editadmin','KepalaYayasanController@editAdmin');
+    Route::post('/admintambah','KepalaYayasanController@admintambah');
 });
 
 Route::get('/profil','HomeController@showChangePasswordForm');

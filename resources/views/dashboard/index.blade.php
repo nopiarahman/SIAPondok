@@ -178,7 +178,11 @@
                 @endif
             </div>
         </div>
+    </div>
+        @elseif(auth()->user()->role=='kepalaYayasan')
+        Kepala Yayasan Keren
         @endif
+
     </div>
     @if(auth()->user()->role=='admin')
     <script type="text/javascript">

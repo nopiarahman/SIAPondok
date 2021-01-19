@@ -15,6 +15,17 @@ function jenjangLengkap(){
         return " Salafiyyah Ulyaa";
     }
 }
+function tulisJenjang($string){
+    if($string=='sd'){
+        return "Salafiyyah Uulaa";
+    }elseif($string=='smpPutra'){
+        return "Salafiyyah Wushta'";
+    }elseif($string=='smpPutri'){
+        return "Tahfidzul Qur'an Lil Bana'at'";
+    }elseif($string=='smaPutra'){
+        return "Salafiyyah Uulya'";
+    }
+}
 function jenjang(){
     return auth()->user()->jenjang;
 }
