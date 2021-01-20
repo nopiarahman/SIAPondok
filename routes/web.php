@@ -99,6 +99,11 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::get('/cetaknilai/{santriwustha}','CetakNilaiController@cetak');
     Route::get('/cetaknilaisw/{santriwustha}','CetakNilaiController@cetaksw');
     
+    Route::get('/pengumuman','PengumumanController@index');
+    Route::get('/pengumumantambah','PengumumanController@create');
+    Route::post('/pengumumantambah','PengumumanController@store');
+    Route::delete('/pengumumanhapus/{pengumuman}','PengumumanController@destroy');
+
     Route::get('/nilai', 'NilaiController@index');
     Route::post('/nilaiisi/{jadwalbelajar}', 'NilaiController@store');
     Route::get('/nilaitambah', 'NilaiController@create');

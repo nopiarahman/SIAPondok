@@ -29,3 +29,9 @@ function tulisJenjang($string){
 function jenjang(){
     return auth()->user()->jenjang;
 }
+function tujuanPengumuman($int){
+    $namaWali = App\user::find($int);
+    $namaSantri = App\santriwustha::where('emailWali',$namaWali->email)->first();
+    // dd($namaSantri->namaLengkap);
+    return $namaSantri->namaLengkap;
+}

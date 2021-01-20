@@ -30,7 +30,7 @@ class WaliSantriController extends Controller
         
         $jadwalbelajar = jadwalbelajar::where('kelas_id',$santriwustha->kelas_id)->get();
         // dd($jadwalbelajar);
-        return view ('waliSantri/lihatnilai',compact('santriwustha','ceknilai','jadwalbelajar','nilaiaktif','periode'));
+        return view ('waliSantri/lihatnilai',compact('santriwustha','jadwalbelajar','nilaiaktif','periode'));
     }
     public function lihatpelanggaran()
     {
