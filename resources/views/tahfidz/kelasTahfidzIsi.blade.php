@@ -1,11 +1,11 @@
 @extends('layout/tema') {{-- menambah dari folder layout halaman main --}}
-@section('title','Data Santri Salafiyah Wustha') {{-- mengisi yield title dengan 1 baris code--}}
-@section ('menukelas','active')
+@section('title','Data Kelas Tahfidz') {{-- mengisi yield title dengan 1 baris code--}}
+@section ('menukelasTahfidz','active')
 @section('container')        {{-- mengisi yield container dengan lebih dari 1 baris code --}}
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h3 class="my-3 align-center">Isi Kelas dengan Santri</h3>
+          <h3 class="my-3 align-center">Isi Kelas Tahfidz dengan Santri</h3>
           @if (session('status'))
             <div class="alert alert-success">
               {{session ('status')}}
@@ -16,7 +16,7 @@
       <div class="card px-3 mb-n1 bg-light">
         <div class="row">
           <div class="col-md-12">
-            <a href="{{ url('/kelas') }}" class="btn btn-secondary mt-3 mb-2 align-left" title=""> <i class="material-icons mx-1  mb-2 align-middle">backspace</i>Kembali</a>
+            <a href="{{ url('/kelasTahfidz') }}" class="btn btn-secondary mt-3 mb-2 align-left" title=""> <i class="material-icons mx-1  mb-2 align-middle">backspace</i>Kembali</a>
             <form method="GET" action="/kelas/kelasisi/" accept-charset="UTF-8" class="form-inline float-right" role="search">
                 <div class="input-group ">
                   <div class="box-tools">
@@ -43,10 +43,11 @@
                         <tr>
                           <th scope="col">No</th>
                           <th scope="col">Nama Santri</th>
-                          <th scope="col">ID Santri</th>
+                          {{-- <th scope="col">ID Santri</th> --}}
                           <th scope="col">Wali Santri</th>
-                          <th scope="col">Kelas</th>
-                          <th scope="col">Ganti Kelas</th>
+                          <th scope="col">Kelas Reguler</th>
+                          <th scope="col">Kelas Tahfidz</th>
+                          <th scope="col">Ganti Kelas Tahfidz</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -54,9 +55,10 @@
                           <tr>
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>{{$sw->namaLengkap}}</td>
-                            <td>{{$sw->id}}</td>
+                            {{-- <td>{{$sw->id}}</td> --}}
                             <td>{{$sw->namaWali}}</td>
-                            <td>{{$sw->kelas->namaKelas}}</td>
+                            <td>Kelas {{$sw->kelas->namaKelas}}</td>
+                            <td>{{$sw->kelasTahfidz->namaKelas}}</td>
                             
                             <td>
   
@@ -65,7 +67,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Pilih Kelas</h5>
+                                      <h5 class="modal-title" id="exampleModalLabel">Pilih Kelas Tahfidz</h5>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
@@ -84,13 +86,13 @@
                                           <tbody>
                                             <tr>
                                             @foreach ($kelas as $ks)
-                                            <form action="/kelas/kelasisi" method="post" enctype="multipart/form-data">
+                                            <form action="/kelasTahfidz/kelasisi" method="post" enctype="multipart/form-data">
                                               @csrf
                                             <th scope="row">{{$loop->iteration}}</th>
                                               <td>{{$ks->namaKelas}}</td>
                                               <td><button type="submit" class="col-form-label btn btn-success " id="data">Pilih kelas</button></td>
                                             </tr>
-                                              <input type="hidden" name="kelas_id" value="{{$ks->id}}" />
+                                              <input type="hidden" name="kelastahfidz_id" value="{{$ks->id}}" />
                                               <input type="hidden" name="id" value="{{$sw->id}}" />
                                             </form>
                                             {{-- {{$kelas->links()}} --}}
@@ -112,6 +114,7 @@
                             </button> 
                           </td>
                             <td>
+                               
                           </td>
                         </tr>
                         @endforeach

@@ -52,6 +52,16 @@ Route::group(['middleware'=>['auth','checkRole:admin']],function(){
     Route::delete ('/kelas/{kelas}','KelasController@destroy');
     Route::get('/kelas/{kelas}/edit', 'KelasController@edit');
     Route::patch('/kelas/{kelas}','KelasController@update');
+
+    /* Kelas Tahfidz */
+    Route::get('/kelasTahfidz','KelasTahfidzController@index');
+    Route::post('/kelasTahfidzTambah','KelasTahfidzController@store');
+    Route::post('/kelasTahfidz/isiPengampu/{pengampu}','KelasTahfidzController@isiPengampu');
+    Route::get('/kelasTahfidz/kelasisi','KelasTahfidzController@isi');
+    Route::post('/kelasTahfidz/kelasisi','KelasTahfidzController@isikelas');
+    Route::delete('/kelasTahfidzHapus/{kelas}','KelasTahfidzController@destroy');
+    Route::get('/kelasTahfidz/{kelas}', 'KelasTahfidzController@show');
+    Route::patch('/kelasTahfidz/{kelas}','KelasTahfidzController@update');
     
     Route::get('/mapel', 'MapelController@index');
     Route::post('/mapel', 'MapelController@store');
@@ -92,6 +102,8 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::get('/kelas', 'KelasController@index');
     Route::get('/kelas/kelasisi/', 'KelasController@isi');
     Route::get('/kelas/{kelas}', 'KelasController@show');
+
+
 
     Route::get('/laporan', 'LaporanController@index');
     Route::get('/laporannilai', 'LaporanController@show');

@@ -45,8 +45,9 @@
 </head>
 
 <body class="
-    @if(auth()->user()->jenjang==" smpPutra") {{Str::ucfirst(auth()->user()->role)}} theme-green @elseif(auth()->
-    user()->jenjang=="sd")
+    @if(auth()->user()->jenjang=="smpPutra")
+    {{Str::ucfirst(auth()->user()->role)}} theme-green 
+    @elseif(auth()->user()->jenjang=="sd")
     {{Str::ucfirst(auth()->user()->role)}} theme-deep-orange
     @elseif(auth()->user()->jenjang=="smpPutri")
     {{Str::ucfirst(auth()->user()->role)}} theme-deep-purple
@@ -167,6 +168,12 @@
                             <span>Kelas</span>
                         </a>
                     </li>
+                    <li class="@yield('menukelasTahfidz')">
+                        <a href="{{'/kelasTahfidz'}}">
+                            <i class="material-icons">chrome_reader_mode</i>
+                            <span>Kelas Tahfidz</span>
+                        </a>
+                    </li>
                     <li class="@yield('menumapel')">
                         <a href="{{'/mapel'}}">
                             <i class="material-icons">book</i>
@@ -236,6 +243,12 @@
                     <a href="{{'/nilai'}}">
                         <i class="material-icons">mode_edit</i>
                         <span>Nilai</span>
+                    </a>
+                </li>
+                <li class="@yield('menunilaitahfidz')">
+                    <a href="{{'/nilaitahfidz'}}">
+                        <i class="material-icons">chrome_reader_mode</i>
+                        <span>Nilai Tahfidz</span>
                     </a>
                 </li>
                 {{-- <li class="@yield('menukelas')">

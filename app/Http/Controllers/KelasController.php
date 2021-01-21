@@ -84,7 +84,6 @@ class KelasController extends Controller
         }
         $kelas = kelas::orderBy('namaKelas')
                         ->where('jenjang',jenjang())->get();
-        // $santriwustha = santriwustha::orderBy('namaLengkap')->paginate(5);
         return view ('kelas/kelasisi',compact('request','santriwustha','kelas'));
     }
     public function isikelas(kelas $kelas , Request $request)
@@ -180,7 +179,7 @@ class KelasController extends Controller
         $cekWaliKelas = walikelas::where('email',$request->email)->first();
         if ($cekWaliKelas != null){
             /* menampilkan pesan gagal */
-            return redirect('/kelas')->with('status3', 'Asatidzah sudah menjadi Wali kelas di kelas yang lain, silahkan pilih asatidzah lain');
+            return redirect('/kelas')->with('status3', 'Asatidzah sudah menjadi Wali kelas dikelas yang lain, silahkan pilih asatidzah lain');
         }else{
             /* Menyimpan Data Wali Kelas */
             $ambilUser = user::where('email',$request->email)->first();
