@@ -40,6 +40,17 @@ class WaliSantriController extends Controller
         $pelanggaran = pelanggaran::where('santriwustha_id','=',$santriwustha->id)->paginate(10);
         return view('waliSantri/lihatpelanggaran',['pelanggaran'=>$pelanggaran]);
     }
+    public function lihatPengumuman(){
+
+        $dataKelompok = \App\pengumuman::where('tujuanKelompok',jenjang())->get();
+        $dataPengumuman = \App\pengumuman::where('tujuanPengumuman',auth()->user()->id)->get();
+
+        $listpengumuman=$dataPengumuman->merge($dataKelompok);
+        $pengumuman = $listpengumuman->all();
+        // ->union('tujuanPengumuman',auth()->user()->id)->paginate(10);
+        // dd($pengumuman->all());
+        return view('waliSantri/lihatpengumuman',compact('pengumuman'));
+    }
 
 
 }

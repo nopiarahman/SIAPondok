@@ -269,6 +269,12 @@
                         <span>Pelanggaran</span>
                     </a>
                 </li>
+                <li class="@yield('menuPengumuman')">
+                    <a href="{{'/pengumumanWali'}}">
+                        <i class="material-icons">announcement</i>
+                        <span>Pengumuman</span>
+                    </a>
+                </li>
                 <li class="@yield('')">
                     <a href="{{'/logout'}}">
                         <i class="material-icons">exit_to_app</i>

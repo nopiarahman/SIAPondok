@@ -117,6 +117,7 @@ Route::group(['middleware'=>['auth','checkRole:waliSantri']],function(){
     Route::get('/walisantriwustha', 'WaliSantriController@lihatsantri');
     Route::get('/lihatnilai', 'WaliSantriController@lihatnilai');
     Route::get('/lihatpelanggaran', 'WaliSantriController@lihatpelanggaran');
+    Route::get('/pengumumanWali', 'WaliSantriController@lihatPengumuman');
 });
 
 Route::group(['middleware' => ['auth','checkRole:kepalaYayasan']], function () {
