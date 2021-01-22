@@ -193,7 +193,7 @@
         </div>
     </div>
         @elseif(auth()->user()->role=='kepalaYayasan')
-        Kepala Yayasan Keren
+        {{-- Kepala Yayasan Keren --}}
         @endif
 
     </div>

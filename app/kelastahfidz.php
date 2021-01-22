@@ -9,9 +9,9 @@ class kelastahfidz extends Model
     protected $table = 'kelastahfidz';
     protected $guarded = ['id','created_at','updated_at']; /* melindungi field yang tidak boleh diisi manual, lihat mass assignment */
 
-    public function guruTahfidz()
+    public function gurutahfidz()
     {
-        return $this->hasOne(guruTahfidz::class);
+        return $this->hasOne(gurutahfidz::class);
     }
     public function santriwustha()
     {

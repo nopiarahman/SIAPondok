@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\gurutahfidz;
+use App\surah;
+use App\nilaitahfidz;
+use App\santriwustha;
 
 class NilaiTahfidzController extends Controller
 {
@@ -13,7 +17,11 @@ class NilaiTahfidzController extends Controller
      */
     public function index()
     {
-        //
+        $cekguru = gurutahfidz::where('jenjang',jenjang())
+                                ->where('user_id',auth()->user()->id)->first();
+        $santriwustha = santriwustha::where('jenjang',jenjang())
+                                    ->where('kelasTahfidz_id',$cekguru->kelasTahfidz_id)->paginate(10);
+        return view('/tahfidz/nilaiindex',compact('santriwustha'));
     }
 
     /**
@@ -79,6 +87,25 @@ class NilaiTahfidzController extends Controller
      */
     public function destroy($id)
     {
-        //
+        nilaitahfidz::destroy($id);
+        return back()->with('status', 'Data Berhasil dihapus');
+    }
+    public function isi($request){
+        // dd($request);
+        $ceknilai=nilaitahfidz::where('santriwustha_id',$request)->get();
+        $santriwustha = santriwustha::find($request);
+        $surah = surah::orderBy('noSurah')->paginate(10);
+        // dd($surah);
+        return view('tahfidz/nilaitahfidzisi',compact('ceknilai','surah','santriwustha'));
+    }
+    public function isinilai(Request $request){
+        // dd($request);
+        $requestData = $request->all();
+        $requestData['jenjang']=jenjang();
+        // $santriwustha = santriwustha::find($request->santriwustha_id);
+        // dd($requestData);
+
+        nilaitahfidz::create($requestData);
+        return redirect('nilaitahfidz/isi'.'/'.$request->santriwustha_id)->with('status', 'Data Berhasil Ditambahkan');
     }
 }

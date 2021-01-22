@@ -66,6 +66,7 @@ class NilaiController extends Controller
         $requestData           = $request->all();
         $requestData['rataRata']= 0.2*$request->harian + 0.2*$request->uts + 0.3*$request->uas + 0.3*$request->akhlak; 
         $requestData['periode_id'] = $periode->id;
+        $requestData['jenjang']=jenjang();
         $this->validate($request,$rules,$costumMessages);
         $ceknilai = DB::table('nilai')
                     ->where('santriwustha_id', '=', $request->santriwustha_id)

@@ -35,3 +35,7 @@ function tujuanPengumuman($int){
     // dd($namaSantri->namaLengkap);
     return $namaSantri->namaLengkap;
 }
+function cariSurah($int){
+    $surah = App\surah::find($int);
+    return $surah->namaSurah;
+}

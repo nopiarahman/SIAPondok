@@ -9,7 +9,7 @@ class gurutahfidz extends Model
     protected $table = 'gurutahfidz';
     protected $guarded = ['id','created_at','updated_at']; /* melindungi field yang tidak boleh diisi manual, lihat mass assignment */
 
-    public function kelasTahfidz()
+    public function kelastahfidz()
     {
         return $this->belongsTo(kelastahfidz::class);
     }
