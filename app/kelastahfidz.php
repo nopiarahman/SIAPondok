@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\santriwustha;
 class kelastahfidz extends Model
 {
-    protected $table = 'kelastahfidz';
+    protected $table = 'kelasTahfidz';
     protected $guarded = ['id','created_at','updated_at']; /* melindungi field yang tidak boleh diisi manual, lihat mass assignment */
 
     public function gurutahfidz()

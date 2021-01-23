@@ -9,6 +9,7 @@ use App\pelanggaran;
 use App\mapel;
 use App\kelas;
 use App\waliKelas;
+use App\gurutahfidz;
 use App\asatidzah;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -71,7 +72,8 @@ class DashboardController extends Controller
                                             ->get();
             }
             $cekwaliKelas=waliKelas::where('user_id',$cekuser->id)->first();
-            // dd($cekwaliKelas->kelas->namaKelas);
+            $cekguruTahfidz=gurutahfidz::where('user_id',$cekuser->id)->first();
+            // dd($cekguruTahfidz);
             return view ('dashboard/index',compact('cekuser','santriwustha','periode','cekjadwal','asatidzah','mapel','jadwalHariIni','cekwaliKelas'));
         }
         elseif(auth()->user()->role=='kepalaYayasan')

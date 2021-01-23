@@ -216,7 +216,7 @@
                     </a>
                 </li>
                 @elseif(auth()->user()->role=='asatidzah')
-                @if(auth()->user()->waliKelas != null)
+                @if(cekwaliKelas() != null)
                 <li class="@yield('menuwali')">
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">assignment</i>
@@ -245,12 +245,14 @@
                         <span>Nilai</span>
                     </a>
                 </li>
+                @if(cekGuruTahfidz() != null)
                 <li class="@yield('menunilaitahfidz')">
                     <a href="{{'/nilaitahfidz'}}">
                         <i class="material-icons">chrome_reader_mode</i>
                         <span>Nilai Tahfidz</span>
                     </a>
                 </li>
+                @endif
                 {{-- <li class="@yield('menukelas')">
                     <a href="{{'/kelas'}}">
                 <i class="material-icons">business</i>

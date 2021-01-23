@@ -128,14 +128,27 @@
                     </button>
                 </a>
             </div>
-            @if(auth()->user()->waliKelas != null)
+            @if(cekwaliKelas() != null)
             <div class="col mt-1">
                     <button type="button" class="btn btn-success py-3 align-center">
                         <div class="col-md-2 ">
                             <i class="material-icons" style="font-size:40px;">domain</i>
                         </div>
                         <div class="col-md-6 py-2 align-middle pl-4">
-                            <h6 class="text-center"> Anda Wali Kelas di Kelas {{$cekwaliKelas->kelas->namaKelas}} </h6>
+                            <h6 class="text-center"> Anda Wali Kelas di Kelas {{cekwaliKelas()->kelas->namaKelas}} </h6>
+                        </div>
+                    </button>
+                {{-- </a> --}}
+            </div>
+            @endif
+            @if(cekGuruTahfidz() != null)
+            <div class="col mt-1">
+                    <button type="button" class="btn btn-success py-3 align-center">
+                        <div class="col-md-2 ">
+                            <i class="material-icons" style="font-size:40px;">domain</i>
+                        </div>
+                        <div class="col-md-6 py-2 align-middle pl-3">
+                            <h6 class="text-center">Pengampu Tahfidz Kelas {{cekGuruTahfidz()->kelasTahfidz->namaKelas}} </h6>
                         </div>
                     </button>
                 {{-- </a> --}}

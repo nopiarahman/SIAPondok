@@ -39,3 +39,11 @@ function cariSurah($int){
     $surah = App\surah::find($int);
     return $surah->namaSurah;
 }
+function cekwaliKelas(){
+    $cekwaliKelas= App\waliKelas::where('user_id',auth()->user()->id)->first();
+    return $cekwaliKelas;
+}
+function cekGuruTahfidz(){
+    $cekGuruTahfidz= App\gurutahfidz::where('user_id',auth()->user()->id)->first();
+    return $cekGuruTahfidz;
+}
