@@ -28,4 +28,5 @@ class AuthController extends Controller
         $user = user::all();
         return view ('profil',compact('user'));
     }
+    
 }

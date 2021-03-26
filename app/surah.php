@@ -9,5 +9,9 @@ class surah extends Model
     protected $table = 'surah';
     protected $guarded = ['id','created_at','updated_at']; /* melindungi field yang tidak boleh diisi manual, lihat mass assignment */
 
+    public function nilaitahfidz()
+    {
+        return $this->hasOne(nilaitahfidz::class);
+    }
 
 }

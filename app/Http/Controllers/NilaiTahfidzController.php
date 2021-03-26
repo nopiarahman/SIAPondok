@@ -20,8 +20,8 @@ class NilaiTahfidzController extends Controller
         $cekguru = gurutahfidz::where('jenjang',jenjang())
                                 ->where('user_id',auth()->user()->id)->first();
         $santriwustha = santriwustha::where('jenjang',jenjang())
-                                    ->where('kelasTahfidz_id',$cekguru->kelasTahfidz_id)->paginate(10);
-        return view('/tahfidz/nilaiindex',compact('santriwustha'));
+                                    ->where('kelastahfidz_id',$cekguru->kelastahfidz_id)->paginate(10);
+        return view('/tahfidz/nilaiindex',compact('santriwustha','cekguru'));
     }
 
     /**
@@ -94,7 +94,7 @@ class NilaiTahfidzController extends Controller
         // dd($request);
         $ceknilai=nilaitahfidz::where('santriwustha_id',$request)->get();
         $santriwustha = santriwustha::find($request);
-        $surah = surah::orderBy('noSurah')->paginate(10);
+        $surah = surah::orderBy('noSurah','DESC')->paginate(10);
         // dd($surah);
         return view('tahfidz/nilaitahfidzisi',compact('ceknilai','surah','santriwustha'));
     }

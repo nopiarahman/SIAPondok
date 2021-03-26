@@ -218,7 +218,7 @@
             <p>____________________________</p>
         </div>
         <div class="col-md-4 text-center">
-            <h5>{{$santriwustha->kelas->waliKelas}}</h5>
+            <h5>{{$santriwustha->kelas->waliKelas->namaLengkap}}</h5>
         </div>
         <div class="col-md-4 text-center">
             <h5>Hery Wandrizal, S.SHi</h5>

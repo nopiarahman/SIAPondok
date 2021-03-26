@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card mt-2">
-                <h5 class=" align-center mt-4"> Input Nilai Tafidz {{$santriwustha->namaLengkap}} </h5> <br>
+                <h5 class=" align-center mt-4"> Input Nilai Tahfidz {{$santriwustha->namaLengkap}} </h5> <br>
                 {{-- <h6 class="align-center">Mata Pelajaran {{$jadwalbelajar->mapel->namaMapel}} </h6> --}}
 
                 <div class="form-group row mb-n2 mx-auto ">

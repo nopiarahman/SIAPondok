@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h3 class="my-3 align-center">Nilai Tahfidz {{jenjangLengkap()}}</h3>
+            <h3 class="my-3 align-center">Nilai Tahfidz {{$cekguru->kelastahfidz->namaKelas}}</h3>
             @if (session('status'))
             <div class="alert alert-success">
                 {{session ('status')}}

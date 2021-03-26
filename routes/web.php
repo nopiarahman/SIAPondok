@@ -108,6 +108,7 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::get('/nilaitahfidz/isi/{nilai}','NilaiTahfidzController@isi');
     Route::delete('/nilaitahfidzhapus/{nilai}','NilaiTahfidzController@destroy');
     Route::post('/nilaitahfidzsantri','NilaiTahfidzController@isinilai');
+    Route::get('/cetaknilaitahfidz/{santriwustha}','CetakNilaiController@cetaknilaitahfidz');
 
     Route::get('/laporan', 'LaporanController@index');
     Route::get('/laporannilai', 'LaporanController@show');

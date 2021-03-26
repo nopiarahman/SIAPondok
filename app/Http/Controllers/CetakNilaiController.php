@@ -9,6 +9,7 @@ use App\periode;
 use App\jadwalbelajar;
 use App\santriwustha;
 use App\nilai;
+use App\nilaitahfidz;
 use Carbon\Carbon;
 use PDF;
 use SnappyImage;
@@ -91,23 +92,32 @@ class CetakNilaiController extends Controller
                     ->get();
             $cekaktif=['santriwustha_id'=> $santriwustha->id,'periode_id'=>$periode->id];
             $nilaiaktif=nilai::where($cekaktif)->get();
-            // $nilaiaktifurut=$nilaiaktif->orderBy($nilaiaktif->namaMapel)->get();
-            // dd($nilaiaktifurut);
         }else{
             $nilaiaktif==null;
         }
-        // dd(terbilang($angka));
-        // $durusullughoh=$nilaiaktif->where('mapel_id',19)->first();
-        // dd($durusullughoh->rataRata);
-        // dd($santriwustha->kelas_id);
-        // dd($kelas->waliKelas);
         $periode=periode::where('status','Aktif')->first();
-        // return view ('laporan/cetaknilaisw',compact('santriwustha','periode','nilaiaktif','kelas','tanggal'));
-
-
         $pdf = PDF::loadview('laporan/cetaknilaisw',compact('santriwustha','periode','nilaiaktif','kelas','tanggal'));
         $pdf->setPaper('legal')->setOption('margin-left',20);
         return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
-        // return $pdf->stream();
+    }
+    public function cetaknilaitahfidz(Santriwustha $santriwustha){
+        
+        $tanggal=Carbon::now();
+        $kelas=kelas::where('id',$santriwustha->kelas_id)->first();
+        $nilaitahfidz = nilaitahfidz::where('santriwustha_id',$santriwustha->id)
+                                    ->where('jenjang',jenjang())->get();
+        // $semuanilai=mapel::all();
+        // dd($ceknilai);
+        $periode=periode::where('status','Aktif')->first();
+        if($nilaitahfidz!=null){
+            // $cekaktif=['santriwustha_id'=> $santriwustha->id,'periode_id'=>$periode->id];
+            // $nilaiaktif=nilai::where($cekaktif)->get();
+            $pdf = PDF::loadview('laporan/cetaknilaitahfidz',compact('santriwustha','periode','nilaitahfidz','kelas','tanggal'));
+            $pdf->setPaper('legal')->setOption('margin-left',20);
+            return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
+        }else{
+            // $nilaiaktif==null;
+        }
+        // return view('laporan/cetaknilaitahfidz',compact('santriwustha','periode','nilaiaktif','kelas','tanggal'));
     }
 }
