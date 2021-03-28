@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-        <h3 class="my-3 align-center">Laporan Nilai Kelas {{$kelas->namaKelas}}</h3>
+        <h3 class="my-3 align-center">Laporan Nilai Kelas {{$cekwaliKelas->kelas->namaKelas}}</h3>
           @if (session('status'))
             <div class="alert alert-success">
               {{session ('status')}}
@@ -47,7 +47,10 @@
                 </a>
             
                 <a href="/cetaknilaisw/{{$sa->id}}" type="button" class="btn btn-info " style="border-radius: 5px ;  font-size:12px"><i class="small material-icons">print</i>
-                  Cetak Laporan Nilai
+                  Cetak Lapor UAS
+                </a>
+                <a href="/cetaknilaisw/{{$sa->id}}" type="button" class="btn btn-info " style="border-radius: 5px ;  font-size:12px"><i class="small material-icons">print</i>
+                  Cetak Lapor MID
                 </a>
             
             </td>
@@ -61,9 +64,5 @@
 </div>
 </div>
 </div>
-  
-                  
-                  
 
-   
 @endsection

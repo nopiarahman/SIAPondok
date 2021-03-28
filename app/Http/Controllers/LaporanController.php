@@ -58,6 +58,7 @@ class LaporanController extends Controller
      */
     public function show(laporan $laporan, kelas $kelas)
     {
+
         $cekuser = auth()->user();
         $cekwaliKelas=waliKelas::where('user_id',$cekuser->id)->first();
         $nilai=nilai::where('kelas_id',$cekwaliKelas->kelas->id)->get();
@@ -65,7 +66,7 @@ class LaporanController extends Controller
                                     ->where('jenjang',jenjang())
                                     ->get();
         // dd($santriwustha);
-        return view ('laporan/laporanshow',compact('santriwustha','kelas'));
+        return view ('laporan/laporanshow',compact('santriwustha','kelas','cekwaliKelas'));
 
     }
 
