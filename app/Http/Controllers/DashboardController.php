@@ -80,15 +80,17 @@ class DashboardController extends Controller
         {
             return view ('dashboard/index',compact('cekuser'));
         }
-        $kelas=kelas::orderBy('namaKelas')->get();
+        $kelas=kelas::where('jenjang',jenjang())->orderBy('namaKelas')->get();
             $namaKelas=[];
             $data=[];
             foreach($kelas as $ks)
             {
                 $namaKelas[]=$ks->namaKelas;
-                $data[]=santriwustha::where('kelas_id',$ks->id)->count();
+                $data[]=santriwustha::where('kelas_id',$ks->id,)
+                                    ->where('jenjang',jenjang())  
+                                    ->count();
             }
-
+            // dd($namaKelas);
         /* return view untuk Admin */
         return view ('dashboard/index',compact('cekuser','santriwustha','periode','asatidzah','mapel','namaKelas','data','jenjang'));
     }

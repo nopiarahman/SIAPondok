@@ -223,14 +223,12 @@
                     config = {
                         type: 'bar',
                         data: {
-                            labels: {
-                                !!json_encode($namaKelas) !!
-                            },
+                            labels: {!!json_encode($namaKelas) !!},
+                        // labels: ["January", "February", "March", "April"],
                             datasets: [{
                                 label: "Jumlah Santri",
-                                data: {
-                                    !!json_encode($data) !!
-                                },
+                                data: {!!json_encode($data) !!},
+                                // data:[30,20,10,50],
                                 backgroundColor: "green"
                             }]
                         },
