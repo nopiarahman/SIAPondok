@@ -112,7 +112,7 @@
         <div class="row align-center">
             <div class="col mt-1">
                 {{-- <div class="row"> --}}
-                <a href="{{url('/mapel')}}">
+                <a href="{{url('/jadwalbelajar')}}">
                     <button type="button" class="btn btn-success py-3 align-center">
                         <div class="col-md-2 ">
                             <i class="material-icons" style="font-size:40px;">book</i>

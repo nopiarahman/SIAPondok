@@ -198,6 +198,7 @@ return [
 
     'aliases' => [
         // print pdf
+        
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         // geotagging
