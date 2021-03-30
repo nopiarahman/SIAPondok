@@ -95,7 +95,6 @@ class CetakNilaiController extends Controller
         }else{
             $nilaiaktif==null;
         }
-        $periode=periode::where('status','Aktif')->first();
         $pdf = PDF::loadview('laporan/cetaknilaisw',compact('santriwustha','periode','nilaiaktif','kelas','tanggal'));
         $pdf->setPaper('legal')->setOption('margin-left',20);
         return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
@@ -116,8 +115,29 @@ class CetakNilaiController extends Controller
             $pdf->setPaper('legal')->setOption('margin-left',20);
             return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
         }else{
-            // $nilaiaktif==null;
+            $nilaiaktif==null;
         }
-        // return view('laporan/cetaknilaitahfidz',compact('santriwustha','periode','nilaiaktif','kelas','tanggal'));
+        return view('laporan/cetaknilaitahfidz',compact('santriwustha','periode','nilaiaktif','kelas','tanggal'));
+    }
+    public function cetakmid(Santriwustha $santriwustha){
+        $tanggal=Carbon::now();
+        $kelas=kelas::where('id',$santriwustha->kelas_id)->first();
+        $nilai=nilai::where('kelas_id',$santriwustha->kelas_id)->first();
+        $semuanilai=mapel::all();
+        $periode=periode::where('status','Aktif')->first();
+
+        if($nilai!=null){
+            // $ceknilai = nilai::where('kelas_id', '=', $nilai->kelas_id)->get();
+            // $cekaktif=['santriwustha_id'=> $santriwustha->id,'periode_id'=>$periode->id];
+            // $nilaiaktif=nilai::where($cekaktif)->get();
+            $nilaiaktif=nilai::where('santriwustha_id',$santriwustha->id)
+                                ->where('kelas_id',$santriwustha->kelas_id)
+                                ->where('periode_id',$periode->id)
+                                ->get();
+        }else{
+            $nilaiaktif==null;
+        }
+        // dd($nilaiaktif);
+        return view('laporan/cetaknilaimid',compact('santriwustha','nilaiaktif','tanggal','kelas','periode'));
     }
 }

@@ -115,6 +115,7 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::get('/laporan/{santriwustha}/detail', 'LaporanController@detail');
     Route::get('/cetaknilai/{santriwustha}','CetakNilaiController@cetak');
     Route::get('/cetaknilaisw/{santriwustha}','CetakNilaiController@cetaksw');
+    Route::get('/cetaknilaimid/{santriwustha}','CetakNilaiController@cetakmid');
     
     Route::get('/pengumuman','PengumumanController@index');
     Route::get('/pengumumantambah','PengumumanController@create');

@@ -49,7 +49,7 @@
                 <a href="/cetaknilaisw/{{$sa->id}}" type="button" class="btn btn-info " style="border-radius: 5px ;  font-size:12px"><i class="small material-icons">print</i>
                   Cetak Lapor UAS
                 </a>
-                <a href="/cetaknilaisw/{{$sa->id}}" type="button" class="btn btn-info " style="border-radius: 5px ;  font-size:12px"><i class="small material-icons">print</i>
+                <a href="/cetaknilaimid/{{$sa->id}}" type="button" class="btn btn-info " style="border-radius: 5px ;  font-size:12px"><i class="small material-icons">print</i>
                   Cetak Lapor MID
                 </a>
             
