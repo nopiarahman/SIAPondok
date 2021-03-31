@@ -86,7 +86,7 @@ class DashboardController extends Controller
             foreach($kelas as $ks)
             {
                 $namaKelas[]=$ks->namaKelas;
-                $data[]=santriwustha::where('kelas_id',$ks->id,)
+                $data[]=santriwustha::where('kelas_id',$ks->id)
                                     ->where('jenjang',jenjang())  
                                     ->count();
             }
