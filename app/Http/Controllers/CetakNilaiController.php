@@ -141,6 +141,7 @@ class CetakNilaiController extends Controller
         $nilaiumum=[];
         $nilaidiniyahsorted=[];
         $nilaiumumsorted=[];
+        $nilaiMulokSorted=[];
         foreach($nilaiaktif as $nd)
         {
             if($nd->mapel->kategori=='diniyah')
@@ -170,7 +171,7 @@ class CetakNilaiController extends Controller
             // dd($nilaidiniyahsorted);
         $cekuser = auth()->user();
         $walikelas=waliKelas::where('user_id',$cekuser->id)->first();
-        // dd($walikelas);
+        // dd($nilaiMulokSorted);
         // dd($cekuser->jenjang);
         if($cekuser->jenjang=="sd"){
             return view('laporan/cetaknilaimidUula',compact('santriwustha','nilaiaktif','tanggal','kelas','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','walikelas'));

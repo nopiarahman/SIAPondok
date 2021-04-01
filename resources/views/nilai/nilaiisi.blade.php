@@ -60,7 +60,7 @@
                                   </thead>
                                   <tbody>
                                     @foreach ($santriwustha as $sw)
-                                     @if($jadwalbelajar->kelas->id == $sw->kelas->id)
+                                    @if($jadwalbelajar->kelas->id == $sw->kelas->id)
                                     <tr>
                                     {{-- <th scope="row">{{$loop->iteration}}</th> --}}
                                       {{-- <td>{{$sw->id}}</td> --}}
@@ -87,40 +87,49 @@
                     <table class="table table-hover align-center">
                       <thead>
                         <tr>
-                          {{-- <th scope="col">No</th> --}}
-                          <th scope="col">Nama Santri</th>
-                          <th scope="col">Nilai Harian / Praktek</th>
-                          <th scope="col">Nilai UTS</th>
-                          <th scope="col">Nilai UAS</th>
-                          <th scope="col">Nilai Akhlak</th>
-                          <th scope="col">Aksi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        
-                        <tr>
-                        
-                        <form action="/nilaiisi/{{$jadwalbelajar->id}}" method="post" enctype="multipart/form-data">
+                            <form action="/nilaiisiuts/{{$jadwalbelajar->id}}" method="post" enctype="multipart/form-data">
                             @csrf
-                            {{-- @if($nilai->harian == null) --}}
+                            <th scope="col">Nama Santri</th>
                             <input type="hidden" name="santriwustha_id" id="id" value="">
+                            <input type="hidden" name="mapel_id" value="{{$jadwalbelajar->mapel_id}}">
+                            <input type="hidden" name="kelas_id" value="{{$jadwalbelajar->kelas_id}}">
+                            <td colspan="2">
+                              <input type="text" readonly size="30" class="form-control" name="" id="namaLengkap">
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="col">Nilai UTS</th>
+                            <td><input type="number" min="30" max="100" size="5" class="form-control @error('uts') is-invalid @enderror " name="uts" id="">
+                              @error('uts')
+                              <div class="invalid-feedback">{{$message}}</div>
+                              @enderror
+                            </td>
+                            <td>
+                              <button type="submit" class="btn btn-success">Input Nilai</button>
+                            </td>
+                          </form>
+                          </tr>
+                        <th scope="col" style="width: 30%">Nilai Harian / Praktek</th>
+                        <th scope="col" style="width: 20%">Nilai UAS</th>
+                        <th scope="col" style="width: 20%">Nilai Akhlak</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <form action="/nilaiisi/{{$jadwalbelajar->id}}" method="post" enctype="multipart/form-data">
+                          @csrf
+                          {{-- @if($nilai->harian == null) --}}
+                          
+                          <input type="hidden" name="santriwustha_id" id="id2" value="">
                             {{-- <input type="hidden" name="jadwalbelajar_id" value="{{$jadwalbelajar->id}}"> --}}
                             <input type="hidden" name="mapel_id" value="{{$jadwalbelajar->mapel_id}}">
                             <input type="hidden" name="kelas_id" value="{{$jadwalbelajar->kelas_id}}">
-                    
-                              <td><input type="text" readonly size="15" class="form-control" name="" id="namaLengkap">
-                               
-                              </td>
                               <td><input type="number" min="30" max="100" size="5" class="form-control @error('harian') is-invalid @enderror " name="harian" id="">
                                 @error('harian')
                                   <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                               </td>
-                              <td><input type="number" min="30" max="100" size="5" class="form-control @error('uts') is-invalid @enderror " name="uts" id="">
-                                @error('uts')
-                                  <div class="invalid-feedback">{{$message}}</div>
-                                @enderror
-                              </td>
+                              
                               <td><input type="number" min="30" max="100" size="5" class="form-control @error('uas') is-invalid @enderror " name="uas" id="">
                                 @error('uas')
                                   <div class="invalid-feedback">{{$message}}</div>
@@ -215,9 +224,14 @@
                       </tbody>
                       <tfoot>
                         @if($rataRataKelas!=null)
-                      <td colspan="8">Rata-rata Kelas: {{$rataRataKelas->rataRataKelas}}</td>
+                      <td colspan="4">Rata-rata UTS: {{$rataRataKelas->rataRataMid}}</td>
                       @else
-                      <td colspan="8">Rata-rata Kelas: </td>
+                      <td colspan="4">Rata-rata UTS: </td>
+                      @endif
+                        @if($rataRataKelas!=null)
+                      <td colspan="4">Rata-rata Raport Kelas: {{$rataRataKelas->rataRataKelas}}</td>
+                      @else
+                      <td colspan="4">Rata-rata Raport Kelas: </td>
                       @endif
                       </tfoot>
                     </table>
@@ -238,6 +252,7 @@
         var id = $(this).data('id');
         var nama = $(this).data('nama');
         $('#id').val(id);
+        $('#id2').val(id);
         $('#namaLengkap').val(nama);
         $('.close').click(); 
         $("#carinama .close").click();

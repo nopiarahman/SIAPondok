@@ -123,6 +123,7 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::delete('/pengumumanhapus/{pengumuman}','PengumumanController@destroy');
 
     Route::get('/nilai', 'NilaiController@index');
+    Route::post('/nilaiisiuts/{jadwalbelajar}', 'NilaiController@storeuts');
     Route::post('/nilaiisi/{jadwalbelajar}', 'NilaiController@store');
     Route::get('/nilaitambah', 'NilaiController@create');
     Route::get('/nilai/{jadwalbelajar}','NilaiController@show');

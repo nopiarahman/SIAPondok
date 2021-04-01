@@ -126,6 +126,7 @@ class LaporanController extends Controller
         $nilaiumum=[];
         $nilaidiniyahsorted=[];
         $nilaiumumsorted=[];
+        $nilaiMulokSorted=[];
         foreach($nilaiaktif as $nd)
         {
             // $testnilai = $nd;

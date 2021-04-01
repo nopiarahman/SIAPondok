@@ -57,7 +57,6 @@ class NilaiController extends Controller
         $periode=periode::where('status','Aktif')->first();
         $rules =[
             'harian' => 'required',
-            'uts' => 'required',
             'uas' => 'required',
             'akhlak' => 'required'
         ];
@@ -65,23 +64,78 @@ class NilaiController extends Controller
             'required' =>':attribute tidak boleh kosong',
             'size' =>':attribute maksimal 100',
         ];
+        $cekuts = DB::table('nilai')
+                        ->where('mapel_id', '=', $request->mapel_id)
+                        ->where('kelas_id', '=', $request->kelas_id)
+                        ->where('periode_id', '=', $periode->id)
+                        ->where('santriwustha_id','=',$request->santriwustha_id)
+                        ->first();
+        // dd($cekuts);
+        $rataRata= 0.2*$request->harian + 0.2*$cekuts->uts + 0.3*$request->uas + 0.3*$request->akhlak; 
+        $this->validate($request,$rules,$costumMessages);
+        // dd($request->santriwustha_id);
+        $ceknilai = nilai::updateOrCreate(
+            ['santriwustha_id'=> $request->santriwustha_id,
+            'mapel_id'=>$request->mapel_id,
+            'kelas_id'=>$request->kelas_id,
+            'periode_id'=>$periode->id,
+            'jenjang'=>jenjang()],
+            [
+                'harian'=>$request->harian,
+                'uas'=>$request->uas,
+                'akhlak'=>$request->akhlak,
+                'rataRata'=>$rataRata
+            ]
+            );
+                   // update rata rata kelas
+            $ceknilaikelas = DB::table('nilai')
+                    ->where('mapel_id', '=', $request->mapel_id)
+                    ->where('kelas_id', '=', $request->kelas_id)
+                    ->where('periode_id', '=', $periode->id)
+                    ->get();
+                    // dd($ceknilaikelas);
+            $total = 0;
+            $hitung = 0;
+            foreach($ceknilaikelas as $cn){
+                $total = $total+$cn->rataRata;
+                $hitung++;
+            }
+            // dd($hitung);
+            if ($hitung!=null){
+                $rataRataKelas = round($total/$hitung,2);
+            }
+            else{
+                $rataRataKelas=0;
+            }
+            $cekrata=['mapel_id'=> $request->mapel_id,'periode_id'=>$periode->id,'kelas_id'=>$request->kelas_id];
+            nilai::where($cekrata)
+                            ->update(['rataRatakelas'=>$rataRataKelas]);
+            return redirect('/nilai'.'/'.$jadwalbelajar)->with('status', 'Data Berhasil Ditambahkan');
+    }
+    public function storeuts(Request $request, $jadwalbelajar){
+        $periode=periode::where('status','Aktif')->first();
+        $rules =[
+            'uts' => 'required',
+        ];
+        $costumMessages = [
+            'required' =>':attribute tidak boleh kosong',
+            'size' =>':attribute maksimal 100',
+        ];
         $requestData           = $request->all();
-        $requestData['rataRata']= 0.2*$request->harian + 0.2*$request->uts + 0.3*$request->uas + 0.3*$request->akhlak; 
         $requestData['periode_id'] = $periode->id;
         $requestData['jenjang']=jenjang();
         $this->validate($request,$rules,$costumMessages);
-        $ceknilai = DB::table('nilai')
-                    ->where('santriwustha_id', '=', $request->santriwustha_id)
-                    ->where('mapel_id', '=', $request->mapel_id)
-                    // ->where('jadwalbelajar_id', '=', $request->jadwalbelajar_id)
-                    ->where('kelas_id', '=', $request->kelas_id)
-                    ->where('periode_id', '=', $periode->id)
-                    ->first();
-        if (is_null($ceknilai)) {
-            // return ('data nilai belum ada')
-            nilai::create($requestData);
-            // update rata rata kelas
-            $ceknilaikelas = DB::table('nilai')
+
+        $ceknilai = nilai::updateOrCreate(
+                    ['santriwustha_id'=> $request->santriwustha_id,
+                    'mapel_id'=>$request->mapel_id,
+                    'kelas_id'=>$request->kelas_id,
+                    'periode_id'=>$periode->id,
+                    'jenjang'=>jenjang()],
+                    ['uts'=>$request->uts]
+        );
+        /* update rata2 mid */
+        $ceknilaikelas = DB::table('nilai')
                     ->where('mapel_id', '=', $request->mapel_id)
                     ->where('kelas_id', '=', $request->kelas_id)
                     ->where('periode_id', '=', $periode->id)
@@ -89,32 +143,20 @@ class NilaiController extends Controller
             $total = 0;
             $hitung = 0;
             foreach($ceknilaikelas as $cn){
-                $total = $total+$cn->rataRata;
+                $total = $total+$cn->uts;
                 $hitung++;
             }
-            // dd($ceknilaikelas); 
+            // dd($total);
             if ($hitung!=null){
-                $rataRataKelas = round($total/$hitung,2);
+                $rataRataMid = round($total/$hitung,2);
             }
             else{
-                $rataRataKelas=0;
-
+                $rataRataMid=0;
             }
             $cekrata=['mapel_id'=> $request->mapel_id,'periode_id'=>$periode->id,'kelas_id'=>$request->kelas_id];
-            nilai::where($cekrata)
-                            ->update(['rataRatakelas'=>$rataRataKelas]);
-            return redirect('/nilai'.'/'.$jadwalbelajar)->with('status', 'Data Berhasil Ditambahkan');
-            // It does not exist - add to favorites button will show
-        } else {
-            // return ('data nilai sudah ada');
-            return redirect('/nilai'.'/'.$jadwalbelajar)->with('status2', 'Data Nilai Sudah Ada');
-            
-        }
-        
-        
-
+            nilai::where($cekrata)->update(['rataRataMid'=>$rataRataMid]);
+        return redirect('/nilai'.'/'.$jadwalbelajar)->with('status', 'Data Berhasil Ditambahkan');
     }
-
     /**
      * Display the specified resource.
      *

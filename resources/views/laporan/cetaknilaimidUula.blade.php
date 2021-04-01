@@ -39,7 +39,7 @@
 </head>
 <body>
     {{-- @foreach ($nilaiaktif as $nilai)
-    {{$nilai->mapel->namaMapel}} 
+    {{$nilai->mapel->namaMapel}}
     {{$nilai->uts}} <br>
 
     @endforeach --}}
@@ -52,7 +52,7 @@
 {{-- Identitas --}}
 <div class="row mt-5">
     <div class="col-md-6">
-        <div class="row">            
+        <div class="row">
             <div class="col-md">
                 <h5 class="font-weight-bold">Nama</h5>
             </div>
@@ -70,7 +70,7 @@
         </div>
     </div>
     <div class="col-md-6">
-        <div class="row">            
+        <div class="row">
             <div class="col-md">
                 <h5 class="font-weight-bold">Kelas</h5>
             </div>
@@ -133,7 +133,7 @@
             ?>
         </td>
         <td>
-            {{-- {{$nd->rataRataKelas}} --}}
+          {{$nd->rataRataMid}}
         </td>
     </tr>
     @endforeach
@@ -163,11 +163,11 @@
             ?>
         </td>
         <td>
-            
+          {{$nu->rataRataMid}}
         </td>
     </tr>
     @endforeach
-    
+
     {{-- Kategori Mapel --}}
     <tr>
         <th colspan="5" class="subJudul">III. Muatan Lokal</th>
@@ -194,7 +194,7 @@
             ?>
         </td>
         <td>
-            
+          {{$nm->rataRataMid}}
         </td>
     </tr>
     @endforeach
@@ -236,18 +236,18 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-md-6">
-                    Diberikan di    
+                    Diberikan di
                 </div>
                 <div class="col-md-6">
-                    : Jambi    
+                    : Jambi
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    Tanggal  
+                    Tanggal
                 </div>
                 <div class="col-md-6">
-                    : 15 Desember 2019    
+                    : {{$tanggal->isoFormat('D MMMM YYYY')}}
                 </div>
             </div>
         </div>
@@ -265,7 +265,7 @@
         <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
         <b>{{$walikelas->namaLengkap}}</b>
     </div>
-    
+
 </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
