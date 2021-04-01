@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>Lapor Mid Semester {{$santriwustha->namaLengkap}} {{$periode->semester}} {{$periode->tahun}}</title>
+    <title>SU - Lapor Mid Semester {{$santriwustha->namaLengkap}} {{$periode->semester}} {{$periode->tahun}}</title>
 <style>
     *{
         font-family: 'Times New Roman', Times, serif;
@@ -57,7 +57,7 @@
                 <h5 class="font-weight-bold">Nama</h5>
             </div>
             <div class="col-md">
-                <h5 class="font-weight-bold">: Nopi Arahman</h5>
+                <h5 class="font-weight-bold">: {{$santriwustha->namaLengkap}}</h5>
             </div>
         </div>
         <div class="row">
@@ -65,7 +65,7 @@
                 <h5 class="font-weight-bold">NISN</h5>
             </div>
             <div class="col-md">
-                <h5 class="font-weight-bold">: 394523594375</h5>
+                <h5 class="font-weight-bold">: {{$santriwustha->nisnSekolahSebelum}}</h5>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
                 <h5 class="font-weight-bold">Kelas</h5>
             </div>
             <div class="col-md">
-                <h5 class="font-weight-bold">: 2 dua </h5>
+                <h5 class="font-weight-bold">: {{$kelas->namaKelas}}</h5>
             </div>
         </div>
         <div class="row">
@@ -83,7 +83,7 @@
                 <h5 class="font-weight-bold">Semester</h5>
             </div>
             <div class="col-md">
-                <h5 class="font-weight-bold">: I (Ganjil)</h5>
+                <h5 class="font-weight-bold">: {{$periode->semester}}</h5>
             </div>
         </div>
         <div class="row">
@@ -91,7 +91,7 @@
                 <h5 class="font-weight-bold">Tahun</h5>
             </div>
             <div class="col-md">
-                <h5 class="font-weight-bold">: 1440-1441H </h5>
+                <h5 class="font-weight-bold">: {{$periode->tahun}}</h5>
             </div>
         </div>
     </div>
@@ -112,229 +112,101 @@
         <th colspan="5" class="subJudul">I. Diniyah</th>
     </tr>
     {{-- Mapel --}}
+    @foreach($nilaidiniyahsorted as $nd)
     <tr>
         <td class="mapel">
-            1. Aqidah
+            {{$loop->iteration}}. {{$nd->namaMapel}}
         </td>
         <td>
-            100
+            {{$nd->uts}}
         </td>
         <td>
             60
         </td>
         <td>
-            Tuntas
+            <?php
+            if($nd->uts<=60){
+                echo "Tidak Tuntas";
+            }else{
+                echo "Tuntas";
+            }
+            ?>
         </td>
         <td>
-            90,3
+            {{-- {{$nd->rataRataKelas}} --}}
         </td>
     </tr>
-    <tr>
-        <td class="mapel">
-            2. Adab
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
-    <tr>
-        <td class="mapel">
-            3. Fikih
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
-    <tr>
-        <td class="mapel">
-            4. Sejarah Islam
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
-    <tr>
-        <td class="mapel">
-            5. Hadits
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
-    <tr>
-        <td class="mapel">
-            6. Bahasa Arab
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
+    @endforeach
     {{-- Kategori Mapel --}}
     <tr>
         <th colspan="5" class="subJudul">II. Umum</th>
     </tr>
     {{-- Mapel --}}
+    @foreach($nilaiumumsorted as $nu)
     <tr>
         <td class="mapel">
-            1. Bahasa Indonesia
+            {{$loop->iteration}}. {{$nu->namaMapel}}
         </td>
         <td>
-            100
+            {{$nu->uts}}
         </td>
         <td>
             60
         </td>
         <td>
-            Tuntas
+            <?php
+            if($nu->uts<=60){
+                echo "Tidak Tuntas";
+            }else{
+                echo "Tuntas";
+            }
+            ?>
         </td>
         <td>
-            90,3
+            
         </td>
     </tr>
-    <tr>
-        <td class="mapel">
-            2. Matematika
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
-    <tr>
-        <td class="mapel">
-            3. Ilmu Pengetahuan Alam
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
+    @endforeach
+    
     {{-- Kategori Mapel --}}
     <tr>
         <th colspan="5" class="subJudul">III. Muatan Lokal</th>
     </tr>
     {{-- Mapel --}}
+    @foreach($nilaiMulokSorted as $nm)
     <tr>
         <td class="mapel">
-            1. Persholatan
+            {{$loop->iteration}}. {{$nm->namaMapel}}
         </td>
         <td>
-            100
+            {{$nm->uts}}
         </td>
         <td>
             60
         </td>
         <td>
-            Tuntas
+            <?php
+            if($nm->uts<=60){
+                echo "Tidak Tuntas";
+            }else{
+                echo "Tuntas";
+            }
+            ?>
         </td>
         <td>
-            90,3
+            
         </td>
     </tr>
-    <tr>
-        <td class="mapel">
-            2. Doa Harian
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
-    <tr>
-        <td class="mapel">
-            3. Iqro' / Al-Qur'an
-        </td>
-        <td>
-            100
-        </td>
-        <td>
-            60
-        </td>
-        <td>
-            Tuntas
-        </td>
-        <td>
-            90,3
-        </td>
-    </tr>
+    @endforeach
     <tr>
         <th> Jumlah </th>
-        <th> 1045</th>
-        <th colspan="3" class="subJudul"> Seribu bang</th>
+        <th> {{round($nilaiaktif->sum('rataRata'))}}</th>
+        <th colspan="3" class="subJudul">  {{terbilang($nilaiaktif->sum('rataRata'))}}</th>
     </tr>
     <tr>
         <th> Rata-rata </th>
-        <th> 98,4</th>
-        <th colspan="3" class="subJudul"> Sembilan puluh gans!</th>
+        <th> {{round($nilaiaktif->avg('rataRata'),2)}}</th>
+        <th colspan="3" class="subJudul"> {{terbilang(round($nilaiaktif->avg('rataRata'),2))}}</th>
     </tr>
 </table>
 {{-- Tabel Ketidakhadiran --}}
@@ -343,17 +215,17 @@
         <td rowspan="3" style="width: 50%" class="font-weight-bold">KETIDAKHADIRAN</td>
         <td>Sakit (S)</td>
         <td>:</td>
-        <td>2</td>
+        <td></td>
     </tr>
     <tr>
         <td>Izin (I)</td>
         <td>:</td>
-        <td>2</td>
+        <td></td>
     </tr>
     <tr>
         <td>Alpa (A)</td>
         <td>:</td>
-        <td>2</td>
+        <td></td>
     </tr>
 </table>
 {{-- Tanggal --}}
@@ -391,7 +263,7 @@
         <br>
         <b>Wali Kelas</b>
         <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
-        <b>Wali Kelasnya bang</b>
+        <b>{{$walikelas->namaLengkap}}</b>
     </div>
     
 </div>

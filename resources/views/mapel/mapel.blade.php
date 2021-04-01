@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h3 class="my-3 align-center">Daftar Mata Pelajaran Salafiyah Wustha</h3>
+            <h3 class="my-3 align-center">Daftar Mata Pelajaran {{jenjangLengkap()}}</h3>
             @if (session('status'))
             <div class="alert alert-success">
                 {{session ('status')}}
@@ -62,6 +62,7 @@
                                             <select name="kategori" id="kategori" class="custom-select">
                                                 <option name="kategori" value="diniyah"> Diniyah </option>
                                                 <option name="kategori" value="umum"> Umum</option>
+                                                <option name="kategori" value="muatanLokal"> Muatan Lokal</option>
                                             </select>
                                         </div>
                                     </div>

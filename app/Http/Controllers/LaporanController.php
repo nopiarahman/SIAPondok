@@ -139,7 +139,7 @@ class LaporanController extends Controller
                     return $value['namaMapel'];
                 }));
             }
-            else
+            elseif($nd->mapel->kategori=='umum')
             {
                 // $nilaiumum[]=$nd;
                 $nd['namaMapel']= $nd->mapel->namaMapel;
@@ -147,12 +147,18 @@ class LaporanController extends Controller
                 $nilaiumumsorted = array_values(Arr::sort($nilaiumum, function ($value) {
                     return $value['namaMapel'];
                 }));
+            }else{
+                $nd['namaMapel']= $nd->mapel->namaMapel;
+                $nilaiMulok[]=$nd;
+                $nilaiMulokSorted = array_values(Arr::sort($nilaiMulok, function ($value) {
+                    return $value['namaMapel'];
+                }));
             }
         }
         // dd($sorted);
-        // dd($nilaidiniyahsorted);
+        // dd($nilaiMulokSorted);
         // $urut=$nilaidiniyah->sortBy($nilaidiniyah->mapel->namaMapel);
         // dd($urut->value()->all());
-        return view ('laporan/laporandetail',compact('santriwustha','nilaiaktif','periode','nilaidiniyahsorted','nilaiumumsorted'));
+        return view ('laporan/laporandetail',compact('santriwustha','nilaiaktif','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted'));
     }
 }

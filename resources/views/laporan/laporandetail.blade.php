@@ -66,7 +66,7 @@
               {{-- <td>{{$nilai->rataRata}}</td> --}}
 
               <td> {{round($nilai->rataRata)}}</td>
-              <td>{{$kkm=65}}</td>
+              <td>{{$kkm=60}}</td>
               <td>
                 @if($nilai->rataRata>=$kkm)
                 Tuntas
@@ -90,7 +90,32 @@
               <td>{{$nilai->uas}}</td>
               <td>{{$nilai->akhlak}}</td>
               <td> {{round($nilai->rataRata)}}</td>
-              <td>{{$kkm=65}}</td>
+              <td>{{$kkm=60}}</td>
+              <td>
+                @if($nilai->rataRata>=$kkm)
+                Tuntas
+                @else
+                Tidak Tuntas
+                @endif
+              </td>
+              <td>{{round($nilai->rataRataKelas)}}</td>
+            </tr>
+          @endforeach
+          @endif
+          @if($nilaiMulokSorted != null)
+          <tr>
+          <th scope="col" colspan="10" class=" align-left px-3"><h5>III. Muatan Lokal</h5></th>
+            @foreach ($nilaiMulokSorted as $nilai)
+          </tr>
+          <tr>
+            <th scope="row">{{$loop->iteration}}</th>
+              <td>{{$nilai->mapel->namaMapel}}</td>
+              <td>{{$nilai->harian}}</td>
+              <td>{{$nilai->uts}}</td>
+              <td>{{$nilai->uas}}</td>
+              <td>{{$nilai->akhlak}}</td>
+              <td> {{round($nilai->rataRata)}}</td>
+              <td>{{$kkm=60}}</td>
               <td>
                 @if($nilai->rataRata>=$kkm)
                 Tuntas
@@ -122,9 +147,4 @@
 </div>
 </div>
 </div>
-  
-                  
-                  
-
-   
 @endsection
