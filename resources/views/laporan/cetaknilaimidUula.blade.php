@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> --}}
 
     <title>SU - Lapor Mid Semester {{$santriwustha->namaLengkap}} {{$periode->semester}} {{$periode->tahun}}</title>
 <style>
@@ -18,13 +18,14 @@
     h2{
         font-weight: 500;
     }
-    table{
+    #nilai{
         width: 100%;
     }
-    table, td, th{
+    #nilai, td, th{
         border: 2px solid black;
         font-size: 18px;
         text-align: center;
+        padding: 3px 0px;
     }
 
     .subJudul{
@@ -35,70 +36,92 @@
         text-align: left;
         padding-left: 40px;
     }
+    #nilai{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    #identitas{
+        width: 100%;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }    
+    #identitas td{
+        height: 20px;
+        border: none;
+        text-align: left;
+    }
+    #kehadiran{
+        width: 100%;
+        margin: 20px 0px;
+        border-collapse: collapse;
+    }
+    #tanggal{
+        margin-bottom: 20px;
+    }
+    #tanggal td {
+        border: none;
+        text-align: left;
+    }
+    #ttd{
+        width: 100%;
+    }
+    #ttd td {
+        border: none;
+        border-collapse: collapse;
+    }
+
 </style>
 </head>
 <body>
-    {{-- @foreach ($nilaiaktif as $nilai)
-    {{$nilai->mapel->namaMapel}}
-    {{$nilai->uts}} <br>
-
-    @endforeach --}}
-
     {{-- Header --}}
-<header class="text-center">
-    <h2 class="font-weight-bold">LAPORAN HASIL EVALUASI</h2>
-    <h2 class="font-weight-bold">UJIAN TENGAH SEMESTER (UTS)</h2>
+<header style="text-align: center"">
+    <h2 style="font-weight: bold">LAPORAN HASIL EVALUASI</h2>
+    <h2 style="font-weight: bold">UJIAN TENGAH SEMESTER (UTS)</h2>
 </header>
 {{-- Identitas --}}
-<div class="row mt-5">
-    <div class="col-md-6">
-        <div class="row">
-            <div class="col-md">
-                <h5 class="font-weight-bold">Nama</h5>
-            </div>
-            <div class="col-md">
-                <h5 class="font-weight-bold">: {{$santriwustha->namaLengkap}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md">
-                <h5 class="font-weight-bold">NISN</h5>
-            </div>
-            <div class="col-md">
-                <h5 class="font-weight-bold">: {{$santriwustha->nisnSekolahSebelum}}</h5>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="row">
-            <div class="col-md">
-                <h5 class="font-weight-bold">Kelas</h5>
-            </div>
-            <div class="col-md">
-                <h5 class="font-weight-bold">: {{$kelas->namaKelas}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md">
-                <h5 class="font-weight-bold">Semester</h5>
-            </div>
-            <div class="col-md">
-                <h5 class="font-weight-bold">: {{$periode->semester}}</h5>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md">
-                <h5 class="font-weight-bold">Tahun</h5>
-            </div>
-            <div class="col-md">
-                <h5 class="font-weight-bold">: {{$periode->tahun}}</h5>
-            </div>
-        </div>
-    </div>
-
-</div>
+<table id="identitas" cellspacing="0">
+    <tr>
+        <td>
+            <span>Nama</span>
+        </td>
+        <td width:30%>
+            <span>: {{$santriwustha->namaLengkap}}</span>
+        </td>
+        <td>
+            <span>Kelas</span>
+        </td>
+        <td>
+            <span>: {{$kelas->namaKelas}} ( {{terbilang($kelas->namaKelas)}} )</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <span>NISN</span>
+        </td>
+        <td>
+            <span>: {{$santriwustha->nisnSekolahSebelum}}</span>
+        </td>
+        <td>
+            <span>Semester</span>
+        </td>
+        <td>
+            <span>: {{$periode->semester}}</span>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td>
+            <span>Tahun</span>
+        </td>
+        <td>
+            <span>: {{$periode->tahun}}</span>
+        </td>
+    </tr>
+    
+</table>
 {{-- Nilai --}}
-<table class="mt-2">
+<table id="nilai" >
     {{-- Table Header --}}
     <tr>
         <th>Mata Pelajaran</th>
@@ -133,7 +156,7 @@
             ?>
         </td>
         <td>
-          {{$nd->rataRataMid}}
+            {{$nd->rataRataMid}}
         </td>
     </tr>
     @endforeach
@@ -210,7 +233,7 @@
     </tr>
 </table>
 {{-- Tabel Ketidakhadiran --}}
-<table class="mt-3">
+<table id="kehadiran">
     <tr>
         <td rowspan="3" style="width: 50%" class="font-weight-bold">KETIDAKHADIRAN</td>
         <td>Sakit (S)</td>
@@ -229,46 +252,60 @@
     </tr>
 </table>
 {{-- Tanggal --}}
-<div class="row mt-3">
-        <div class="col-md-6">
-
-        </div>
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-6">
-                    Diberikan di
-                </div>
-                <div class="col-md-6">
-                    : Jambi
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    Tanggal
-                </div>
-                <div class="col-md-6">
-                    : {{$tanggal->isoFormat('D MMMM YYYY')}}
-                </div>
-            </div>
-        </div>
-</div>
+<table id="tanggal">
+    <tr>
+        <td style="width: 70%"></td>
+        <td >
+            <span>Diberikan di </span>
+        </td>
+        <td>
+            <span>: Jambi </span>
+        </td>
+    </tr>
+    <tr>
+        <td style="width: 70%"></td>
+        <td>
+            <span>Tanggal</span> 
+        </td>
+        <td>
+            <span>:{{$tanggal->isoFormat('D MMMM YYYY')}}</span>
+        </td>
+    </tr>
+</table>
 {{-- TTD --}}
-<div class="row text-center mt-3">
-    <div class="col-md-6">
-        Mengetahui, <br>
-        <b>Orang Tua / Wali</b>
-        <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
-    </div>
-    <div class="col-md-6">
-        <br>
-        <b>Wali Kelas</b>
-        <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
-        <b>{{$walikelas->namaLengkap}}</b>
-    </div>
+<table id="ttd">
+    <tr>
+        <td>
+            Mengetahui,
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b>Orang Tua / Wali</b>
+        </td>
+        <td>
+            <b>Wali Kelas</b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
+            
+        </td>
+        <td>
+            <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
+        </td>
+    </tr>
+    <tr>
+        <td>
 
-</div>
+        </td>
+        <td>
+            <b>{{$walikelas->namaLengkap}}</b>
+        </td>
+    </tr>
+</table>
 </body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>
