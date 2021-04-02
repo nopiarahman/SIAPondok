@@ -104,6 +104,9 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::get('/kelas/{kelas}', 'KelasController@show');
 
     /* Memasukan Nilai Tahfidz */
+    Route::get('/carisurah', 'NilaiTahfidzController@loadData');
+    Route::post('/testcari', 'NilaiTahfidzController@testcari');
+
     Route::get('/nilaitahfidz','NilaiTahfidzController@index');
     Route::get('/nilaitahfidz/isi/{nilai}','NilaiTahfidzController@isi');
     Route::delete('/nilaitahfidzhapus/{nilai}','NilaiTahfidzController@destroy');

@@ -33,68 +33,6 @@
                 <h5 class=" align-center mt-4"> Input Nilai Tahfidz {{$santriwustha->namaLengkap}} </h5> <br>
                 {{-- <h6 class="align-center">Mata Pelajaran {{$jadwalbelajar->mapel->namaMapel}} </h6> --}}
 
-                <div class="form-group row mb-n2 mx-auto ">
-                    <div class="col-md-12 align-center mt-2 ">
-                        {{-- <label for="namaLengkap" class="col-sm-3 col-form-label">Cari Santri</label> --}}
-                        <button type="button" class=" col-form-label btn btn-info "
-                            style="border-radius: 5px ;  font-size:12px ; width:200px" data-toggle="modal"
-                            data-target="#carinama">
-                            <span class="glyphicon glyphicon-search mr-2"></span>Cari Surah
-                        </button>
-                    </div>
-                    <div class="modal fade" id="carinama" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pilih Nama Surah</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <div class="body table-responsive-xl">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    {{-- <th scope="col">No</th> --}}
-                                                    {{-- <th scope="col">ID Santri</th> --}}
-                                                    <th scope="col">No Surah</th>
-                                                    <th scope="col">Nama Surah</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($surah as $sh)
-                                                {{-- @if($jadwalbelajar->kelas->id == $sw->kelas->id) --}}
-                                                <tr>
-                                                    {{-- <th scope="row">{{$loop->iteration}}</th> --}}
-                                                    {{-- <td>{{$sw->id}}</td> --}}
-                                                    <td>{{$sh->noSurah}}</td>
-                                                    <td>{{$sh->namaSurah}}</td>
-                                                    {{-- <td><a href="#" id="data" class="btn btn-success pilih" onClick="masuk(this,'{{$sw->namaLengkap}}','{{$sw->kelas->namaKelas}}','{{$sw->id}}')"
-                                                    style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih
-                                                    data</a></td> --}}
-                                                    <td><a href="#" id="data" class="btn btn-success pilih"
-                                                            data-id={{$sh->id}} data-nama={{$sh->namaSurah}}
-                                                            style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih
-                                                            data</a></td>
-                                                </tr>
-                                                {{-- @endif --}}
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                {{$surah->links()}}
-
-                            </div>
-                            <div class="modal-footer">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="body table-responsive">
 
                     <table class="table table-hover align-center">
@@ -107,25 +45,14 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <tr>
-
                                 <form action="/nilaitahfidzsantri/" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    {{-- @if($nilai->harian == null) --}}
-                                    {{-- <input type="hidden" name="santriwustha_id" id="id" value=""> --}}
-                                    {{-- <input type="hidden" name="jadwalbelajar_id" value="{{$jadwalbelajar->id}}">
-                                    --}}
-                                    {{-- <input type="hidden" name="mapel_id" value="{{$jadwalbelajar->mapel_id}}">
-                                    <input type="hidden" name="kelas_id" value="{{$jadwalbelajar->kelas_id}}"> --}}
-
-                                    <td><input type="text" readonly size="15" class="form-control" name=""
-                                            id="namaSurah">
-                                        {{-- Nilai Hidden --}}
-                                        <input type="hidden" name="surah_id" id="id">
+                                    <td>
+                                        
+                                        <select class="carisurah form-control" style="width:300px;height:calc(1.5em + .75rem + 2px);" name="surah_id"></select>
                                         <input type="hidden" name="santriwustha_id" value="{{$santriwustha->id}}">
-
                                     </td>
                                     <td><input type="number" min="30" max="100" size="5"
                                             class="form-control @error('totalNilai') is-invalid @enderror " name="totalNilai"
@@ -134,18 +61,38 @@
                                         <div class="invalid-feedback">{{$message}}</div>
                                         @enderror
                                     </td>
-                                    
                                     <td>
                                         <button type="submit" class="btn btn-success">Input Nilai</button>
                                     </td>
                                 </form>
-
                             </tr>
-                            {{-- @endif
-                          @endforeach --}}
                         </tbody>
                     </table>
                 </div>
+                <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+                <script type="text/javascript">
+                $('.carisurah').select2({
+                    placeholder: 'Cari...',
+                    ajax: {
+                    url: '/carisurah',
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function (data) {
+                        return {
+                        results:  $.map(data, function (item) {
+                            return {
+                            text: item.namaSurah, /* memasukkan text di option => <option>namaSurah</option> */
+                            id: item.id /* memasukkan value di option => <option value=id> */
+                            }
+                        })
+                        };
+                    },
+                    cache: true
+                    }
+                });
+
+</script>
             </div>
         </div>
 

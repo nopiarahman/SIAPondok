@@ -7,7 +7,7 @@ use App\gurutahfidz;
 use App\surah;
 use App\nilaitahfidz;
 use App\santriwustha;
-
+use DB;
 class NilaiTahfidzController extends Controller
 {
     /**
@@ -107,5 +107,18 @@ class NilaiTahfidzController extends Controller
 
         nilaitahfidz::create($requestData);
         return redirect('nilaitahfidz/isi'.'/'.$request->santriwustha_id)->with('status', 'Data Berhasil Ditambahkan');
+    }
+    public function loadData(Request $request)
+    {
+        // dd($request);
+    	if ($request->has('q')) {
+    		$cari = $request->q;
+    		$data = surah::select('id', 'namaSurah')->where('namaSurah', 'LIKE', '%'.$cari.'%')->get();
+            // dd($data);
+    		return response()->json($data);
+    	}
+    }
+    public function testcari(Request $request){
+        // dd($request);
     }
 }
