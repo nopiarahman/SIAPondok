@@ -100,6 +100,7 @@ class CetakNilaiController extends Controller
         $pdf->setPaper('legal')->setOption('margin-left',20);
         return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
     }
+    
     public function cetaknilaitahfidz(Santriwustha $santriwustha){
         
         $tanggal=Carbon::now();

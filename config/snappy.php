@@ -32,13 +32,19 @@ return [
     |    The environment variables to set while running the wkhtmltopdf process.
     |
     */
-    
+
     'pdf' => [
         'enabled' => true,
-        // 'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"',
-        'binary'  => '/usr/local/bin/wkhtmltopdf',
-        // 'binary'  => env('WKHTML_PDF_BINARY', '/usr/local/bin/wkhtmltopdf'),
+        /* menggunakan server */
         // 'binary'  => base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'),
+        
+        /* menggunakan windows */
+        'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"',
+        
+        /* menggunakan MAC OS */
+        // 'binary'  => '/usr/local/bin/wkhtmltopdf',
+        
+        // 'binary'  => env('WKHTML_PDF_BINARY', '/usr/local/bin/wkhtmltopdf'),
         'timeout' => false,
         'options' => [],
         'env'     => [],
@@ -46,7 +52,14 @@ return [
     
     'image' => [
         'enabled' => true,
-        'binary'  => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage'),
+        /* menggunakan server */
+        // 'binary'  => base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'),
+        
+        /* Windows */
+        'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"',
+        
+        /* Mac */
+        // 'binary'  => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage'),
         'timeout' => false,
         'options' => [],
         'env'     => [],
