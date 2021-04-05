@@ -206,7 +206,14 @@
         </div>
     </div>
         @elseif(auth()->user()->role=='kepalaYayasan')
-        {{-- Kepala Yayasan Keren --}}
+        <div class="body">
+            <div class="row justify-content-center">
+                <div class="col-md-8 ">
+                    <h5 class="m-3 align-center">Chart bang</h5>
+                    <div id="line_chart" class="graph"></div>
+                </div>
+            </div>
+        </div>
         @endif
 
     </div>
@@ -243,5 +250,5 @@
         });
 
     </script>
-    @endif
+        @endif
     @endsection

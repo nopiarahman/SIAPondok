@@ -32,20 +32,6 @@ class DashboardController extends Controller
         $waktu=carbon::now();
         $hari=$waktu->isoFormat('dddd');
         $jenjang =jenjang();
-        /* Menyimpan nama marhalah */
-        // if(auth()->user()->jenjang=="sd"){
-        //     $jenjang="Salafiyyah Uulaa";
-        // }
-        // elseif(auth()->user()->jenjang=="smpPutra"){
-        //     $jenjang="Salafiyyah Wustha'";
-        // }
-        // elseif(auth()->user()->jenjang=="smpPutri"){
-        //     $jenjang="Tahfidzul Qur'an Lil Banaat";
-        // }
-        // else{
-        //     $jenjang="Salafiyyah Ulyaa";
-        // }
-        
         if(auth()->user()->role=='waliSantri')
         {
             $santriwustha=santriwustha::where('emailWali','=',$cekuser->email)->first();
@@ -78,6 +64,12 @@ class DashboardController extends Controller
         }
         elseif(auth()->user()->role=='kepalaYayasan')
         {
+            $santriwustha = santriwustha::all();
+            $angkatanSmpPutra = $santriwustha->where('jenjang','smpPutra')->countBy('angkatan');
+            $angkatanSd = $santriwustha->where('jenjang','sd')->countBy('angkatan');
+            $angkatanSma = $santriwustha->where('jenjang','smaPutra')->countBy('angkatan');
+            $angkatanSmpPutri = $santriwustha->where('jenjang','smpPutri')->countBy('angkatan');
+            // dd($angkatanSmpPutra);
             return view ('dashboard/index',compact('cekuser'));
         }
         $kelas=kelas::where('jenjang',jenjang())->orderBy('namaKelas')->get();

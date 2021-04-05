@@ -22,22 +22,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
     <!-- Bootstrap Core Css -->
-    <link href="{{asset('tema/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
+    {{-- <link href="{{asset('tema/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     {{-- Costum CSS --}}
     <link rel="stylesheet" href="{{asset('tema/css/costum.css')}}">
     <!-- Waves Effect Css -->
-    <link href="{{asset('tema/plugins/node-waves/waves.css')}}" rel="stylesheet" />
+    {{-- <link href="{{asset('tema/plugins/node-waves/waves.css')}}" rel="stylesheet" /> --}}
 
     <!-- Animation Css -->
     <link href="{{asset('tema/plugins/animate-css/animate.css')}}" rel="stylesheet" />
 
-    <link href="{{asset('plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" />
+    {{-- <link href="{{asset('plugins/bootstrap-select/css/bootstrap-select.css')}}" rel="stylesheet" /> --}}
 
     <!-- Morris Chart Css-->
-    <link href="{{asset('tema/plugins/morrisjs/morris.css')}}" rel="stylesheet" />
+    {{-- <link href="{{asset('tema/plugins/morrisjs/morris.css')}}" rel="stylesheet" /> --}}
 
     <!-- Custom Css -->
     <link href="{{asset('tema/css/style.css')}}" rel="stylesheet">
@@ -355,8 +355,8 @@
     <!-- Select Plugin Js -->
     {{-- <script  <script src="../../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 ="{{asset('tema/plugins/bootstrap-select/js/bootstrap-select.js')}}"></script> --}}
-    <script src="{{asset('tema/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
-    <script src="{{asset('tema/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script>
+    {{-- <script src="{{asset('tema/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('tema/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}"></script> --}}
 
     <!-- Slimscroll Plugin Js -->
     <script src="{{asset('tema/plugins/jquery-slimscroll/jquery.slimscroll.js')}}"></script>
@@ -365,25 +365,14 @@
     <script src="{{asset('tema/plugins/node-waves/waves.js')}}"></script>
 
     <!-- Jquery CountTo Plugin Js -->
-    <script src="{{asset('tema/plugins/jquery-countto/jquery.countTo.js')}}"></script>
+    {{-- <script src="{{asset('tema/plugins/jquery-countto/jquery.countTo.js')}}"></script> --}}
 
     <!-- Morris Plugin Js -->
-    <script src="{{asset('tema/plugins/raphael/raphael.min.js')}}"></script>
-    <script src="{{asset('tema/plugins/morrisjs/morris.js')}}"></script>
+    {{-- <script src="{{asset('tema/plugins/raphael/raphael.min.js')}}"></script>
+    <script src="{{asset('tema/plugins/morrisjs/morris.js')}}"></script> --}}
 
     <!-- ChartJs -->
     <script src="{{asset('tema/plugins/chartjs/Chart.js')}}"></script>
-
-
-    <!-- Flot Charts Plugin Js -->
-    <script src="{{asset('tema/plugins/flot-charts/jquery.flot.js')}}"></script>
-    <script src="{{asset('tema/plugins/flot-charts/jquery.flot.resize.js')}}"></script>
-    <script src="{{asset('tema/plugins/flot-charts/jquery.flot.pie.js')}}"></script>
-    <script src="{{asset('tema/plugins/flot-charts/jquery.flot.categories.js')}}"></script>
-    <script src="{{asset('tema/plugins/flot-charts/jquery.flot.time.js')}}"></script>
-
-    <!-- Sparkline Chart Plugin Js -->
-    <script src="{{asset('tema/plugins/jquery-sparkline/jquery.sparkline.js')}}"></script>
 
     <!-- Custom Js -->
     <script src="{{asset('tema/js/admin.js')}}"></script>
