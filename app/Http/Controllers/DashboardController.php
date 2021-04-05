@@ -13,6 +13,7 @@ use App\gurutahfidz;
 use App\asatidzah;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Charts\ChartJenjang ;
 
 class DashboardController extends Controller
 {
@@ -65,12 +66,71 @@ class DashboardController extends Controller
         elseif(auth()->user()->role=='kepalaYayasan')
         {
             $santriwustha = santriwustha::all();
-            $angkatanSmpPutra = $santriwustha->where('jenjang','smpPutra')->countBy('angkatan');
-            $angkatanSd = $santriwustha->where('jenjang','sd')->countBy('angkatan');
-            $angkatanSma = $santriwustha->where('jenjang','smaPutra')->countBy('angkatan');
-            $angkatanSmpPutri = $santriwustha->where('jenjang','smpPutri')->countBy('angkatan');
+            $angkatanSmpPutra = $santriwustha->where('jenjang','smpPutra')->groupBy('angkatan')
+                                ->map(function ($item){
+                                    return count($item);
+                                });
+            $angkatanSd = $santriwustha->where('jenjang','sd')->groupBy('angkatan')
+                                ->map(function ($item){
+                                    return count($item);
+                                });
+            $angkatanSmaPutra = $santriwustha->where('jenjang','smaPutra')->groupBy('angkatan')
+                                ->map(function ($item){
+                                    return count($item);
+                                });
+            $angkatanSmpPutri = $santriwustha->where('jenjang','smpPutri')->groupBy('angkatan')
+                                ->map(function ($item){
+                                    return count($item);
+                                });
             // dd($angkatanSmpPutra);
-            return view ('dashboard/index',compact('cekuser'));
+
+            /* Menggunakan  package Laravel-Chart lihat dokumentasi di https://v6.charts.erik.cat/*/
+            $chartJenjang = new ChartJenjang;
+            $chartJenjang->labels($angkatanSmpPutra->keys());
+            // $chartJenjang->loaderColor('#1f81d1');
+            /* Option chart untuk kostumisasi lihat di Library -> ChartJS https://www.chartjs.org/docs/latest/charts/line.html#line-styling */
+            $chartJenjang->dataset('Salafiyah Wustha','line',$angkatanSmpPutra->values())
+                            ->options(['borderColor' => '#4CAF50',
+                                        'fill'=>false,       
+                                        'backgroundColor'=>'transparent',
+                                        'tension'=>0.3, 
+                            ]);
+            $chartJenjang->dataset('Salafiyah Uulaa','line',$angkatanSd->values())
+                            ->options(['borderColor'=>'#FF5722',
+                                        'fill'=>false,       
+                                        'backgroundColor'=>'transparent',
+                                        'tension'=>0.3,    
+                            ]);
+            $chartJenjang->dataset('Tahfidz Banaat','line',$angkatanSmpPutri->values())
+                            ->options(['borderColor'=>'#9C27B0',
+                                        'fill'=>false,       
+                                        'backgroundColor'=>'transparent',
+                                        'tension'=>0.3,    
+                            ]);
+            $chartJenjang->dataset('Salafiyah Ulyaa','line',$angkatanSmaPutra->values())
+                            ->options(['borderColor'=>'dodgerblue',
+                                        'fill'=>false,       
+                                        'backgroundColor'=>'transparent',
+                                        'tension'=>0.3,    
+                            ]);
+                                
+            $chartGuru = new ChartJenjang;
+            $asatidzah = asatidzah::all();
+            $jenjang = $asatidzah->groupBy('jenjang')->map(function ($item){
+                return count($item);
+            });
+            $updateNama=[];
+            foreach($jenjang->keys() as $jk){
+                $updateNama[]=tulisJenjang($jk);
+            }
+            // dd($updateNama);
+            $chartGuru->labels($updateNama);
+            $chartGuru->dataset('Jumlah Guru','bar',$jenjang->values())
+            ->options([
+                'backgroundColor'=>'#4CAF50',
+            ]);
+
+            return view ('dashboard/index',compact('cekuser','chartJenjang','chartGuru'));
         }
         $kelas=kelas::where('jenjang',jenjang())->orderBy('namaKelas')->get();
             $namaKelas=[];

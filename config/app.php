@@ -146,7 +146,7 @@ return [
         // Midnite81\GeoLocation\GeoLocationServiceProvider::class,
         // snappy pdf
         
-
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,

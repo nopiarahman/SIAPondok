@@ -206,24 +206,43 @@
         </div>
     </div>
         @elseif(auth()->user()->role=='kepalaYayasan')
-        <div class="body">
-            <div class="row justify-content-center">
-                <div class="col-md-8 ">
-                    <h5 class="m-3 align-center">Chart bang</h5>
-                    <div id="line_chart" class="graph"></div>
+        <div class="conten">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="m-3 align-center">Grafik Jumlah Santri</h5>
+                    <div style="height: 400px">
+                        {!! $chartJenjang->container() !!}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="m-3 align-center">Grafik Jumlah Asatidzah</h5>
+                    <div style="height: 400px">
+                        {!! $chartGuru->container() !!}
+                    </div>
                 </div>
             </div>
         </div>
+            
         @endif
 
     </div>
+    
+                                                                
+
+    @endsection
+    {{-- Menambah Script untuk ChartJenjang - Laravel chart --}}
+    @section('footer')
+    {!! $chartJenjang->script() !!} 
+    {!! $chartGuru->script() !!} 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     @if(auth()->user()->role=='admin')
     <script type="text/javascript">
         $(document).ready(function () {
             $(function () {
                 new Chart(document.getElementById("bar_chart").getContext("2d"), getChartJs('bar'));
             });
-
+            
             function getChartJs(type) {
                 var config = null;
                 if (type === 'bar') {
@@ -231,7 +250,7 @@
                         type: 'bar',
                         data: {
                             labels: {!!json_encode($namaKelas) !!},
-                        // labels: ["January", "February", "March", "April"],
+                            // labels: ["January", "February", "March", "April"],
                             datasets: [{
                                 label: "Jumlah Santri",
                                 data: {!!json_encode($data) !!},
@@ -248,7 +267,7 @@
                 return config;
             }
         });
-
-    </script>
+        
+        </script>
         @endif
     @endsection
