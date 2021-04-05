@@ -56,7 +56,8 @@ class CetakNilaiController extends Controller
             // $nilaiaktif=nilai::where($cekaktif)->get();
             $pdf = PDF::loadview('laporan/cetaknilaitahfidz',compact('santriwustha','periode','kelas','tanggal','nilaitahfidz'));
             $pdf->setPaper('legal')->setOption('margin-left',20);
-            return view('laporan/cetaknilaitahfidz',compact('santriwustha','periode','nilaiaktif','kelas','tanggal','nilaitahfidz'));
+            return view('lapor
+            an/cetaknilaitahfidz',compact('santriwustha','periode','nilaiaktif','kelas','tanggal','nilaitahfidz'));
             return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
         }else{
             $nilaiaktif==null;
@@ -116,6 +117,9 @@ class CetakNilaiController extends Controller
         // dd($nilaiMulokSorted);
         // dd($cekuser->jenjang);
         if($cekuser->jenjang=="sd"){
+            $pdf = PDF::loadview('laporan/cetaknilaimidUula',compact('santriwustha','nilaiaktif','tanggal','kelas','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','walikelas'));
+            $pdf->setPaper('legal');
+            return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
             return view('laporan/cetaknilaimidUula',compact('santriwustha','nilaiaktif','tanggal','kelas','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','walikelas'));
         }elseif($cekuser->jenjang=="smpPutra"){
             return view('laporan/cetaknilaimidWushta',compact('santriwustha','nilaiaktif','tanggal','kelas','periode'));

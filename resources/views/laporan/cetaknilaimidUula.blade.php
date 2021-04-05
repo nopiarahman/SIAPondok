@@ -12,7 +12,7 @@
         font-family: 'Times New Roman', Times, serif;
     }
     body{
-        width: 70%;
+        width: 80%;
         margin:50px auto 10px auto;
     }
     h2{
@@ -22,7 +22,7 @@
         width: 100%;
     }
     #nilai, td, th{
-        border: 2px solid black;
+        border: 1px solid black;
         font-size: 18px;
         text-align: center;
         padding: 3px 0px;
@@ -43,7 +43,7 @@
     #identitas{
         width: 100%;
         margin-bottom: 20px;
-        margin-top: 20px;
+        margin-top: 50px;
     }    
     #identitas td{
         height: 20px;
@@ -68,6 +68,10 @@
     #ttd td {
         border: none;
         border-collapse: collapse;
+    }
+    header {
+        /* margin-top: 100px; */
+        padding-top: 30px;
     }
 
 </style>
