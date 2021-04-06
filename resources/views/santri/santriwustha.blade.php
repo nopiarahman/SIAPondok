@@ -1,12 +1,15 @@
 @extends('layout/tema') {{-- menambah dari folder layout halaman main --}}
 @section('title','Data Santri Salafiyah Wustha') {{-- mengisi yield title dengan 1 baris code--}}
 @section ('menuwali','active')
-@section ('menusantri','active')
 @section('container')        {{-- mengisi yield container dengan lebih dari 1 baris code --}}
     <div class="container">
       <div class="row">
         <div class="col-12">
+          @if(auth()->user()->role=='kepalaYayasan')
+          <h3 class="my-3 align-center">Data Santri Marhalah {{tulisJenjang($jenjang)}}</h3>
+          @else
           <h3 class="my-3 align-center">Data Santri Marhalah {{jenjangLengkap()}}</h3>
+          @endif
           @if (session('status'))
             <div class="alert alert-success">
               {{session ('status')}}

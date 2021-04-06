@@ -41,8 +41,13 @@
                               <span>14.252</span>
                           </li>
                       </ul> --}}
-                      <div class="">
-                        
+                      @if(auth()->user()->role=='kepalaYayasan')
+                          <div class="">
+                            <a href="/dataasatidzah" class="btn btn-secondary btn-lg btn-block">Kembali</a>
+                          </div>
+                      </div>
+                        @else
+                        <div class="">
                         <a href="{{$asatidzah->id}}/edit" class="btn btn-primary btn-lg waves-effect btn-block">Edit Data</a>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
@@ -50,8 +55,8 @@
                         </button>
                         <a href="/asatidzah" class="btn btn-secondary btn-lg btn-block">Kembali</a>
                       </div>
-                       <!-- Modal -->
-                       
+                      <!-- Modal -->
+
                       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
@@ -76,6 +81,7 @@
                         </div>
                       </div>
                   </div>
+                  @endif
               </div>
             </div>
             <div class="col-md-8">

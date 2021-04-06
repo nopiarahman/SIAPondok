@@ -233,8 +233,10 @@
     @endsection
     {{-- Menambah Script untuk ChartJenjang - Laravel chart --}}
     @section('footer')
+    @if(auth()->user()->role=='kepalaYayasan')    
     {!! $chartJenjang->script() !!} 
     {!! $chartGuru->script() !!} 
+    @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
     @if(auth()->user()->role=='admin')
     <script type="text/javascript">

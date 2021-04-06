@@ -146,6 +146,12 @@ Route::group(['middleware' => ['auth','checkRole:kepalaYayasan']], function () {
     Route::get('/editadmin','KepalaYayasanController@editAdmin');
     Route::post('/admintambah','KepalaYayasanController@admintambah');
     Route::delete('/adminhapus/{admin}','KepalaYayasanController@adminhapus');
+    Route::get('/dataSantriUulaa','KepalaYayasanController@datasantriuulaa');
+    Route::get('/dataSantriWustha','KepalaYayasanController@datasantriwustha');
+    Route::get('/dataSantriBanaat','KepalaYayasanController@datasantribanaat');
+    Route::get('/dataSantriUlyaa','KepalaYayasanController@datasantriulyaa');
+    Route::get('/dataasatidzah','KepalaYayasanController@dataasatidzah');
+    Route::get('/dataasatidzah/{asatidzah}', 'KepalaYayasanController@dataasatidzahshow');
 });
 
 Route::get('/profil','HomeController@showChangePasswordForm');

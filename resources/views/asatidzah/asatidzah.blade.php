@@ -46,6 +46,9 @@
                       <tr>
                         <th scope="col">No</th>
                         <th scope="col">Nama Asatdizah</th>
+                        @if(auth()->user()->role=='kepalaYayasan')
+                        <th scope="col">Jenjang</th>
+                        @endif
                         <th scope="col">Email</th>
                         <th scope="col">No Telp </th>
                         <th scope="col">Detail</th>
@@ -56,9 +59,14 @@
                       <tr>
                       <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$as->namaLengkap}}</td>
+                        <td>{{tulisJenjang($as->jenjang)}}</td>
                         <td>{{$as->email}}</td>
                         <td>{{$as->noHP}}</td>
+                        @if(auth()->user()->role=='kepalaYayasan')
+                        <td><a href="dataasatidzah/{{$as->id}}" class="btn btn-success" style="border-radius: 5px ; margin:-5px ; font-size:12px">detail</a></td>
+                        @else
                         <td><a href="asatidzah/{{$as->id}}" class="btn btn-success" style="border-radius: 5px ; margin:-5px ; font-size:12px">detail</a></td>
+                        @endif
                       </tr>
                       @endforeach
                     </tbody>

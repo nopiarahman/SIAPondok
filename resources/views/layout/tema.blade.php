@@ -22,7 +22,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
     <!-- Bootstrap Core Css -->
-    {{-- <link href="{{asset('tema/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet"> --}}
+    <link href="{{asset('tema/plugins/bootstrap/css/bootstrap.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
@@ -96,12 +96,11 @@
             <div class="navbar-header">
                 {{-- <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a> --}}
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand mb-n2" href="{{url('/dashboard')}}"> <img
+                <a class="navbar-brand mb-n2"href="{{url('/dashboard')}}"> <img
                         src="{{asset('tema/images/logopondok.png')}}" alt="">
                     Sistem Informasi Akademik Pondok Pesantren Alqosim Jambi {{jenjangLengkap()}}
                 </a>
             </div>
-
     </nav>
     <!-- #Top Bar -->
     <section>
@@ -110,7 +109,6 @@
             <!-- User Info -->
             <div class="{{jenjang()}} user-info pb-5 align-center ">
                 <div class="image">
-
                     <img src="{{asset('tema/images/user.png')}}" width="75" height="75" alt="User" />
                     {{-- <img src="{{auth()->user()->asatidzah()->pasPhoto}}" width="75" height="75" alt="User" /> --}}
                 </div>
@@ -120,10 +118,7 @@
                     <div class="email">{{auth()->user()->email}}</div>
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{Str::ucfirst(auth()->user()->role)}} {{jenjangLengkap()}}
-
                     </div>
-
-
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="true">keyboard_arrow_down</i>
@@ -133,11 +128,8 @@
                             <li><a href="/logout"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
-
                 </div>
-
             </div>
-
             <!-- #User Info -->
             <!-- Menu -->
             <div class="menu">
@@ -194,9 +186,6 @@
                             <li class="@yield('menuperiode')">
                                 <a href="{{url('/periode')}}">Periode</a>
                             </li>
-                            {{-- <li class="@yield('menubanaat')">
-                                <a href="{{url('/santribanaat')}}">Tahfidz Qur'an Lilbanaat</a>
-                    </li> --}}
                 </ul>
                 </li>
                 <li class="@yield('menuPelanggaran')">
@@ -299,10 +288,36 @@
                     </a>
                 </li>
                 @elseif(auth()->user()->role=='kepalaYayasan')
+                <li class="@yield('menuwali')">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">assignment</i>
+                        <span>Data Santri</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li class="@yield('menuuulaa')">
+                            <a href="{{url('/dataSantriUulaa')}}">Salafiyyah Uulaa</a>
+                        </li>
+                        <li class="@yield('menuwustha')">
+                            <a href="{{url('/dataSantriWustha')}}">Salafiyyah Wustha'</a>
+                        </li>
+                        <li class="@yield('menubanaat')">
+                            <a href="{{url('/dataSantriBanaat')}}">Tahfidz Banaat</a>
+                        </li>
+                        <li class="@yield('menuulyaa')">
+                            <a href="{{url('/dataSantriUlyaa')}}">Salafiyyah Ulyaa</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="@yield('menuEditAdmin')">
                     <a href="{{'/editadmin'}}">
                         <i class="material-icons">people</i>
                         <span>Kelola Admin</span>
+                    </a>
+                </li>
+                <li class="@yield('menuasatidzah')">
+                    <a href="{{'/dataasatidzah'}}">
+                        <i class="material-icons">people</i>
+                        <span>Data Asastidzah</span>
                     </a>
                 </li>
                 <li class="@yield('')">
