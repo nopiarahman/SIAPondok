@@ -32,6 +32,7 @@ Route::group(['middleware'=>['auth','checkRole:admin']],function(){
     Route::delete ('/santriwustha/{santriwustha}','SantriWusthaController@destroy');
     Route::get('/santriwustha/{santriwustha}/edit', 'SantriWusthaController@edit');
     Route::patch('/santriwustha/{santriwustha}','SantriWusthaController@update');
+    Route::post('/gantistatus/{santriwustha}','SantriWusthaController@gantistatus');
     
     Route::get('/asatidzah', 'AsatidzahController@index');
     Route::post('/asatidzah', 'AsatidzahController@store');

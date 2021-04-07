@@ -203,4 +203,11 @@ class SantriWusthaController extends Controller
         santriwustha::destroy($santriwustha->id);
         return redirect('/santriwustha')->with('status', 'Data Berhasil dihapus');
     }
+    public function gantistatus (Request $request, Santriwustha $santriwustha){
+        // dd($request);
+        $requestData=$request->all();
+        santriwustha::find($santriwustha->id)->update($requestData);
+        return redirect('/santriwustha')->with('status', 'Data Berhasil Diubah');
+
+    }
 }

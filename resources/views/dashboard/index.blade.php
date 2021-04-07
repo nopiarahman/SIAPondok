@@ -206,12 +206,50 @@
         </div>
     </div>
         @elseif(auth()->user()->role=='kepalaYayasan')
-        <div class="conten">
-
+        <div class="content">
             <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <h5>Data Pondok Pesantren Al-Qosim Jambi</h5>
+                </div>
                 <div class="col-md-6">
-                    <h5 class="m-3 align-center">Grafik Jumlah Santri</h5>
-                    <div style="height: 400px">
+                    
+                    <table class="table table-sm">
+                        <tr>
+                            <th colspan="2">
+                                <h6 style="text-align: center">Jumlah Santri Aktif</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td >
+                                Salafiyyah Uula
+                            </td>
+                            <td>: {{$jumlahUulaa}} Santri</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Salafiyyah Wustha
+                            </td>
+                            <td>: {{$jumlahWustha}} Santri</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Salafiyyah Tahfidz Banaat
+                            </td>
+                            <td>: {{$jumlahBanaat}} Santri</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Salafiyyah Ulyaa
+                            </td>
+                            <td>: {{$jumlahUlyaa}} Santri</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row mx-auto bg-light" style="border-radius: 5%">
+                <div class="col-md-6 ">
+                    <h5 class="m-3 align-center ">Grafik Jumlah Santri</h5>
+                    <div style="height: 400px" class="bg-light">
                         {!! $chartJenjang->container() !!}
                     </div>
                 </div>
@@ -223,13 +261,8 @@
                 </div>
             </div>
         </div>
-            
         @endif
-
     </div>
-    
-                                                                
-
     @endsection
     {{-- Menambah Script untuk ChartJenjang - Laravel chart --}}
     @section('footer')

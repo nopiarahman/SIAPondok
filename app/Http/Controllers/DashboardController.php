@@ -129,8 +129,16 @@ class DashboardController extends Controller
             ->options([
                 'backgroundColor'=>'#4CAF50',
             ]);
+            
+            /* Data Pondok */
+            $jumlahUulaa = santriwustha::where('jenjang','sd')->where('status','aktif')->count();
+            $jumlahWustha = santriwustha::where('jenjang','smpPutra')->where('status','aktif')->count();
+            $jumlahBanaat = santriwustha::where('jenjang','smpPutri')->where('status','aktif')->count();
+            $jumlahUlyaa = santriwustha::where('jenjang','smaPutra')->where('status','aktif')->count();
+            
 
-            return view ('dashboard/index',compact('cekuser','chartJenjang','chartGuru'));
+            // dd($santriaktif);
+            return view ('dashboard/index',compact('cekuser','chartJenjang','chartGuru','jumlahUulaa','jumlahWustha','jumlahBanaat','jumlahUlyaa'));
         }
         $kelas=kelas::where('jenjang',jenjang())->orderBy('namaKelas')->get();
             $namaKelas=[];

@@ -9,7 +9,8 @@
           <h3 class="my-3 align-center">Tambah Data Santri {{jenjangLengkap()}}</h3>
           
             <form method="POST" action="/santriwustha" class="pb-5" enctype="multipart/form-data">
-                @csrf
+              @csrf
+              <input type="hidden" name="status" value="Aktif">
                 {{-- Data Santri --}}
             <div class="card p-4 bg-light">
                 <h5 class="mb-4">IDENTITAS SANTRI</h5>

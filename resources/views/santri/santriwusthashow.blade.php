@@ -1,4 +1,4 @@
-@extends('layout/tema') menambah dari folder layout halaman main
+@extends('layout/tema')
 @section('title','Data Santri Salafiyah Wustha') {{-- mengisi yield title dengan 1 baris code--}}
 @section ('menuwustha','active')
 @section ('menusantri','active')
@@ -21,8 +21,8 @@
                         </div>
                       <div class="content-area">
                           <h3>{{$santriwustha->namaLengkap}}</h3>
-                          {{-- <p>Web Software Developer</p>
-                          <p>Administrator</p> --}}
+                          <p style="color: green">Santri {{$santriwustha->status}}</p>
+                          {{-- <p>Administrator</p> --}}
                       </div>
                   </div>
                   <div class="profile-footer">
@@ -48,6 +48,9 @@
                         @else          
                         <a href="{{Storage::url($santriwustha->suratWaliSantri)}}" class="btn btn-success btn-lg btn-block"> Lihat Surat Wali Santri</a> 
                         @endif
+                        <button type="button" class="btn btn-warning btn-lg btn-block" data-toggle="modal" data-target="#modalstatus">
+                          Ganti Status Santri
+                        </button>
                         <br>
                         <a href="{{$santriwustha->id}}/edit" class="btn btn-primary btn-lg waves-effect btn-block">Edit Data</a>
                         <!-- Button trigger modal -->
@@ -82,6 +85,50 @@
                           </div>
                         </div>
                       </div>
+                      <div class="modal fade" id="modalstatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Ganti Status Santri</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form action="/gantistatus/{{$santriwustha->id}}" method="POST" class="d-inline">
+                                @csrf
+                              <div class="row mb-1">
+                                <div class="col-sm-4">
+                                  <label for="status" class=" col-form-label">Pilih Status</label>
+                                </div>
+                                <div class="col-sm-8 ">
+                                  <select name="status" id="status" class="custom-select">
+                                    <option name="status" value="Aktif"> Aktif </option>
+                                    <option name="status" value="Lulus"> Lulus </option>
+                                    <option name="status" value="Pindah"> Pindah </option>
+                                        <option name="status" value="Dikeluarkan"> Dikeluarkan </option>
+                                        <option name="status" value="Lainnya"> Lainnya </option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <button type="submit" class="btn btn-info px-4 ml-3 ">Rubah Status</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                  {{-- <button type="submit" class="btn btn-danger px-4 ml-2">Hapus</button> --}}
+                                </form>  
+
+                            </div>
+                            {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button> --}}
+                                {{-- @method('delete') --}}
+                                {{-- <div class="content">
+
+                                </div> --}}
+                                
+                                  <div class="modal-footer">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
                   </div>
               </div>
             </div>
