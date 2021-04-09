@@ -39,12 +39,16 @@ class CetakNilaiController extends Controller
             $nilaiaktif==null;
         }
         $jenjang=auth()->user()->jenjang;
-        if($jenjang='sd'){
+        // dd($jenjang);
+        $cekuser = auth()->user();
+            $walikelas=waliKelas::where('user_id',$cekuser->id)->first();
             $nilaidiniyah=[];
             $nilaiumum=[];
+            $nilaibahasa=[];
             $nilaidiniyahsorted=[];
             $nilaiumumsorted=[];
             $nilaiMulokSorted=[];
+            $nilaiBahasaSorted=[];
             foreach($nilaiaktif as $nd)
             {
                 if($nd->mapel->kategori=='diniyah')
@@ -63,17 +67,22 @@ class CetakNilaiController extends Controller
                     $nilaiumumsorted = array_values(Arr::sort($nilaiumum, function ($value) {
                         return $value['namaMapel'];
                     }));
+                    
+                }elseif($nd->mapel->kategori=='bahasa'){
+                    $nd['namaMapel']= $nd->mapel->namaMapel;
+                    $nilaibahasa[]=$nd;
+                    $nilaiBahasaSorted = array_values(Arr::sort($nilaibahasa, function ($value) {
+                        return $value['namaMapel'];
+                    }));
                 }else{
                     $nd['namaMapel']= $nd->mapel->namaMapel;
-                    $nilaiMulok[]=$nd;
-                    $nilaiMulokSorted = array_values(Arr::sort($nilaiMulok, function ($value) {
+                    $nilaimulok[]=$nd;
+                    $nilaiMulokSorted = array_values(Arr::sort($nilaimulok, function ($value) {
                         return $value['namaMapel'];
                     }));
                 }
             }
-            $cekuser = auth()->user();
-            $walikelas=waliKelas::where('user_id',$cekuser->id)->first();
-            // dd($periode->semester);
+        if($jenjang=="sd"){
             if($periode->semester=='Ganjil'){
                 $pdf = PDF::loadview('laporan/cetakUASGanjilUula',compact('santriwustha','nilaiaktif','tanggal','kelas','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','walikelas'));
                 $pdf->setPaper('legal');
@@ -105,31 +114,37 @@ class CetakNilaiController extends Controller
                 return view('laporan/cetakUASGenapUula',compact('santriwustha','nilaiaktif','tanggal','kelas','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','walikelas'));
                 
             }
-        }elseif($jenjang='smpPutra'){
-            if($periode='Ganjil'){
+        }elseif($jenjang=="smpPutra"){
+            if($periode->semester=="Ganjil"){
+                // $hitungDiniyah=count($nilaidiniyahsorted);
+                // dd(count($nilaidiniyahsorted));
+                // return view ('laporan/cetakUASGanjilWustha',compact('santriwustha','periode','nilaiaktif','kelas','tanggal','walikelas','nilaidiniyahsorted','nilaiBahasaSorted'));
+                $pdf = PDF::loadview('laporan/cetakUASGanjilWustha',compact('santriwustha','periode','nilaiaktif','kelas','tanggal','walikelas','nilaidiniyahsorted','nilaiBahasaSorted'));
+                $pdf->setPaper('legal');
+                return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
+            }else{
+                // dd($jenjang);
+
+            }
+            
+        }elseif($jenjang=='smpPutri'){
+            if($periode->semester=='Ganjil'){
 
             }else{
 
             }
             
-        }elseif($jenjang='smpPutri'){
-            if($periode='Ganjil'){
-
-            }else{
-
-            }
-            
-        }elseif($jenjang='smaPutra'){
-            if($periode='Ganjil'){
+        }elseif($jenjang=='smaPutra'){
+            if($periode->semester=='Ganjil'){
 
             }else{
 
             }
 
         }
-        $pdf = PDF::loadview('laporan/cetaknilaisw',compact('santriwustha','periode','nilaiaktif','kelas','tanggal'));
-        $pdf->setPaper('legal')->setOption('margin-left',20);
-        return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
+        // $pdf = PDF::loadview('laporan/cetaknilaisw',compact('santriwustha','periode','nilaiaktif','kelas','tanggal'));
+        // $pdf->setPaper('legal')->setOption('margin-left',20);
+        // return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
     }
 
     public function cetaknilaitahfidz(Santriwustha $santriwustha){

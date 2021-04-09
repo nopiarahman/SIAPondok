@@ -63,6 +63,7 @@
                                                 <option name="kategori" value="diniyah"> Diniyah </option>
                                                 <option name="kategori" value="umum"> Umum</option>
                                                 <option name="kategori" value="muatanLokal"> Muatan Lokal</option>
+                                                <option name="kategori" value="bahasa"> Bahasa</option>
                                             </select>
                                         </div>
                                     </div>
