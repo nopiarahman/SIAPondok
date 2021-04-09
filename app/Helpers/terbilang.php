@@ -4,7 +4,10 @@ function penyebut($nilai) {
             $nilai = abs($nilai);
             $huruf = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
             $temp = "";
-            if ($nilai < 12) {
+            if($nilai == 0){
+                $temp = $huruf[$nilai];
+            }
+            else if ($nilai < 12) {
                 $temp = " ". $huruf[$nilai];
             } else if ($nilai <20) {
                 $temp = penyebut($nilai - 10). " belas";
@@ -27,12 +30,35 @@ function penyebut($nilai) {
             }     
             return $temp;
         }
-     
+
+        function tkoma($nilai)
+        {
+            $nilai = stristr($nilai,'.');
+            $angka = array("nol", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan","sembilan");
+            $temp="";
+            $pjg = strlen($nilai);
+            $pos = 1;
+
+            while($pos < $pjg){
+                $char = substr($nilai,$pos,1);
+                $pos++;
+                $temp = " ".$angka[$char];
+            }
+            return $temp;
+        }
+
         function terbilang($nilai) {
             if($nilai<0) {
                 $hasil = "minus ". trim(penyebut($nilai));
             } else {
+                $poin = trim(tkoma($nilai));
                 $hasil = trim(penyebut($nilai));
-            }     		
-            return $hasil;
+            }
+                if($poin){
+                    $hasil = ucfirst ($hasil).' koma '.$poin;
+                }else{
+                    $hasil = ucfirst($hasil);
+                }
+                return $hasil;  
+            
         }

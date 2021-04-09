@@ -206,13 +206,12 @@
         </div>
     </div>
         @elseif(auth()->user()->role=='kepalaYayasan')
-        <div class="content">
+        <div class="content" style="padding:2%;">
             <div class="row">
                 <div class="col-md-12 d-flex justify-content-center">
                     <h5>Data Pondok Pesantren Al-Qosim Jambi</h5>
                 </div>
-                <div class="col-md-6">
-                    
+                <div class="col-md-6 mt-3">               
                     <table class="table table-sm">
                         <tr>
                             <th colspan="2">
@@ -245,8 +244,41 @@
                         </tr>
                     </table>
                 </div>
+                <div class="col-md-6 mt-3">               
+                    <table class="table table-sm">
+                        <tr>
+                            <th colspan="2">
+                                <h6 style="text-align: center">Jumlah Asatidzah</h6>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td >
+                                Salafiyyah Uula
+                            </td>
+                            <td>: {{$guruUulaa}} Orang</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Salafiyyah Wustha
+                            </td>
+                            <td>: {{$guruWustha}} Orang</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Salafiyyah Tahfidz Banaat
+                            </td>
+                            <td>: {{$guruBanaat}} Orang</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Salafiyyah Ulyaa
+                            </td>
+                            <td>: {{$guruUlyaa}} Orang</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="row mx-auto bg-light" style="border-radius: 5%">
+            <div class="row mx-auto bg-light mt-3" style="border-radius: 5%">
                 <div class="col-md-6 ">
                     <h5 class="m-3 align-center ">Grafik Jumlah Santri</h5>
                     <div style="height: 400px" class="bg-light">

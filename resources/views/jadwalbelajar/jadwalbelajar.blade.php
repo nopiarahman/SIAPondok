@@ -72,7 +72,7 @@
                       @if(auth()->user()->role=='asatidzah')
                       @foreach ($jadwalaktifguru as $jb)
                       <tr>
-                        <th scope="row">{{$loop->iteration}}</th>
+                        {{-- <th scope="row">{{$loop->iteration}}</th> --}}
                         {{-- <td>{{$jb->asatidzah->namaLengkap}}</td> --}}
                         <td>{{$jb->mapel->namaMapel}}</td>
                         <td>{{$jb->kelas->namaKelas}}</td>

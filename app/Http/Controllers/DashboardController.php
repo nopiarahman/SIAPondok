@@ -136,9 +136,13 @@ class DashboardController extends Controller
             $jumlahBanaat = santriwustha::where('jenjang','smpPutri')->where('status','aktif')->count();
             $jumlahUlyaa = santriwustha::where('jenjang','smaPutra')->where('status','aktif')->count();
             
+            $guruUulaa = asatidzah::where('jenjang','sd')->count();
+            $guruWustha = asatidzah::where('jenjang','smpPutra')->count();
+            $guruBanaat = asatidzah::where('jenjang','smpPutri')->count();
+            $guruUlyaa = asatidzah::where('jenjang','smaPutra')->count();
 
             // dd($santriaktif);
-            return view ('dashboard/index',compact('cekuser','chartJenjang','chartGuru','jumlahUulaa','jumlahWustha','jumlahBanaat','jumlahUlyaa'));
+            return view ('dashboard/index',compact('cekuser','chartJenjang','chartGuru','jumlahUulaa','jumlahWustha','jumlahBanaat','jumlahUlyaa','guruUulaa','guruWustha','guruBanaat','guruUlyaa'));
         }
         $kelas=kelas::where('jenjang',jenjang())->orderBy('namaKelas')->get();
             $namaKelas=[];
