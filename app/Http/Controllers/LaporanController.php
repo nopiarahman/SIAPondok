@@ -127,6 +127,8 @@ class LaporanController extends Controller
         $nilaidiniyahsorted=[];
         $nilaiumumsorted=[];
         $nilaiMulokSorted=[];
+        $nilaiBahasaSorted=[];
+        $nilaibahasa=[];
         foreach($nilaiaktif as $nd)
         {
             // $testnilai = $nd;
@@ -148,18 +150,25 @@ class LaporanController extends Controller
                 $nilaiumumsorted = array_values(Arr::sort($nilaiumum, function ($value) {
                     return $value['namaMapel'];
                 }));
-            }else{
-                $nd['namaMapel']= $nd->mapel->namaMapel;
-                $nilaiMulok[]=$nd;
-                $nilaiMulokSorted = array_values(Arr::sort($nilaiMulok, function ($value) {
-                    return $value['namaMapel'];
-                }));
             }
+                elseif($nd->mapel->kategori=='bahasa'){
+                    $nd['namaMapel']= $nd->mapel->namaMapel;
+                    $nilaibahasa[]=$nd;
+                    $nilaiBahasaSorted = array_values(Arr::sort($nilaibahasa, function ($value) {
+                        return $value['namaMapel'];
+                    }));
+                }else{
+                    $nd['namaMapel']= $nd->mapel->namaMapel;
+                    $nilaimulok[]=$nd;
+                    $nilaiMulokSorted = array_values(Arr::sort($nilaimulok, function ($value) {
+                        return $value['namaMapel'];
+                    }));
+                }
         }
         // dd($sorted);
         // dd($nilaiMulokSorted);
         // $urut=$nilaidiniyah->sortBy($nilaidiniyah->mapel->namaMapel);
         // dd($urut->value()->all());
-        return view ('laporan/laporandetail',compact('santriwustha','nilaiaktif','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted'));
+        return view ('laporan/laporandetail',compact('santriwustha','nilaiaktif','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','nilaiBahasaSorted'));
     }
 }

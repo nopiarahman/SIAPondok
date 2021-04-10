@@ -40,7 +40,7 @@
     #identitas{
         width: 100%;
         margin-bottom: 20px;
-        margin-top: 50px;
+        margin-top: 30px;
     }    
     #identitas td{
         font-size:14px;
@@ -50,11 +50,22 @@
         /* font-weight: bold; */
     }
     #kehadiran{
-        width: 100%;
+        width: 40%;
         margin: 20px 0px;
         border-collapse: collapse;
+        float: right;
     }
     #kehadiran td{
+        border: 1px solid black;
+        text-align: center;
+    }
+    #ekskul{
+        width: 50%;
+        margin: 20px 0px;
+        border-collapse: collapse;
+        float: left;
+    }
+    #ekskul td{
         border: 1px solid black;
         text-align: center;
     }
@@ -71,6 +82,7 @@
     #ttd td {
         border: none;
         border-collapse: collapse;
+        text-align: center;
     }
     header {
         /* margin-top: 100px; */
@@ -80,6 +92,9 @@
         width: 100%;
         margin: 20px 0px;
         border-collapse: collapse;
+    }
+    #catatan td {
+        border: 1px solid black;
     }
 
 </style>
@@ -214,9 +229,33 @@
     </tr>
 </table>
 {{-- Tabel Ketidakhadiran --}}
+<table id="ekskul">
+    <tr>
+        <td style="font-weight:bold;">NO</td>
+        <td style="font-weight:bold;">KEGIATAN EKSTRAKULIKULER</td>
+        <td style="font-weight:bold;">Nilai</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td> Mudhaharah</td>
+        <td style="padding:0px 10px"></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
 <table id="kehadiran">
     <tr>
-        <td rowspan="3" style="width: 50%" class="font-weight-bold">KETIDAKHADIRAN</td>
+        <td colspan="3" style="width: 50%; font-weight:bold;">KETIDAKHADIRAN</td>
+    </tr>
+    <tr>
         <td>Sakit (S)</td>
         <td>:</td>
         <td style="padding:0px 10px"></td>

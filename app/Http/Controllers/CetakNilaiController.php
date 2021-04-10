@@ -112,7 +112,6 @@ class CetakNilaiController extends Controller
                 $pdf->setPaper('legal');
                 return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
                 return view('laporan/cetakUASGenapUula',compact('santriwustha','nilaiaktif','tanggal','kelas','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','walikelas'));
-                
             }
         }elseif($jenjang=="smpPutra"){
             if($periode->semester=="Ganjil"){
@@ -123,7 +122,30 @@ class CetakNilaiController extends Controller
                 $pdf->setPaper('legal');
                 return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
             }else{
+                $statusNaik = "naik";
+                if($statusNaik=="naik"){
+                    if($kelas->namaKelas<=3){
+                        $naik = $kelas->namaKelas+1;
+                        $tidaknaik=false;
+                    }else{
+                        $naik = "Lulus";
+                        $tidaknaik="Tidak Lulus";
+                    }
+                }else{
+                    if($kelas->namaKelas<=3){
+                        $naik=$kelas->namaKelas;
+                        $tidaknaik=true;
+                    }else{
+                        $naik = "Lulus";
+                        $tidaknaik="Tidak Lulus";
+                    }
+                }
+                $pdf = PDF::loadview('laporan/cetakUASGenapWustha',compact('naik','tidaknaik','santriwustha','nilaiaktif','tanggal','kelas','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','walikelas','nilaiBahasaSorted'));
+                $pdf->setPaper('legal');
+                return $pdf->stream('raport'.$santriwustha->namaLengkap.'.pdf');
+                return view ('laporan/cetakUASGenapWustha',compact('santriwustha','periode','nilaiaktif','kelas','tanggal','walikelas','nilaidiniyahsorted','nilaiBahasaSorted','tidaknaik','naik'));
                 // dd($jenjang);
+
 
             }
             
