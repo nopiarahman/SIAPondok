@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> --}}
 
-    <title>SW - Lapor UAS Genap{{$santriwustha->namaLengkap}} {{$periode->semester}} {{$periode->tahun}}</title>
+    <title>SW - Lapor UAS Ganjil{{$santriwustha->namaLengkap}} {{$periode->semester}} {{$periode->tahun}}</title>
 <style>
     *{
         font-family: 'Times New Roman', Times, serif;
@@ -103,7 +103,7 @@
     {{-- Header --}}
 <header style="text-align: center"">
     <h2 style="font-weight: bold">LAPORAN HASIL EVALUASI</h2>
-    <h2 style="font-weight: bold">UJIAN AKHIR SEMESTER (UAS)</h2>
+    <h2 style="font-weight: bold">UJIAN TENGAH SEMESTER (UTS)</h2>
 </header>
 {{-- Identitas --}}
 <table id="identitas" cellspacing="0">
@@ -179,7 +179,7 @@
         <th>Huruf</th>
         <th>Rata-rata Kelas</th>
     </tr>
-    @if($nilaidiniyahsorted !=null)
+    @if($nilaidiniyahsorted != null)
     <tr>
         <th rowspan="{{count($nilaidiniyahsorted)+1}}" style="text-align: center">
             <span>I</span>
@@ -193,14 +193,14 @@
         <td >{{$loop->iteration}}</td>
         <td style="text-align: left"> {{$nd->mapel->namaMapel}} </td>
         <td>65</td>
-        <td>{{$nd->rataRata}}</td>
-        <td style="text-align: left">{{terbilang($nd->rataRata)}}</td>
-        <td>{{$nd->rataRataKelas}}</td>
+        <td>{{$nd->uts}}</td>
+        <td style="text-align: left">{{terbilang($nd->uts)}}</td>
+        <td>{{$nd->rataRataMid}}</td>
     </tr>
     </tr>
     @endforeach
     @endif
-    @if($nilaiBahasaSorted !=null)
+    @if($nilaiBahasaSorted != null)
     <tr>
         <th rowspan="{{count($nilaiBahasaSorted)+1}}" style="text-align: center">
             <span>II</span>
@@ -215,13 +215,13 @@
         <td>{{$loop->iteration}}</td>
         <td style="text-align: left">{{$nb->mapel->namaMapel}}</td>
         <td>65</td>
-        <td>{{$nb->rataRata}}</td>
-        <td style="text-align: left">{{terbilang($nb->rataRata)}}</td>
-        <td>{{$nb->rataRataKelas}}</td>
+        <td>{{$nb->uts}}</td>
+        <td style="text-align: left">{{terbilang($nb->uts)}}</td>
+        <td>{{$nb->rataRataMid}}</td>
     </tr>
     @endforeach
     @endif
-    @if($nilaiumumsorted !=null)
+    @if($nilaiumumsorted != null)
     <tr>
         <th rowspan="{{count($nilaiumumsorted)+1}}" style="text-align: center">
             <span>III</span>
@@ -236,21 +236,21 @@
         <td>{{$loop->iteration}}</td>
         <td style="text-align: left">{{$nu->mapel->namaMapel}}</td>
         <td>65</td>
-        <td>{{$nu->rataRata}}</td>
-        <td style="text-align: left">{{terbilang($nu->rataRata)}}</td>
-        <td>{{$nu->rataRataKelas}}</td>
+        <td>{{$nu->uts}}</td>
+        <td style="text-align: left">{{terbilang($nu->uts)}}</td>
+        <td>{{$nu->rataRataMid}}</td>
     </tr>
     @endforeach
     @endif
     <tr>
         <th colspan="5" style="text-align: right"> Jumlah </th>
-        <th> {{round($nilaiaktif->sum('rataRata'),1)}}</th>
-        <th colspan="3" class="subJudul">  {{terbilang($nilaiaktif->sum('rataRata'))}}</th>
+        <th> {{round($nilaiaktif->sum('uts'),1)}}</th>
+        <th colspan="3" class="subJudul">  {{terbilang($nilaiaktif->sum('uts'))}}</th>
     </tr>
     <tr>
         <th colspan="5" style="text-align: right"> Rata-rata </th>
-        <th> {{round($nilaiaktif->avg('rataRata'),2)}}</th>
-        <th colspan="3" class="subJudul"> {{terbilang(round($nilaiaktif->avg('rataRata'),2))}}</th>
+        <th> {{round($nilaiaktif->avg('uts'),2)}}</th>
+        <th colspan="3" class="subJudul"> {{terbilang(round($nilaiaktif->avg('uts'),2))}}</th>
     </tr>
 </table>
 {{-- Tabel Ketidakhadiran --}}
@@ -309,9 +309,7 @@
 {{-- Tanggal --}}
 <table id="tanggal">
     <tr>
-        <td style="width:  68%">
-            <span style="font-weight: bold;  text-decoration:underline;">KEPUTUSAN:</span>
-        </td>
+        <td style="width:  68%"></td>
         <td >
             <span>Diberikan di </span>
         </td>
@@ -320,12 +318,7 @@
         </td>
     </tr>
     <tr>
-        <td style="width:  68%" rowspan="2">
-            Dengan memperhatikan hasil yang dicapai <br> pada Semester I dan II, maka Ananda ditetapkan <br>
-            <span style="font-weight: bold; @if($tidaknaik==true) text-decoration: line-through;@endif"  >Naik</span> / 
-            <span style="font-weight: bold; @if($tidaknaik==false) text-decoration: line-through;@endif" >Tidak Naik</span>
-            <span>ke Kelas: {{$naik}} ( {{terbilang($naik)}} )</span> 
-        </td>
+        <td style="width:  68%"></td>
         <td>
             <span>Tanggal</span> 
         </td>
@@ -350,17 +343,11 @@
         <td>
             <b>Wali Kelas</b>
         </td>
-        <td>
-            <b>Kepala Sekolah</b>
-        </td>
     </tr>
     <tr>
         <td>
             <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
             
-        </td>
-        <td>
-            <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
         </td>
         <td>
             <hr style="height:2px; width:75%; border-width:0;color:black;background-color:black; margin-top:100px;">
@@ -372,9 +359,6 @@
         </td>
         <td>
             <b>{{$walikelas->namaLengkap}}</b>
-        </td>
-        <td>
-            <b>Ja'far Shidik, S.Pd, M.Pd</b>
         </td>
     </tr>
 </table>

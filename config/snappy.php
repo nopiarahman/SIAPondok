@@ -39,10 +39,10 @@ return [
         // 'binary'  => base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'),
         
         /* menggunakan windows */
-        // 'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"',
+        'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"',
         
         /* menggunakan MAC OS */
-        'binary'  => '/usr/local/bin/wkhtmltopdf',
+        // 'binary'  => '/usr/local/bin/wkhtmltopdf',
         
         // 'binary'  => env('WKHTML_PDF_BINARY', '/usr/local/bin/wkhtmltopdf'),
         'timeout' => false,
@@ -56,10 +56,10 @@ return [
         // 'binary'  => base_path('vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'),
         
         /* Windows */
-        // 'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"',
+        'binary' => '"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf"',
         
         /* Mac */
-        'binary'  => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage'),
+        // 'binary'  => env('WKHTML_IMG_BINARY', '/usr/local/bin/wkhtmltoimage'),
         'timeout' => false,
         'options' => [],
         'env'     => [],

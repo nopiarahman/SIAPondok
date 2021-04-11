@@ -227,13 +227,13 @@
     @endforeach
     <tr>
         <th> Jumlah </th>
-        <th> {{round($nilaiaktif->sum('rataRata'))}}</th>
-        <th colspan="3" class="subJudul">  {{terbilang($nilaiaktif->sum('rataRata'))}}</th>
+        <th> {{round($nilaiaktif->sum('uts'))}}</th>
+        <th colspan="3" class="subJudul">  {{terbilang($nilaiaktif->sum('uts'))}}</th>
     </tr>
     <tr>
         <th> Rata-rata </th>
-        <th> {{round($nilaiaktif->avg('rataRata'),2)}}</th>
-        <th colspan="3" class="subJudul"> {{terbilang(round($nilaiaktif->avg('rataRata'),2))}}</th>
+        <th> {{round($nilaiaktif->avg('uts'),2)}}</th>
+        <th colspan="3" class="subJudul"> {{terbilang(round($nilaiaktif->avg('uts'),2))}}</th>
     </tr>
 </table>
 {{-- Tabel Ketidakhadiran --}}

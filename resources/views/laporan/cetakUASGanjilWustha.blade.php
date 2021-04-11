@@ -179,6 +179,7 @@
         <th>Huruf</th>
         <th>Rata-rata Kelas</th>
     </tr>
+    @if($nilaidiniyahsorted != null)
     <tr>
         <th rowspan="{{count($nilaidiniyahsorted)+1}}" style="text-align: center">
             <span>I</span>
@@ -198,6 +199,8 @@
     </tr>
     </tr>
     @endforeach
+    @endif
+    @if($nilaiBahasaSorted != null)
     <tr>
         <th rowspan="{{count($nilaiBahasaSorted)+1}}" style="text-align: center">
             <span>II</span>
@@ -217,6 +220,28 @@
         <td>{{$nb->rataRataKelas}}</td>
     </tr>
     @endforeach
+    @endif
+    @if($nilaiumumsorted != null)
+    <tr>
+        <th rowspan="{{count($nilaiumumsorted)+1}}" style="text-align: center">
+            <span>III</span>
+        </th>
+        <th rowspan="{{count($nilaiumumsorted)+1}}" style="text-align: center">
+            <span>ILMU UMUM</span>
+        </th>
+        
+    </tr>
+    @foreach($nilaiumumsorted as $nu)
+    <tr>
+        <td>{{$loop->iteration}}</td>
+        <td style="text-align: left">{{$nu->mapel->namaMapel}}</td>
+        <td>65</td>
+        <td>{{$nu->rataRata}}</td>
+        <td style="text-align: left">{{terbilang($nu->rataRata)}}</td>
+        <td>{{$nu->rataRataKelas}}</td>
+    </tr>
+    @endforeach
+    @endif
     <tr>
         <th colspan="5" style="text-align: right"> Jumlah </th>
         <th> {{round($nilaiaktif->sum('rataRata'),1)}}</th>
