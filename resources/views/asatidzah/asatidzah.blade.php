@@ -59,7 +59,9 @@
                       <tr>
                       <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$as->namaLengkap}}</td>
+                        @if(auth()->user()->role=='kepalaYayasan')
                         <td>{{tulisJenjang($as->jenjang)}}</td>
+                        @endif
                         <td>{{$as->email}}</td>
                         <td>{{$as->noHP}}</td>
                         @if(auth()->user()->role=='kepalaYayasan')

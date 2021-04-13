@@ -221,7 +221,7 @@
             ?>
         </td>
         <td>
-          {{$nm->rataRataMid}}
+            {{$nm->rataRataMid}}
         </td>
     </tr>
     @endforeach

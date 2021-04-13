@@ -46,6 +46,7 @@ class DashboardController extends Controller
         elseif(auth()->user()->role=='asatidzah')
         {
             $cekasatidzah=asatidzah::where('user_id','=',$cekuser->id)->first();
+            // dd($cekuser);
             $cekjadwalaktif=['asatidzah_id'=> $cekasatidzah->id,'periode_id'=>$periode->id,'jenjang'=>jenjang()];
             $cekjadwal=jadwalbelajar::where($cekjadwalaktif)->get();
             if($hari=='Minggu'){

@@ -48,6 +48,9 @@
               <tr>
               <th scope="col">No</th>
               <th scope="col">Materi Pelajaran</th>
+              @if(auth()->user()->jenjang=='smpPutri')
+              <th scope="col">Jenis</th>
+              @endif
               <th scope="col">Kelas</th>
               <th scope="col">Hari </th>
               <th scope="col">Jam Mulai</th>
@@ -62,6 +65,9 @@
               <tr>
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$jb->mapel->namaMapel}}</td>
+                @if(auth()->user()->jenjang=='smpPutri')
+                <td>{{$jb->mapel->jenis}}</td>
+                @endif
                 <td>{{$jb->kelas->namaKelas}}</td>
                 <td>{{$jb->hari}}</td>
                 <td>{{$jb->jamMulai}}</td>

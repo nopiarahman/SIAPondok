@@ -67,6 +67,20 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @if(auth()->user()->jenjang=='smpPutri')
+                                    <div class="row mb-1">
+                                        <div class="col-sm-4">
+                                            <label for="jenis" class=" col-form-label">Jenis</label>
+                                        </div>
+                                        <div class="col-sm-8 ">
+                                            <select name="jenis" id="jenis" class="custom-select">
+                                                <option name="jenis" value="teori"> Teori </option>
+                                                <option name="jenis" value="praktek"> Praktek </option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @endif
                                     <button type="submit" class="btn btn-info px-4 ml-3 ">Tambah</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                                 </form>
@@ -88,6 +102,9 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Mata Pelajaran</th>
                         <th scope="col">Kategori</th>
+                        @if(auth()->user()->jenjang=='smpPutri')
+                        <th scope="col">Jenis</th>
+                        @endif
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -97,6 +114,9 @@
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$mp->namaMapel}}</td>
                         <td>{{$mp->kategori}}</td>
+                        @if(auth()->user()->jenjang=='smpPutri')
+                        <td>{{$mp->jenis}}</td>
+                        @endif
                         {{-- <td><a href="kelas/{{$ks->id}}/edit" class="btn btn-success" style="border-radius: 5px ;
                         font-size:12px">Edit</a> --}}
                         <td><button type="button" class="btn btn-info " style="border-radius: 5px ;  font-size:12px"
@@ -150,16 +170,46 @@
                                                 enctype="multipart/form-data">
                                                 @method('patch')
                                                 @csrf
-                                                <label for="namaMapel" class="col-sm-3 col-form-label">Nama Mata
-                                                    pelajaran</label>
-                                                <div class="col-sm-9 ">
-                                                    <input type="text"
-                                                        class="form-control @error('namaMapel') is-invalid @enderror"
-                                                        id="namaMapel" name="namaMapel" value="{{$mp->namaMapel}}">
-                                                    @error('namaMapel')
-                                                    <div class="invalid-feedback">{{$message}}</div>
-                                                    @enderror
-                                                </div>
+                                                <div class="row mb-1"> 
+                                                    <div class="col-sm-4">
+                                                      <label for="namaMapel" class=" col-form-label">Nama Mata Pelajaran</label>
+                                                    </div>
+                                                    <div class="col-sm-8 ">
+                                                        <input type="text"
+                                                            class="form-control my-2 @error('namaMapel') is-invalid @enderror"
+                                                            id="namaMapel" name="namaMapel" value="{{$mp->namaMapel}}"">
+                                                        @error('namaMapel')
+                                                        <div class="invalid-feedback">{{$message}}</div>
+                                                        @enderror
+                                                    </div>
+                                                  </div>
+                                                  <div class="row mb-1">
+                                                      <div class="col-sm-4">
+                                                          <label for="kategori" class=" col-form-label">Kategori</label>
+                                                      </div>
+                                                      <div class="col-sm-8 ">
+                                                          <select name="kategori" id="kategori" class="custom-select">
+                                                              <option name="kategori" value="diniyah"> Diniyah </option>
+                                                              <option name="kategori" value="umum"> Umum</option>
+                                                              <option name="kategori" value="muatanLokal"> Muatan Lokal</option>
+                                                              <option name="kategori" value="bahasa"> Bahasa</option>
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                                  @if(auth()->user()->jenjang=='smpPutri')
+                                                  <div class="row mb-1">
+                                                      <div class="col-sm-4">
+                                                          <label for="jenis" class=" col-form-label">Jenis</label>
+                                                      </div>
+                                                      <div class="col-sm-8 ">
+                                                          <select name="jenis" id="jenis" class="custom-select">
+                                                              <option name="jenis" value="teori"> Teori </option>
+                                                              <option name="jenis" value="praktek"> Praktek </option>
+                                                              
+                                                          </select>
+                                                      </div>
+                                                  </div>
+                                                  @endif
                                                 <button type="submit" class="btn btn-info px-4 ml-2 ">Edit</button>
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Batal</button>

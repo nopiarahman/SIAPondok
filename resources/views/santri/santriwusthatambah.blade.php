@@ -60,9 +60,8 @@
                             Laki laki
                           </label>
                         </div>
-                        <div class="form-check disabled">
-                          <input class="form-check-input" type="radio" name="jk" id="gridRadios3" value="option3" disabled>
-                          <label class="form-check-label" for="gridRadios3">
+                        <div class="form-check ">
+                          <input class="form-check-input" type="radio" name="jk" id="gridRadios3" value="Perempuan">
                             Perempuan
                           </label>
                         </div>

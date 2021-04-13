@@ -46,8 +46,10 @@ class JadwalBelajarController extends Controller
                                         ->where('asatidzah_id','=',$cekasatidzah->id)
                                         ->where('jenjang',jenjang())
                                         ->orderBy('hari')->get();
+                                        // dd($jadwalaktifguru);
         return view ('/jadwalbelajar/jadwalbelajar',compact('periode','jadwalaktif','jadwalaktifguru')); 
         }                             
+        // dd($jadwalaktifguru)
         return view ('/jadwalbelajar/jadwalbelajar',compact('periode','jadwalaktif')); 
 
     }

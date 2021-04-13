@@ -137,7 +137,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Pilih Mate Pelajaran</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Pilih Mata Pelajaran</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -149,6 +149,9 @@
                   <tr>
                     <th scope="col">No</th>
                     <th scope="col" >Nama Mata Pelajaran</th>
+                    @if(auth()->user()->jenjang=='smpPutri')
+                    <th scope="col" >Jenis</th>
+                    @endif
                   
                   </tr>
                 </thead>
@@ -156,6 +159,9 @@
                   @foreach ($mapel as $mp)
                   <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$mp->namaMapel}}</td>
+                    @if(auth()->user()->jenjang=='smpPutri')
+                    <td>{{$mp->jenis}}</td>
+                    @endif
                     <td><a href="#" id="datamapel" class="btn btn-success pilih" data-id={{$mp->id}} data-nama={{$mp->namaMapel}}  style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
                   </tr>
                   @endforeach

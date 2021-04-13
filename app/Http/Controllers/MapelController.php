@@ -94,18 +94,18 @@ class MapelController extends Controller
 
         $namamapel = mapel::where('namaMapel', '=', $request->input('namaMapel'))
                             ->where('jenjang',jenjang())->first();
-        if ($namamapel === null) {
+        // if ($namamapel === null) {
             $this->validate($request,$rules,$costumMessages);
             $mapel->update($requestData);
             return redirect('/mapel')->with('status', 'Data Berhasil dirubah');
-        }else {
-            $costumMessages=[
-                'required'=>'nama Mata Pelajaran Sudah ada'
-            ];
-            $this->validate($request,$rules,$costumMessages);
-            return redirect('/mapel')->with('status2', 'Nama mapel Sudah Ada, mapel Gagal Dirubah');
-            // validate('nama mapel sudah ada');
-        }
+        // }else {
+        //     $costumMessages=[
+        //         'required'=>'nama Mata Pelajaran Sudah ada'
+        //     ];
+        //     $this->validate($request,$rules,$costumMessages);
+        //     return redirect('/mapel')->with('status2', 'Nama mapel Sudah Ada, mapel Gagal Dirubah');
+        //     // validate('nama mapel sudah ada');
+        // }
     }
 
     /**

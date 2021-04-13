@@ -122,6 +122,8 @@ class LaporanController extends Controller
             $nilaiaktif==null;
         }
 
+        
+
         $nilaidiniyah=[];
         $nilaiumum=[];
         $nilaidiniyahsorted=[];
@@ -133,7 +135,7 @@ class LaporanController extends Controller
         {
             // $testnilai = $nd;
             // $testnilai['namaMapel']=$nd->mapel->namaMapel;
-            
+            // dd($nd->mapel->jenis);
             if($nd->mapel->kategori=='diniyah')
             {
                 $nd['namaMapel']= $nd->mapel->namaMapel;
@@ -165,10 +167,27 @@ class LaporanController extends Controller
                     }));
                 }
         }
-        // dd($sorted);
-        // dd($nilaiMulokSorted);
-        // $urut=$nilaidiniyah->sortBy($nilaidiniyah->mapel->namaMapel);
-        // dd($urut->value()->all());
-        return view ('laporan/laporandetail',compact('santriwustha','nilaiaktif','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','nilaiBahasaSorted'));
+        /* Nilai Teori dan Praktek Banaat */
+        // $nilaiBahasaPraktek=[];
+        foreach($nilaidiniyahsorted as $nilai){
+            if($nilai->mapel->jenis=='teori'){
+                $nilaiDiniyahTeori[]=$nilai;
+            }else{
+                $nilaiDiniyahPraktek[]=$nilai;
+            }
+        }
+        foreach($nilaiBahasaSorted as $nb){
+            if($nb->mapel->jenis=='teori'){
+                $nilaiBahasaTeori[]=$nb;
+            }else{
+                $nilaiBahasaPraktek[]=$nb;
+            }
+        }
+        // dd($nilaiBahasaPraktek);
+        if(auth()->user()->jenjang=='smpPutri'){
+            return view ('laporan/laporandetailbanaat',compact('santriwustha','nilaiaktif','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','nilaiBahasaSorted','nilaiBahasaTeori','nilaiBahasaPraktek','nilaiDiniyahTeori','nilaiDiniyahPraktek'));
+        }else{
+            return view ('laporan/laporandetail',compact('santriwustha','nilaiaktif','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','nilaiBahasaSorted'));
+        }
     }
 }
