@@ -72,8 +72,9 @@
                     <th scope="col" colspan="10" class=" align-left px-3">
                         <h5>I. Nilai Diniyah </h5>
                     </th>
-                    @foreach ($nilaidiniyahsorted as $nilai)
                 </tr>
+                @foreach ($nilaidiniyahsorted as $nilai)
+                @if($nilai->mapel->jenis=='teori')
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$nilai->mapel->namaMapel}}</td>
@@ -94,6 +95,7 @@
                     </td>
                     <td>{{round($nilai->rataRataKelas)}}</td>
                 </tr>
+                @endif
                 @endforeach
                 
                 @if($nilaiBahasaSorted != null)
