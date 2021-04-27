@@ -107,7 +107,13 @@
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$pd->tahun}}</td>
                     <td>{{$pd->semester}}</td>
-                    <td>{{$pd->status}}</td>
+                    <td
+                    @if($pd->status=='Aktif')
+                        class="badge badge-info"
+                    @else
+                        class="badge badge-secondary"
+                    @endif
+                    >{{$pd->status}}</td>
                     <td>
                         <a href="/periode/{{$pd->id}}/aktif" type="button" class="btn btn-success "
                             style="border-radius: 5px ;  font-size:12px">
@@ -205,24 +211,6 @@
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Batal</button>
                                         </form>
-                                        {{-- <form action="/periode/{{$pd->id}}" method="POST" class="d-inline"
-                                        enctype="multipart/form-data">
-                                        @method('patch')
-                                        @csrf
-                                        <label for="namaMapel" class="col-sm-3 col-form-label">Nama Mata
-                                            pelajaran</label>
-                                        <div class="col-sm-9 ">
-                                            <input type="text"
-                                                class="form-control @error('namaMapel') is-invalid @enderror"
-                                                id="namaMapel" name="namaMapel" value="{{$pd->namaMapel}}">
-                                            @error('namaMapel')
-                                            <div class="invalid-feedback">{{$message}}</div>
-                                            @enderror
-                                        </div>
-                                        <button type="submit" class="btn btn-info px-4 ml-2 ">Edit</button>
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Batal</button>
-                                        </form> --}}
                                     </div>
                                     <div class="modal-footer">
                                     </div>

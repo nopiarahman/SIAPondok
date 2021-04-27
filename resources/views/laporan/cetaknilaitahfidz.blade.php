@@ -15,29 +15,29 @@
 
     }
     .judul{
-        font-size: 14pt;
+        font-size: 12pt;
         font-weight: bold;
     }
     .tebal{
         font-weight: bold;
     }
     .full{
-        width: 95%;
+        width: 90%;
     }
     #nilai{
-        border: 2px solid black;
-
-    }
-    #nilai td{
         border: 1px solid black;
         border-collapse: collapse;
-        padding-top: 10px;
     }
-    #nilai th {
-        border: 2px solid black;
+    #nilai td, th{
+        border: 1px solid black;
+        padding: 5px;
     }
     .bawah{
         float: right;
+    }
+    #tanggal{
+        float:right;
+        margin-top: 20px;
     }
 
 </style>
@@ -45,12 +45,12 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mt-4 ">
-                <h3 class="tebal" >LAPORAN HASIL EVALUASI</h3>
-                <h3 class="tebal">TAHFIDZ QUR'AN</h3>
+                <h3 class="tebal" style="text-align: center">LAPORAN HASIL EVALUASI</h3>
+                <h3 class="tebal" style="text-align: center">TAHFIDZ QUR'AN</h3>
             </div>
         </div>
-        <div class="mt-3 judul">
-            <table class="full">
+        <div class="judul">
+            <table class="full" style="padding-top: 20px">
                 <tr>
                     <td>Nama</td>
                     <td>:</td>
@@ -78,39 +78,61 @@
                 </tr>
             </table>
         </div>
-        <div class="kolomTunggal mt-3">
-            <table id="nilai" class="full">
+        <div class="kolomTunggal">
+            <table id="nilai" class="full" style="margin-top: 20px"> 
                 <tr class="tebal">
-                    <th rowspan="2" style="text-align: center"> <h5 class="tebal"> No. </h5></th>
-                    <th rowspan="2" style="text-align: center" width="40%"><h5 class="tebal">Surah</h5></th>
-                    <th colspan="2" style="text-align: center"> <h5 class="tebal">Nilai</h5></th>
+                    <th rowspan="2" style="text-align: center"> <span class="tebal"> No. </span></th>
+                    <th rowspan="2" style="text-align: center" width="40%"><span class="tebal">Surah</span></th>
+                    <th colspan="2" style="text-align: center"> <span class="tebal">Nilai</span></th>
                 </tr>
                 <tr>
-                    <th style="text-align: center"><h5 class="tebal">Angka</h5></th>
-                    <th style="text-align: center"><h5 class="tebal">Huruf</h5></th>
+                    <th style="text-align: center"><span class="tebal">Angka</span></th>
+                    <th style="text-align: center"><span class="tebal">Huruf</span></th>
                 </tr>
-                @foreach ($nilaitahfidz as $nilai)
+                @foreach ($duaJuz as $juz)
                 <tr>
-                        <td scope="row" style="text-align: center"> <h5> {{$loop->iteration}} </h5></td>
-                        <td style="padding-left: 10px"> <h5> {{$nilai->surah->namaSurah}}</h5></td>
-                        <td style="text-align: center"> <h5>{{$nilai->totalNilai}}</h5></td>
+                        <td scope="row" style="text-align: center"> <span> {{$loop->iteration}} </span></td>
+                        <td style="padding-left: 10px; text-align:right;" > <span> {{$juz->arab}}</span></td>
+                        <td style="text-align: center"> 
+                        <span> 
+                            
+                        
+                        </span></td>
                         {{-- <td> --}}
-                            @if($nilai->totalNilai>=85)
-                            <td style="text-align: center"> <h5>A</h5></td>
+                            {{-- @if($nilai->totalNilai>=85)
+                            <td style="text-align: center"> <span>A</span></td>
                             @elseif($nilai->totalNilai>=70)
-                            <td style="text-align: center"> <h5>B</h5></td>
+                            <td style="text-align: center"> <span>B</span></td>
                             @elseif($nilai->totalNilai>=60)
-                            <td style="text-align: center"> <h5>C</h5></td>
+                            <td style="text-align: center"> <span>C</span></td>
                             @else
-                            <td style="text-align: center"> <h5>C</h5></td>
-                            @endif
+                            <td style="text-align: center"> <span>C</span></td>
+                            @endif --}}
                         {{-- </td> --}}
                     </tr>
                 @endforeach
+                {{-- @foreach ($nilaitahfidz as $nilai)
+                <tr>
+                        <td scope="row" style="text-align: center"> <span> {{$loop->iteration}} </span></td>
+                        <td style="padding-left: 10px; text-align:right;" > <span> {{$nilai->surah->arab}}</span></td>
+                        <td style="text-align: center"> <span>{{$nilai->totalNilai}}</span></td>
+                        
+                            @if($nilai->totalNilai>=85)
+                            <td style="text-align: center"> <span>A</span></td>
+                            @elseif($nilai->totalNilai>=70)
+                            <td style="text-align: center"> <span>B</span></td>
+                            @elseif($nilai->totalNilai>=60)
+                            <td style="text-align: center"> <span>C</span></td>
+                            @else
+                            <td style="text-align: center"> <span>C</span></td>
+                            @endif
+                        
+                    </tr>
+                @endforeach --}}
             </table>
         </div>
-        <div class="bawah pt-5 mt-5">
-            <table width=50%>
+        <div class=" full">
+            <table width=50% id="tanggal">
                 <tr>
                     <td>Diberikan di</td>
                     <td>:</td>

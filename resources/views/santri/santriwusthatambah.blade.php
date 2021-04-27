@@ -15,6 +15,15 @@
             <div class="card p-4 bg-light">
                 <h5 class="mb-4">IDENTITAS SANTRI</h5>
                   <div class="form-group row">
+                    <label for="angkatan" class="col-sm-3 col-form-label">Angkatan</label>
+                    <div class="col-sm-9 ">
+                      <input type="text" class="form-control @error('angkatan') is-invalid @enderror " id="angkatan" name="angkatan" value="{{old('angkatan')}}">
+                      @error('angkatan')
+                        <div class="invalid-feedback">{{$message}}</div>
+                      @enderror
+                    </div>
+                  </div>
+                  <div class="form-group row">
                     <label for="namaLengkap" class="col-sm-3 col-form-label">Nama Lengkap</label>
                     <div class="col-sm-9 ">
                       <input type="text" class="form-control @error('namaLengkap') is-invalid @enderror " id="namaLengkap" name="namaLengkap" value="{{old('namaLengkap')}}">
@@ -62,6 +71,7 @@
                         </div>
                         <div class="form-check ">
                           <input class="form-check-input" type="radio" name="jk" id="gridRadios3" value="Perempuan">
+                          <label class="form-check-label" for="gridRadios1">
                             Perempuan
                           </label>
                         </div>

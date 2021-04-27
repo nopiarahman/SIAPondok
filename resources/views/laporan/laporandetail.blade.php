@@ -74,7 +74,6 @@
                     </th>
                 </tr>
                 @foreach ($nilaidiniyahsorted as $nilai)
-                @if($nilai->mapel->jenis=='teori')
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$nilai->mapel->namaMapel}}</td>
@@ -95,7 +94,6 @@
                     </td>
                     <td>{{round($nilai->rataRataKelas)}}</td>
                 </tr>
-                @endif
                 @endforeach
                 
                 @if($nilaiBahasaSorted != null)

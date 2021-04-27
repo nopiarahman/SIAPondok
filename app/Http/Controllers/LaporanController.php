@@ -121,9 +121,6 @@ class LaporanController extends Controller
         }else{
             $nilaiaktif==null;
         }
-
-        
-
         $nilaidiniyah=[];
         $nilaiumum=[];
         $nilaidiniyahsorted=[];
@@ -183,7 +180,7 @@ class LaporanController extends Controller
                 $nilaiBahasaPraktek[]=$nb;
             }
         }
-        // dd($nilaiBahasaPraktek);
+        // dd($nilaidiniyahsorted);
         if(auth()->user()->jenjang=='smpPutri'){
             return view ('laporan/laporandetailbanaat',compact('santriwustha','nilaiaktif','periode','nilaidiniyahsorted','nilaiumumsorted','nilaiMulokSorted','nilaiBahasaSorted','nilaiBahasaTeori','nilaiBahasaPraktek','nilaiDiniyahTeori','nilaiDiniyahPraktek'));
         }else{
