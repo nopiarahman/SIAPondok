@@ -1,4 +1,7 @@
 @extends('layout/tema') {{-- menambah dari folder layout halaman main --}}
+@section('head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+@endsection
 @section('title','Tambah Pengumuman') {{-- mengisi yield title dengan 1 baris code--}}
 @section('menuPengumuman','active')
 @section('container') {{-- mengisi yield container dengan lebih dari 1 baris code --}}
@@ -32,64 +35,7 @@
                 </div>
             </div>
 
-            <div class="form-group row">
-                {{-- modal hapus--}}
-                <div class="modal fade" id="carinama" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Pilih Wali Santri</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="body table-responsive-xl">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">No</th>
-                                                <th scope="col">Wali Santri</th>
-                                                <th scope="col">Nama Santri</th>
-                                                <th scope="col">Kelas</th>
-                                                <th scope="col">No Telp Wali</th>
-                                                {{-- <th scope="col">Email Wali</th> --}}
-                                                <th scope="col">Pilih Data</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($cariWaliSantri as $wali)
-                                            <tr class="" data-nama="{{$wali->name}}">
-                                                <th scope="row">{{$loop->iteration}}</th>
-                                                <td>{{$wali->namaWali}}</td>
-                                                <td>{{$wali->namaLengkap}}</td>
-                                                <td>{{$wali->kelas->namaKelas}}</td>
-                                                <td>{{$wali->teleponWali}}</td>
-                                                {{-- <td>{{$wali->emailWali}}</td> --}}
-                                                {{-- <td><a href="#" id="data" class="btn btn-success pilih" onClick="masuk(this,'{{$sw->namaLengkap}}','{{$sw->kelas->namaKelas}}','{{$sw->id}}')"
-                                                style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a>
-                                                </td> --}}
-                                                <td><a href="#" id="data" class="btn btn-success pilih"
-                                                        data-id={{$wali->id}} data-nama={{$wali->namaWali}}
-                                                        data-kelas={{$wali->kelas->namaKelas}}
-                                                        data-email={{$wali->emailWali}}
-                                                        style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih
-                                                        data</a></td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-</form>
-</div>
-</div>
-</div>
-</div>
+                
 
 <div class=" form-group row">
     <label for="namaLengkap" class="col-sm-3 col-form-label">Nama Wali Santri</label>
@@ -140,14 +86,69 @@
     <div class="invalid-feedback">{{$message}}</div>
     @enderror
 </div>
-<button type="submit" class="btn btn-primary align-center py-2 mb-2"> Tambah Data</button>
-<a href="/pengumuman" class="btn btn-secondary align-center py-2">Kembali</a>
+<div class="form-group row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+        <button type="submit" class="btn btn-primary align-center py-2 "> Tambah Data</button>
+        <a href="/pengumuman" class="btn btn-secondary align-center py-2">Kembali</a>
+    </div>
+</div>
 </div>
 </div>
 {{-- Tombol --}}
 </form>
 
 </div>
+</div>
+</div>
+{{-- modal hapus--}}
+<div class="modal fade" id="carinama" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Pilih Wali Santri</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <div class="body">
+                <table class="table table-hover" id="tableWali">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Wali Santri</th>
+                            <th scope="col">Nama Santri</th>
+                            <th scope="col">Kelas</th>
+                            <th scope="col">No Telp Wali</th>
+                            {{-- <th scope="col">Email Wali</th> --}}
+                            <th scope="col">Pilih Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($cariWaliSantri as $wali)
+                        <tr class="" data-nama="{{$wali->name}}">
+                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>{{$wali->namaWali}}</td>
+                            <td>{{$wali->namaLengkap}}</td>
+                            <td>{{$wali->kelas->namaKelas}}</td>
+                            <td>{{$wali->teleponWali}}</td>
+                            <td><a href="#" id="data" class="btn btn-success pilih"
+                                    data-id="{{$wali->id}}" data-nama="{{$wali->namaWali}}"
+                                    data-kelas="{{$wali->kelas->namaKelas}}"
+                                    data-email="{{$wali->emailWali}}"
+                                    style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih
+                                    data</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 </div>
 <script type="text/javascript">
@@ -169,4 +170,32 @@
 </script>
 
 
+@endsection
+@section('footer')
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script type="text/javascript" >
+    $('#tableWali').DataTable({
+      "pageLength":     10,
+      "language": {
+        "decimal":        "",
+        "emptyTable":     "Tidak ada data tersedia",
+        "info":           "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "infoEmpty":      "Menampilkan 0 sampai 0 dari 0 data",
+        "infoFiltered":   "(difilter dari _MAX_ total data)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "Menampilkan _MENU_ data",
+        "loadingRecords": "Loading...",
+        "processing":     "Processing...",
+        "search":         "Cari:",
+        "zeroRecords":    "Tidak ada data ditemukan",
+        "paginate": {
+            "first":      "Awal",
+            "last":       "Akhir",
+            "next":       "Selanjutnya",
+            "previous":   "Sebelumnya"
+        },
+        }
+    });
+</script>
 @endsection

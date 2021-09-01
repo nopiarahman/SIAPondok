@@ -165,16 +165,16 @@ class NilaiController extends Controller
      */
     public function show(Request $request, Jadwalbelajar $jadwalbelajar)
     {
-        // dd($jadwalbelajar);
-        $santriwustha = santriwustha::orderby('namaLengkap')->get();
-        $nilai = nilai::orderBy('santriwustha_id')->paginate(10);
+        $santriwustha = santriwustha::where('kelas_id',$jadwalbelajar->kelas->id)->get();
+        // dd($santriwustha);
+        // $nilai = nilai::orderBy('santriwustha_id')->paginate(10);
         $jadwalsemua= jadwalbelajar::all();
         $daftarnilai=nilai::where('kelas_id','=',$jadwalbelajar->kelas_id)
                             ->where('periode_id',$jadwalbelajar->periode_id)
                             ->where('mapel_id',$jadwalbelajar->mapel_id)->get();
         $rataRataKelas=$daftarnilai->first();
         // dd($rataRataKelas);
-        return view ('/nilai/nilaiisi',compact('jadwalbelajar','daftarnilai','santriwustha','nilai','jadwalsemua','rataRataKelas'));
+        return view ('/nilai/nilaiisi',compact('jadwalbelajar','daftarnilai','santriwustha','jadwalsemua','rataRataKelas'));
     }
 
     /**

@@ -1,4 +1,7 @@
 @extends('layout/tema') {{-- menambah dari folder layout halaman main --}}
+@section('head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+@endsection
 @section('title','Data Mata Pelajaran') {{-- mengisi yield title dengan 1 baris code--}}
 {{-- @section('menuasatidzah','active') --}}
 @section('menumapel','active')
@@ -96,7 +99,7 @@
     </div>
     <div class="card mt-2">
         <div class="body table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover" id="table">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -177,7 +180,7 @@
                                                     <div class="col-sm-8 ">
                                                         <input type="text"
                                                             class="form-control my-2 @error('namaMapel') is-invalid @enderror"
-                                                            id="namaMapel" name="namaMapel" value="{{$mp->namaMapel}}"">
+                                                             name="namaMapel" value="{{$mp->namaMapel}}"">
                                                         @error('namaMapel')
                                                         <div class="invalid-feedback">{{$message}}</div>
                                                         @enderror
@@ -188,7 +191,7 @@
                                                           <label for="kategori" class=" col-form-label">Kategori</label>
                                                       </div>
                                                       <div class="col-sm-8 ">
-                                                          <select name="kategori" id="kategori" class="custom-select">
+                                                          <select name="kategori"  class="custom-select">
                                                               <option name="kategori" value="diniyah"> Diniyah </option>
                                                               <option name="kategori" value="umum"> Umum</option>
                                                               <option name="kategori" value="muatanLokal"> Muatan Lokal</option>
@@ -226,15 +229,39 @@
                     @endforeach
                 </tbody>
             </table>
-            {{$mapel->links()}}
 
 
         </div>
     </div>
 </div>
-
 </div>
 </div>
-
-
+@endsection
+@section('footer')
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script type="text/javascript" >
+    $('#table').DataTable({
+      "pageLength":     20,
+      "language": {
+        "decimal":        "",
+        "emptyTable":     "Tidak ada data tersedia",
+        "info":           "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "infoEmpty":      "Menampilkan 0 sampai 0 dari 0 data",
+        "infoFiltered":   "(difilter dari _MAX_ total data)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "Menampilkan _MENU_ data",
+        "loadingRecords": "Loading...",
+        "processing":     "Processing...",
+        "search":         "Cari:",
+        "zeroRecords":    "Tidak ada data ditemukan",
+        "paginate": {
+            "first":      "Awal",
+            "last":       "Akhir",
+            "next":       "Selanjutnya",
+            "previous":   "Sebelumnya"
+        },
+        }
+    });
+</script>
 @endsection

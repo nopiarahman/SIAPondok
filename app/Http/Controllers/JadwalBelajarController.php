@@ -26,18 +26,18 @@ class JadwalBelajarController extends Controller
             if($cariasatidzah!=null)
             {
                 $jadwalaktif = jadwalbelajar::where('asatidzah_id',$cariasatidzah->id)->orderBy('hari')
-                                                ->where('jenjang',jenjang())->paginate(10); 
+                                                ->where('jenjang',jenjang())->get(); 
                 return view ('/jadwalbelajar/jadwalbelajar',compact('jadwalbelajar','periode','jadwalaktif','jadwalaktifguru')); 
             }
             else
             {
                 $jadwalaktif=jadwalbelajar::where('periode_id','=',$periode->id)->orderBy('hari')
-                                            ->where('jenjang',jenjang())->paginate(10);
+                                            ->where('jenjang',jenjang())->get();
             }
         }else
         {
             $jadwalaktif=jadwalbelajar::where('periode_id','=',$periode->id)->orderBy('hari')
-                                        ->where('jenjang',jenjang())->paginate(10);
+                                        ->where('jenjang',jenjang())->get();
         }
         // dd($jadwalaktif);
         if(auth()->user()->role=='asatidzah')

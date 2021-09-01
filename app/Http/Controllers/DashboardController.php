@@ -36,7 +36,7 @@ class DashboardController extends Controller
         if(auth()->user()->role=='waliSantri')
         {
             $santriwustha=santriwustha::where('emailWali','=',$cekuser->email)->first();
-            
+            // dd($santriwustha->kelas);
             $cekaktif=['santriwustha_id'=> $santriwustha->id,'periode_id'=>$periode->id];
             $nilaiaktif=nilai::where($cekaktif)->orderBy('mapel_id')->get();
             // dd($nilaiaktif);

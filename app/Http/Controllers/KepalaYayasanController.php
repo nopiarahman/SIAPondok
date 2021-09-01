@@ -32,11 +32,11 @@ class KepalaYayasanController extends Controller
         if ($request->get('cari')) {
             $santriwustha = santriwustha::where('namaLengkap', 'LIKE', '%' . $request->cari . '%')
             ->where('jenjang','sd')
-            ->paginate(10);
+            ->get();
         } else {
             $santriwustha = santriwustha::orderBy('namaLengkap')
             ->where('jenjang','sd')
-            ->paginate(10);
+            ->get();
         }   
         $jenjang='sd';
         $menu='menuuulaa';
@@ -46,13 +46,13 @@ class KepalaYayasanController extends Controller
         if ($request->get('cari')) {
             $santriwustha = santriwustha::where('namaLengkap', 'LIKE', '%' . $request->cari . '%')
             ->where('jenjang','smpPutra')
-            ->paginate(20);
+            ->get();
         } else {
             $santriwustha = santriwustha::orderBy('namaLengkap')
             ->where('jenjang','smpPutra')
-            ->paginate(20);
+            ->get();
         }   
-        $jenjang='sd';
+        $jenjang='smpPutra';
         $menu='menuwustha';
         return view('santri/santriwustha',compact('santriwustha','jenjang','menu'));
     }
@@ -60,13 +60,13 @@ class KepalaYayasanController extends Controller
         if ($request->get('cari')) {
             $santriwustha = santriwustha::where('namaLengkap', 'LIKE', '%' . $request->cari . '%')
             ->where('jenjang','smpPutri')
-            ->paginate(20);
+            ->get();
         } else {
             $santriwustha = santriwustha::orderBy('namaLengkap')
             ->where('jenjang','smpPutri')
-            ->paginate(20);
+            ->get();
         }   
-        $jenjang='sd';
+        $jenjang='smpPutri';
         $menu='menubanaat';
         return view('santri/santriwustha',compact('santriwustha','jenjang','menu'));
     }
@@ -74,24 +74,24 @@ class KepalaYayasanController extends Controller
         if ($request->get('cari')) {
             $santriwustha = santriwustha::where('namaLengkap', 'LIKE', '%' . $request->cari . '%')
             ->where('jenjang','smaPutra')
-            ->paginate(20);
+            ->get();
         } else {
             $santriwustha = santriwustha::orderBy('namaLengkap')
             ->where('jenjang','smaPutra')
-            ->paginate(20);
+            ->get();
         }   
-        $jenjang='sd';
+        $jenjang='smaPutra';
         $menu='menuulyaa';
         return view('santri/santriwustha',compact('santriwustha','jenjang','menu'));
     }
     public function dataasatidzah(Request $request){
         if ($request ->get('cari')){
             $asatidzah = asatidzah::where('namaLengkap','LIKE','%'. $request->cari.'%')
-                                    ->paginate(10); 
+                                    ->get(); 
         }else{
             
             $asatidzah = asatidzah::orderBy('namaLengkap')
-                                    ->paginate(10);
+                                    ->get();
         }
         return view ('asatidzah/asatidzah',['asatidzah'=>$asatidzah]);
     }

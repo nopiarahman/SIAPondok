@@ -1,6 +1,10 @@
 @extends('layout/tema') {{-- menambah dari folder layout halaman main --}}
+@section('head')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+@endsection
 @section('title','Laporan Nilai Santri') {{-- mengisi yield title dengan 1 baris code--}}
 {{-- @section('menuasatidzah','active') --}}
+@section('menuwali','active')
 @section('menulaporan','active')
 @section('container')        {{-- mengisi yield container dengan lebih dari 1 baris code --}}
     <div class="container">
@@ -22,7 +26,7 @@
     </div>
     <div class="card mt-2">
       <div class="body table-responsive">
-        <table class="table table-hover align-center">
+        <table class="table table-hover " id="table">
           <thead>
             <tr>
               <th scope="col">No</th>
@@ -65,4 +69,32 @@
 </div>
 </div>
 
+@endsection
+@section('footer')
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script type="text/javascript" >
+    $('#table').DataTable({
+      "pageLength":     15,
+      "language": {
+        "decimal":        "",
+        "emptyTable":     "Tidak ada data tersedia",
+        "info":           "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+        "infoEmpty":      "Menampilkan 0 sampai 0 dari 0 data",
+        "infoFiltered":   "(difilter dari _MAX_ total data)",
+        "infoPostFix":    "",
+        "thousands":      ",",
+        "lengthMenu":     "Menampilkan _MENU_ data",
+        "loadingRecords": "Loading...",
+        "processing":     "Processing...",
+        "search":         "Cari:",
+        "zeroRecords":    "Tidak ada data ditemukan",
+        "paginate": {
+            "first":      "Awal",
+            "last":       "Akhir",
+            "next":       "Selanjutnya",
+            "previous":   "Sebelumnya"
+        },
+        }
+    });
+</script>
 @endsection

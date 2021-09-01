@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\santriwustha;
+use App\kelas;
 use App\User;
 use App\orangtua;
 use Illuminate\Http\Request;
@@ -54,9 +55,6 @@ class SantriWusthaController extends Controller
             'tempatLahir' => 'required',
             'tanggalLahir' => 'required|date',
             'anakKe' => 'required|numeric',
-            'sekolahSebelum' => 'required',
-            'alamatSekolahSebelum' => 'required',
-            'nisnSekolahSebelum' => 'required',
             'namaAyah' => 'required',
             'pendidikanAyah' => 'required',
             'tanggalLahirAyah' => 'required|date',
@@ -93,10 +91,12 @@ class SantriWusthaController extends Controller
             $file_suratWaliSantri = $request->file('suratWaliSantri')->store('public/file/wustha/suratWaliSantri');
         }
         $jenjang=auth()->user()->jenjang;
+        $kelas = kelas::where('jenjang',$jenjang)->orderBy('namaKelas')->first();
         $requestData           = $request->all();
         $requestData['pasPhoto'] = $file_photo;
         $requestData['suratWaliSantri'] = $file_suratWaliSantri;
         $requestData['jenjang'] = $jenjang;
+        $requestData['kelas_id'] = $kelas->id;
         $this->validate($request, $rules, $costumMessages);
         santriwustha::create($requestData);
         // $user = new \App\User;
@@ -106,7 +106,6 @@ class SantriWusthaController extends Controller
             'email' => $request->emailWali,
             'password' => bcrypt('rahasia'),
             'jenjang' => $jenjang,
-            'remember_token' => str_random(60)
         ]);
         return redirect('/santriwustha')->with('status', 'Data Berhasil ditambahkan');
     }

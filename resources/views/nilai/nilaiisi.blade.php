@@ -55,20 +55,18 @@
                                       {{-- <th scope="col">No</th> --}}
                                       {{-- <th scope="col">ID Santri</th> --}}
                                       <th scope="col">Nama Santri</th>
-                                      <th scope="col">Nama Santri</th>
+                                      <th scope="col">Aksi</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     @foreach ($santriwustha as $sw)
-                                    @if($jadwalbelajar->kelas->id == $sw->kelas->id)
                                     <tr>
                                     {{-- <th scope="row">{{$loop->iteration}}</th> --}}
                                       {{-- <td>{{$sw->id}}</td> --}}
                                       <td>{{$sw->namaLengkap}}</td>
                                     {{-- <td><a href="#" id="data" class="btn btn-success pilih" onClick="masuk(this,'{{$sw->namaLengkap}}','{{$sw->kelas->namaKelas}}','{{$sw->id}}')" style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td> --}}
-                                    <td><a href="#" id="data" class="btn btn-success pilih" data-id={{$sw->id}} data-nama={{$sw->namaLengkap}} style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
+                                    <td><a href="#" id="data" class="btn btn-success pilih" data-id="{{$sw->id}}" data-nama="{{$sw->namaLengkap}}" style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
                                     </tr>
-                                    @endif
                                     @endforeach
                                   </tbody>
                                 </table>

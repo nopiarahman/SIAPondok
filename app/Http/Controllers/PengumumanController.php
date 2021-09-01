@@ -11,7 +11,7 @@ class PengumumanController extends Controller
 {
     public function index(){
 
-        $pengumuman=pengumuman::paginate(10);
+        $pengumuman=pengumuman::get();
         return view('pengumuman/pengumumanindex',compact('pengumuman'));
     }
     public function create(){

@@ -15,7 +15,7 @@ class MapelController extends Controller
     public function index(Request  $request)
     {
         $mapel = mapel::orderBy('namaMapel')
-                        ->where('jenjang',jenjang())->paginate(10);
+                        ->where('jenjang',jenjang())->get();
         return view('mapel/mapel',['mapel'=>$mapel]);
     }
 

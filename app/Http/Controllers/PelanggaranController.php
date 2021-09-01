@@ -18,7 +18,7 @@ class PelanggaranController extends Controller
     {
         $pelanggaran = pelanggaran::latest()
                         ->where('jenjang',jenjang())
-                        ->paginate(10);
+                        ->get();
         return view('pelanggaran/pelanggaran',['pelanggaran'=>$pelanggaran]);
     }
 
@@ -33,12 +33,12 @@ class PelanggaranController extends Controller
         if ($request ->get('cari')){
             $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')
                                         ->where('jenjang',jenjang())
-                                        ->paginate(10); 
+                                        ->get(); 
         }else{
             
             $santriwustha = santriwustha::orderBy('namaLengkap')
                                         ->where('jenjang',jenjang())
-                                        ->paginate(10);
+                                        ->get();
         }
 
         $pelanggaran = new pelanggaran;

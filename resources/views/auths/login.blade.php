@@ -55,8 +55,8 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-8 p-t-5">
-                            <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
-                            <label for="rememberme">Ingat saya</label>
+                            {{-- <input type="checkbox" name="rememberme" id="rememberme" class="filled-in chk-col-pink">
+                            <label for="rememberme">Ingat saya</label> --}}
                         </div>
                         <div class="col-xs-4">
                             <button class="btn btn-block bg-green waves-effect" type="submit">Login</button>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-xs-6 ">
-                            <a href="forgot-password.html">lupa password?</a>
+                            {{-- <a href="forgot-password.html">lupa password?</a> --}}
                         </div>
                     </div>
                 </form>

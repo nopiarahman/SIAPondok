@@ -141,7 +141,7 @@ return [
          */
 
         // geotagging
-        Torann\GeoIP\GeoIPServiceProvider::class,
+        // Torann\GeoIP\GeoIPServiceProvider::class,
 
         // Midnite81\GeoLocation\GeoLocationServiceProvider::class,
         // snappy pdf
@@ -202,7 +202,7 @@ return [
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         // geotagging
-        'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+        // 'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         // 'GeoLocation' => Midnite81\GeoLocation\Facades\GeoLocation::class,
         
         'App' => Illuminate\Support\Facades\App::class,

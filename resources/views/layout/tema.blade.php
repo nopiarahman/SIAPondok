@@ -2,18 +2,20 @@
 <html>
 
 <head>
-    @stack('head')
-
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>@yield('title')</title>
     <!-- Favicon-->
+    @yield('head')
     <link rel="icon" href="{{asset('favicon.ico')}}" type="image/x-icon">
     <link href="{{asset('tema/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}"
         rel="stylesheet" />
     <!-- Google Fonts -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
+    {{-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> --}}
     @stack('head')
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet"
         type="text/css">
@@ -220,9 +222,11 @@
                         <li class="@yield('menulaporan')">
                             <a href="{{url('/laporannilai')}}">Laporan Nilai Kelas</a>
                         </li>
+                        {{-- <li class="@yield('menuAbsensi')">
+                            <a href="{{url('/absensiSantri')}}">Absensi Santri</a>
+                        </li> --}}
                     </ul>
                 </li>
-                
                 @endif
                 <li class="@yield('menujadwal')">
                     <a href="{{'/jadwalbelajar'}}">

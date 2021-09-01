@@ -116,7 +116,7 @@
                   <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$as->namaLengkap}}</td>
                     <td>{{$as->noHP}}</td>
-                    <td><a href="#" id="dataas" class="btn btn-success pilih" data-id={{$as->id}} data-nama={{$as->namaLengkap}}  style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
+                    <td><a href="#" id="dataas" class="btn btn-success pilih" data-id="{{$as->id}}" data-nama="{{$as->namaLengkap}}"  style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -162,7 +162,7 @@
                     @if(auth()->user()->jenjang=='smpPutri')
                     <td>{{$mp->jenis}}</td>
                     @endif
-                    <td><a href="#" id="datamapel" class="btn btn-success pilih" data-id={{$mp->id}} data-nama={{$mp->namaMapel}}  style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
+                    <td><a href="#" id="datamapel" class="btn btn-success pilih" data-id="{{$mp->id}}" data-nama="{{$mp->namaMapel}}" style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -201,7 +201,7 @@
                   @foreach ($kelas as $ks)
                   <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$ks->namaKelas}}</td>
-                    <td><a href="#" id="datakelas" class="btn btn-success pilih" data-id={{$ks->id}} data-nama={{$ks->namaKelas}}  style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
+                    <td><a href="#" id="datakelas" class="btn btn-success pilih" data-id="{{$ks->id}}" data-nama="{{$ks->namaKelas}}"  style="border-radius: 5px ; margin:-5px ; font-size:12px">pilih data</a></td>
                   </tr>
                   @endforeach
                 </tbody>

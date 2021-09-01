@@ -148,11 +148,11 @@ class KelasTahfidzController extends Controller
     public function isi(kelastahfidz $kelas , Request $request){
         if ($request ->get('cari')){
             $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')
-                                        ->where('jenjang',jenjang())->paginate(10); 
+                                        ->where('jenjang',jenjang())->get(); 
         }else{
             
             $santriwustha = santriwustha::orderBy('namaLengkap')
-                                        ->where('jenjang',jenjang())->paginate(10);
+                                        ->where('jenjang',jenjang())->get();
         }
         $kelas = kelastahfidz::orderBy('namaKelas')
                         ->where('jenjang',jenjang())->get();
@@ -172,14 +172,14 @@ class KelasTahfidzController extends Controller
         }
         if ($request ->get('cari')){
             $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')
-                                        ->where('jenjang',jenjang())->paginate(10); 
+                                        ->where('jenjang',jenjang())->get(); 
         }else{
             
             $santriwustha = santriwustha::orderBy('namaLengkap')
-                                        ->where('jenjang',jenjang())->paginate(10);
+                                        ->where('jenjang',jenjang())->get();
         }
         $kelas = kelastahfidz::orderBy('namaKelas')
-                        ->where('jenjang',jenjang())->paginate(10);
+                        ->where('jenjang',jenjang())->get();
 
         $requestData           = $request->all();
 

@@ -76,11 +76,11 @@ class KelasController extends Controller
     {
         if ($request ->get('cari')){
             $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')
-                                        ->where('jenjang',jenjang())->paginate(10); 
+                                        ->where('jenjang',jenjang())->get(); 
         }else{
             
             $santriwustha = santriwustha::orderBy('namaLengkap')
-                                        ->where('jenjang',jenjang())->paginate(10);
+                                        ->where('jenjang',jenjang())->get();
         }
         $kelas = kelas::orderBy('namaKelas')
                         ->where('jenjang',jenjang())->get();
@@ -101,14 +101,14 @@ class KelasController extends Controller
         }
         if ($request ->get('cari')){
             $santriwustha = santriwustha::where('namaLengkap','LIKE','%'. $request->cari.'%')
-                                        ->where('jenjang',jenjang())->paginate(10); 
+                                        ->where('jenjang',jenjang())->get(); 
         }else{
             
             $santriwustha = santriwustha::orderBy('namaLengkap')
-                                        ->where('jenjang',jenjang())->paginate(10);
+                                        ->where('jenjang',jenjang())->get();
         }
         $kelas = kelas::orderBy('namaKelas')
-                        ->where('jenjang',jenjang())->paginate(10);
+                        ->where('jenjang',jenjang())->get();
 
         $requestData           = $request->all();
 

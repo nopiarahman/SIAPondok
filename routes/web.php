@@ -134,6 +134,8 @@ Route::group(['middleware'=>['auth','checkRole:admin,asatidzah,waliSantri,kepala
     Route::delete('/nilai/{nilai}','NilaiController@destroy');
     
     Route::get('/dataSantri','WaliKelasController@index');
+    Route::get('/absensiSantri','WaliKelasController@absensi');
+    Route::post('/absensiSimpan','WaliKelasController@absensiSimpan')->name('absensiSimpan');
     
 });
 Route::group(['middleware'=>['auth','checkRole:waliSantri']],function(){
