@@ -53,18 +53,16 @@ class PelanggaranController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        // $rules =[
-        //     'namaLengkap' => 'required',
-        //     'jenisPelanggaran' => 'required',
-        //     'tanggalPelanggaran' => 'required',
-        //     'keterangan' => 'required',
-        // ];
-        // $costumMessages = [
-        //     'required' =>':attribute tidak boleh kosong'
-        // ];
-        // $this->validate($request,$rules,$costumMessages);
         $requestData           = $request->all();
+        if($request->jenisPelanggaran == "Ringan"){
+            $requestData['poin']=2;
+        }elseif($request->jenisPelanggaran == "Sedang"){
+            $requestData['poin']=5;
+        }elseif($request->jenisPelanggaran == "Berat"){
+            $requestData['poin']=10;
+        }elseif($request->jenisPelanggaran == "Sangat Berat"){
+            $requestData['poin']=20;
+        }
         $requestData['jenjang']=jenjang();
         pelanggaran::create($requestData);
         return redirect('/pelanggaran')->with('status', 'Data Berhasil ditambahkan');

@@ -37,8 +37,11 @@ class WaliSantriController extends Controller
         $cekuser = auth()->user();
         $santriwustha=santriwustha::where('emailWali','=',$cekuser->email)->first();
         
-        $pelanggaran = pelanggaran::where('santriwustha_id','=',$santriwustha->id)->paginate(10);
-        return view('waliSantri/lihatpelanggaran',['pelanggaran'=>$pelanggaran]);
+        $pelanggaran = pelanggaran::where('santriwustha_id','=',$santriwustha->id)->get();
+        // dd($pelanggaran);
+        $totalPoin = $pelanggaran->sum('poin');
+        // dd($totalPoin);
+        return view('waliSantri/lihatpelanggaran',compact('pelanggaran','santriwustha','totalPoin'));
     }
     public function lihatPengumuman(){
 
